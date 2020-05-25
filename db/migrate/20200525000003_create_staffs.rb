@@ -1,6 +1,6 @@
 class CreateStaffs < ActiveRecord::Migration[6.0]
   def change
-    create_table :staffs do |t|
+    create_table :staffs, comment: '员工' do |t|
       t.string :person_id, limit: 18, unique: true, null: false, comment: '身份证号'
       t.string :name, limit: 64, comment: '姓名'
       t.string :phone, limit: 64, comment: '电话'
