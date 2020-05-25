@@ -1,0 +1,2 @@
+class DepositAccount < Account
+end

@@ -1,0 +1,2 @@
+class CheckAccount < Account
+end
