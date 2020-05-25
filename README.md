@@ -1,9 +1,8 @@
-# README
+# Junk Bank System
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+No, this is not really a bank system. It's the 3rd lab of « Database Systems » of USTC in Spring 2020.
 
-Things you may want to cover:
+---
 
 * Ruby version
 
