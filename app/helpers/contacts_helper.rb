@@ -1,5 +1,5 @@
 module ContactsHelper
   def fields
-    this_fields = PersonsHelper::fields
+    %i{name phone email relationship}
   end
 end

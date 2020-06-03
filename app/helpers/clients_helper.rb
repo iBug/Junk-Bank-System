@@ -1,5 +1,9 @@
 module ClientsHelper
   def fields
-    this_fields = PersonsHelper::fields
+    PersonsHelper::fields
+  end
+
+  def contact_fields
+    %i{name phone email relationship}
   end
 end
