@@ -1,9 +1,10 @@
 body {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+	display: flex !important;
+	flex-direction: column !important;
+	min-height: 100vh !important;
+	font-family: "Segoe UI", sans-serif;
 }
 
 .initial-content {
-	flex: 1 0 auto;
+	flex-grow: 1 !important;
 }

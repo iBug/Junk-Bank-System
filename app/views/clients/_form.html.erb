@@ -1,4 +1,4 @@
-<%= form_with(model: client, local: true) do |form| %>
+<%= form_with model: client, local: true  do |f| %>
   <% if client.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
@@ -11,7 +11,23 @@
     </div>
   <% end %>
 
+  <%= fields.each do |field| %>
+    <div class="form-group">
+      <%= f.label field %>
+      <%= f.text_field field, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <% f.fields_for :contacts do |c| %>
+    <% fields.each do |field| %>
+      <div class="form-group">
+        <%= c.label field %>
+        <%= c.text_field field, class: 'form-control' %>
+      </div>
+    <% end %>
+  <% end %>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= f.submit %>
   </div>
 <% end %>
