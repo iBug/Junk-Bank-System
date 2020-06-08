@@ -13,10 +13,18 @@
 
   <% fields.each do |field| %>
     <div class="form-group">
-      <%= f.label field %>
+      <%= f.label field, "#{field.capitalize}" %>
       <%= f.text_field field, class: 'form-control' %>
     </div>
   <% end %>
+
+  <%# Select manager %>
+  <div class="form-group">
+    <%= f.label :manager %>
+    <%= f.select :manager_id, options_for_select(Staff.all.map do |staff| %>
+      <% [staff.name, staff.id] %>
+    <% end), class: 'form-control' %>
+  </div>
 
   <%= f.fields_for :contact do |c| %>
     <% contact_fields.each do |field| %>
@@ -28,6 +36,6 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
