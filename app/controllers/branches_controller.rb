@@ -69,6 +69,6 @@ class BranchesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def branch_params
-      params.fetch(:branch, {})
+      params.fetch(:branch, {}).permit(%i[name city assets])
     end
 end

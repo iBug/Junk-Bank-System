@@ -11,7 +11,21 @@
     </div>
   <% end %>
 
+  <% %i{name city}.each do |field| %>
+    <div class="form-group">
+      <%= form.label field, "#{field.capitalize}" %>
+      <%= form.text_field field, class: 'form-control' %>
+    </div>
+  <% end %>
+
+  <% %i{assets}.each do |field| %>
+    <div class="form-group">
+      <%= form.label field, "#{field.capitalize}" %>
+      <%= form.number_field field, class: 'form-control' %>
+    </div>
+  <% end %>
+
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
