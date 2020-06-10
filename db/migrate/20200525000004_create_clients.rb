@@ -6,7 +6,7 @@ class CreateClients < ActiveRecord::Migration[6.0]
       t.string :phone, limit: 64, comment: '电话'
       t.string :address, limit: 256, comment: '地址'
 
-      t.references :manager, null: true, index: true, foreign_key: { to_table: :staffs, on_delete: :nullify }
+      t.references :manager, null: true, index: true, foreign_key: { to_table: :staffs, on_delete: :restrict }
       t.integer :manager_type, limit: 1, default: 0, null: true
 
       t.timestamps

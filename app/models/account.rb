@@ -3,6 +3,6 @@ class Account < ApplicationRecord
 
   belongs_to :branch
   belongs_to :client
-  has_one :deposit_account, as: :accountable, polymorphic: true
-  has_one :check_account, as: :accountable, polymorphic: true
+  belongs_to :deposit_account, polymorphic: true
+  belongs_to :check_account, polymorphic: true
 end

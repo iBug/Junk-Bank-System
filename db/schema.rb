@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
   add_foreign_key "accounts", "branches", on_delete: :cascade
   add_foreign_key "accounts", "clients"
   add_foreign_key "check_accounts", "accounts", on_delete: :cascade
-  add_foreign_key "clients", "staffs", column: "manager_id", on_delete: :nullify
+  add_foreign_key "clients", "staffs", column: "manager_id"
   add_foreign_key "clients_loans", "clients"
   add_foreign_key "clients_loans", "loans", column: "loans_id", on_delete: :cascade
   add_foreign_key "contacts", "clients", on_delete: :cascade

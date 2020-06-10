@@ -8,8 +8,8 @@ class CreateStaffs < ActiveRecord::Migration[6.0]
       t.date :start_date, default: -> { 'CURRENT_TIMESTAMP' }, comment: '开始工作日期'
       t.boolean :manager, default: -> { false }, comment: '经理'
 
-      t.references :branch, index: true, foreign_key: {on_delete: :restrict}
-      t.references :department, index: true, foreign_key: {on_delete: :restrict}
+      t.references :branch, index: true, foreign_key: { on_delete: :restrict }
+      t.references :department, index: true, foreign_key: { on_delete: :restrict }
 
       t.timestamps
     end
