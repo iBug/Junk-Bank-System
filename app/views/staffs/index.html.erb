@@ -1,0 +1,39 @@
+<h1>员工</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>身份证号</th>
+      <th>姓名</th>
+      <th>电话</th>
+      <th>地址</th>
+      <th>开始工作日期</th>
+      <th>经理？</th>
+      <th>支行</th>
+      <th>部门</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @staffs.each do |staff| %>
+      <tr>
+        <td><%= staff.person_id %></td>
+        <td><%= staff.name %></td>
+        <td><%= staff.phone %></td>
+        <td><%= staff.address %></td>
+        <td><%= staff.start_date %></td>
+        <td><%= staff.manager %></td>
+        <td><%= staff.branch.name %></td>
+        <td><%= staff.department.name %></td>
+        <td>
+          <%= link_to '查看', staff, class: 'btn btn-primary' %>
+          <%= link_to '编辑', edit_staff_path(staff), class: 'btn btn-secondary' %>
+          <%= link_to '删除', staff, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新建员工', new_staff_path, class: 'btn btn-success' %>

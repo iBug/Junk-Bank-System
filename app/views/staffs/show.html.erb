@@ -1,0 +1,24 @@
+<h1>查看员工</h1>
+
+<dl class="row my-3">
+  <dt class="col col-12 col-md-2">身份证号</dt>
+  <dd class="col col-12 col-md-10"><%= @staff.person_id %></dd>
+  <dt class="col col-12 col-md-2">姓名</dt>
+  <dd class="col col-12 col-md-10"><%= @staff.name %></dd>
+  <dt class="col col-12 col-md-2">电话</dt>
+  <dd class="col col-12 col-md-10"><%= @staff.phone %></dd>
+  <dt class="col col-12 col-md-2">地址</dt>
+  <dd class="col col-12 col-md-10"><%= @staff.address %></dd>
+  <dt class="col col-12 col-md-2">开始工作日期</dt>
+  <dd class="col col-12 col-md-10"><%= @staff.start_date %></dd>
+  <dt class="col col-12 col-md-2">经理</dt>
+  <dd class="col col-12 col-md-10"><%= @staff.manager ? '是' : '否' %></dd>
+  <dt class="col col-12 col-md-2">支行</dt>
+  <dd class="col col-12 col-md-10"><%= link_to @staff.branch.name, @staff.branch %></dd>
+  <dt class="col col-12 col-md-2">部门</dt>
+  <dd class="col col-12 col-md-10"><%= link_to @staff.department.name, @staff.department %></dd>
+</dl>
+
+<%= link_to '编辑', edit_staff_path(@staff), class: 'btn btn-primary' %>
+<%= link_to '返回', staffs_path, class: 'btn btn-secondary' %>
+<%= link_to '删除', @staff, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
