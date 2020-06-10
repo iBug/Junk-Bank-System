@@ -1,1 +1,17 @@
-<h1>Home</h1>
+<h1 class="text-center py-5 display-4"><%= site_name %></h1>
+
+<div class="row">
+  <% [[Branch, '支行'], [Department, '部门'], [Staff, '员工'], [Client, '客户']].each do |cls, name| %>
+    <div class="px-3 mb-4 col col-12 col-sm-6 col-md-4 col-lg-3">
+      <div class="card shadow-sm text-center">
+        <div class="card-header">
+          <h4 class="my-0 fonr-weight-normal"><%= name %></h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title mb-3"><%= cls.count %> 个<%= name %></h3>
+          <%= link_to '查看', send(cls.to_s.underscore.pluralize + '_url'), class: "btn btn-lg btn-block btn-primary" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
