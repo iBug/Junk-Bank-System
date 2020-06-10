@@ -21,7 +21,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar-content">
         <ul class="navbar-nav mr-auto">
-          <% home_models.each do |model, icon| %>
+          <% navbar_models.each do |model, icon| %>
             <li class="nav-item <%= active_page url_for model %>">
               <%= link_to url_for(model), class: 'nav-link' do %>
                 <i class="fas fa-fw fa-<%= icon %>"></i>

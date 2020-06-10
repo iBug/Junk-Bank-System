@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Branch:</strong>
+  <%= @account.branch_id %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @account.client_id %>
+</p>
+
+<p>
+  <strong>Accountable:</strong>
+  <%= @account.accountable_id %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @account.balance %>
+</p>
+
+<p>
+  <strong>Open date:</strong>
+  <%= @account.open_date %>
+</p>
+
+<p>
+  <strong>Last access:</strong>
+  <%= @account.last_access %>
+</p>
+
+<%= link_to 'Edit', edit_account_path(@account) %> |
+<%= link_to 'Back', accounts_path %>

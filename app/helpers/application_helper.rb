@@ -7,8 +7,8 @@ module ApplicationHelper
     bool ? '是' : '否'
   end
 
-  def home_models
-    [Branch, Department, Staff, Client].zip %w[university building user-tie user-friends]
+  def navbar_models
+    [Branch, Department, Staff, Client, Account].zip %w[university building user-tie user-friends user-circle]
   end
 
   def site_name

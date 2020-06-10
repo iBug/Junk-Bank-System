@@ -1,3 +1,3 @@
-class Contact < Person
+class Contact < ApplicationRecord
   belongs_to :client
 end

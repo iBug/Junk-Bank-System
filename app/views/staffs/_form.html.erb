@@ -34,8 +34,9 @@
   <div class="form-group">
     <%= form.label :start_date, '开始工作日期' %>
     <div class="form-row">
+      <%# Trick: https://stackoverflow.com/a/28821449/5958455 %>
       <div class="col col-4">
-        <%= form.date_select :start_date, {date_separator: '</div><div class="col col-4">'}, {class: 'form-control'} %>
+        <%= form.date_select :start_date, { date_separator: '</div><div class="col col-4">' }, { class: 'form-control' } %>
       </div>
     </div>
   </div>
@@ -51,14 +52,14 @@
     <%= form.label :branch_id, '支行' %>
     <%= form.select :branch_id, options_for_select(Branch.all.map do |branch| %>
       <% [branch.name, branch.id] %>
-      <% end), {}, {class: 'form-control'} %>
+      <% end), {}, { class: 'form-control' } %>
   </div>
 
   <div class="form-group">
     <%= form.label :department_id, '部门' %>
     <%= form.select :department_id, options_for_select(Department.all.map do |dept| %>
       <% [dept.name, dept.id] %>
-      <% end), {}, {class: 'form-control'} %>
+      <% end), {}, { class: 'form-control' } %>
   </div>
 
   <div class="actions">

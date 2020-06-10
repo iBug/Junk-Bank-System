@@ -31,7 +31,6 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    @client.build_contact(client_params[:contact_attributes])
 
     respond_to do |format|
       if @client.save
