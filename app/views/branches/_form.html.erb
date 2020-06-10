@@ -1,6 +1,6 @@
-<%= form_with(model: branch, local: true) do |form| %>
+<%= form_with model: branch, local: true, class: 'my-3' do |form| %>
   <% if branch.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(branch.errors.count, "error") %> prohibited this branch from being saved:</h2>
 
       <ul>
@@ -11,21 +11,22 @@
     </div>
   <% end %>
 
-  <% %i{name city}.each do |field| %>
-    <div class="form-group">
-      <%= form.label field, "#{field.capitalize}" %>
-      <%= form.text_field field, class: 'form-control' %>
-    </div>
-  <% end %>
+  <div class="form-group">
+    <%= form.label :name, '名称' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
 
-  <% %i{assets}.each do |field| %>
-    <div class="form-group">
-      <%= form.label field, "#{field.capitalize}" %>
-      <%= form.number_field field, class: 'form-control' %>
-    </div>
-  <% end %>
+  <div class="form-group">
+    <%= form.label :city, '城市' %>
+    <%= form.text_field :city, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :assets, '资产' %>
+    <%= form.number_field :assets, class: 'form-control' %>
+  </div>
 
   <div class="actions">
-    <%= form.submit class: 'btn btn-primary' %>
+    <%= form.submit class: 'btn btn-success' %>
   </div>
 <% end %>

@@ -1,6 +1,6 @@
-<h1>Editing Department</h1>
+<h1>编辑部门 <%= @department.name %></h1>
 
 <%= render 'form', department: @department %>
 
-<%= link_to 'Show', @department %> |
-<%= link_to 'Back', departments_path %>
+<%= link_to 'Show', @department, class: 'btn btn-primary' %>
+<%= link_to 'Back', departments_path, class: 'btn btn-secondary' %>

@@ -1,6 +1,6 @@
-<%= form_with(model: department, local: true) do |form| %>
+<%= form_with model: department, local: true, class: 'my-3' do |form| %>
   <% if department.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(department.errors.count, "error") %> prohibited this department from being saved:</h2>
 
       <ul>
@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :name %>
+    <%= form.label :name, '部门名称' %>
     <%= form.text_field :name, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :type %>
-    <%= form.text_field :type, class: 'form-control' %>
+    <%= form.label :kind, '部门类型' %>
+    <%= form.text_field :kind, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit, class: 'btn btn-primary' %>
+    <%= form.submit class: 'btn btn-success' %>
   </div>
 <% end %>

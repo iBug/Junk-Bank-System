@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   resources :branches
   resources :departments
+  resources :staffs
   resources :clients
 end

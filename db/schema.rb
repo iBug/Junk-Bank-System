@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
 
   create_table "departments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "部门", force: :cascade do |t|
     t.string "name", limit: 64, comment: "部门名称"
-    t.string "type", limit: 64, comment: "部门类型"
+    t.string "kind", limit: 64, comment: "部门类型"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,11 +1,11 @@
-<h1>Departments</h1>
+<h1>部门</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Type</th>
+      <th>部门号</th>
+      <th>部门名称</th>
+      <th>部门类型</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -15,10 +15,10 @@
       <tr>
         <td><%= link_to department.id, department %></td>
         <td><%= department.name %></td>
-        <td><%= department.type %></td>
+        <td><%= department.kind %></td>
         <td>
-          <%= link_to 'Edit', edit_department_path(department), class: 'btn btn-primary' %>
-          <%= link_to 'Destroy', department, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <%= link_to '编辑', edit_department_path(department), class: 'btn btn-primary' %>
+          <%= link_to '删除', department, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>
@@ -27,4 +27,4 @@
 
 <br>
 
-<%= link_to 'New Department', new_department_path %>
+<%= link_to '创建部门', new_department_path, class: 'btn btn-success' %>

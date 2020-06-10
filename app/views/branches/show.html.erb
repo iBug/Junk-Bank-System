@@ -1,17 +1,13 @@
-<p>
-  <strong>Name:</strong>
-  <%= @branch.name %>
-</p>
+<h1>查看支行</h1>
 
-<p>
-  <strong>City:</strong>
-  <%= @branch.city %>
-</p>
-
-<p>
-  <strong>Assets:</strong>
-  <%= @branch.assets %>
-</p>
+<dl class="row my-3">
+  <dt class="col col-12 col-md-2">名称</dt>
+  <dd class="col col-12 col-md-10"><%= @branch.name %></dd>
+  <dt class="col col-12 col-md-2">城市</dt>
+  <dd class="col col-12 col-md-10"><%= @branch.city %></dd>
+  <dt class="col col-12 col-md-2">资产</dt>
+  <dd class="col col-12 col-md-10"><%= @branch.assets %></dd>
+</dl>
 
 <%= link_to 'Edit', edit_branch_path(@branch), class: 'btn btn-primary' %>
 <%= link_to 'Back', branches_path, class: 'btn btn-secondary' %>

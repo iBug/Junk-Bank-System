@@ -1,12 +1,12 @@
-<p>
-  <strong>Name:</strong>
-  <%= @department.name %>
-</p>
+<h1>查看部门</h1>
 
-<p>
-  <strong>Type:</strong>
-  <%= @department.type %>
-</p>
+<dl class="row my-3">
+  <dt class="col col-12 col-md-2">名称</dt>
+  <dd class="col col-12 col-md-10"><%= @department.name %></dd>
+  <dt class="col col-12 col-md-2">类型</dt>
+  <dd class="col col-12 col-md-10"><%= @department.kind %></dd>
+</dl>
 
-<%= link_to 'Edit', edit_department_path(@department) %> |
-<%= link_to 'Back', departments_path %>
+<%= link_to 'Edit', edit_department_path(@department), class: 'btn btn-primary' %>
+<%= link_to 'Back', departments_path, class: 'btn btn-secondary' %>
+<%= link_to 'Destroy', @department, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
