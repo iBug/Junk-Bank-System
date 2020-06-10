@@ -18,11 +18,18 @@ bundle install --path=vendor/bundle
 
 ### Initialize database
 
-Edit `config/database.yml` properly then
+Edit `config/database.yml` properly and then
 
 ```shell
 bundle exec rake db:create
 bundle exec rake db:migrate
+bundle exec rake db:seed
+```
+
+You can also combine the above commands into one:
+
+```shell
+bundle exec rake db:setup
 ```
 
 ### Start development server
