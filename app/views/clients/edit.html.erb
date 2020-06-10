@@ -1,6 +1,6 @@
-<h1>Editing Client</h1>
+<h1>编辑客户</h1>
 
 <%= render 'form', client: @client %>
 
-<%= link_to 'Show', @client %> |
-<%= link_to 'Back', clients_path %>
+<%= link_to '查看', @client, class: 'btn btn-primary' %>
+<%= link_to '返回', clients_path, class: 'btn btn-secondary' %>

@@ -1,7 +1,5 @@
 <h1>查看客户</h1>
 
-<%= @client.attributes %>
-
 <dl class="row my-3">
   <% fields_with_name.each do |field, name| %>
     <dt class="col col-12 col-md-2"><%= name %></dt>
@@ -10,7 +8,7 @@
   <dt class="col col-12 col-md-2">负责人</dt>
   <dd class="col col-12 col-md-10"><%= link_to @client.manager.name, @client.manager %></dd>
   <dt class="col col-12 col-md-2">负责人类型</dt>
-  <dd class="col col-12 col-md-10"><%= 'Unimplemented' %></dd>
+  <dd class="col col-12 col-md-10"><%= manager_type_name @client.manager_type %></dd>
   <dt class="col col-12 col-md-2">联系人</dt>
   <dd class="col col-12 col-md-10"><%= link_to @client.contact.name, @client.contact %></dd>
 </dl>
