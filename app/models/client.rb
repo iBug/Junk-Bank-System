@@ -1,4 +1,6 @@
 class Client < Person
+  set_display_name '客户'
+
   belongs_to :manager, class_name: :Staff
   has_one :contact, dependent: :destroy
   has_many :created_deposit_accounts

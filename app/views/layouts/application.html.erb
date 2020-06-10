@@ -25,7 +25,7 @@
             <li class="nav-item <%= active_page url_for model %>">
               <%= link_to url_for(model), class: 'nav-link' do %>
                 <i class="fas fa-fw fa-<%= icon %>"></i>
-                <%= model %>
+                <%= model.display_name %>
               <% end %>
             </li>
           <% end %>

@@ -1,7 +1,5 @@
 class Department < ApplicationRecord
-  has_many :staffs
+  set_display_name '部门'
 
-  def display_name
-    '部门'
-  end
+  has_many :staffs
 end
