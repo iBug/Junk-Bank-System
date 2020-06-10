@@ -19,9 +19,6 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
     t.decimal "balance", precision: 12, scale: 2, comment: "余额"
     t.date "open_date", comment: "开户日期"
     t.datetime "last_access", default: -> { "current_timestamp()" }, comment: "最近访问"
-    t.float "interest_rate", comment: "利率"
-    t.string "currency", limit: 3, default: "BTC", comment: "货币类型"
-    t.decimal "withdraw_amount", precision: 12, scale: 2, comment: "透支额"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["branch_id"], name: "index_accounts_on_branch_id"
@@ -35,6 +32,12 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
     t.decimal "assets", precision: 12, scale: 2, comment: "资产"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "check_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "支票账户", force: :cascade do |t|
+    t.bigint "account_id"
+    t.decimal "withdraw_amount", precision: 12, scale: 2, comment: "透支额"
+    t.index ["account_id"], name: "index_check_accounts_on_account_id"
   end
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "客户", force: :cascade do |t|
@@ -73,6 +76,13 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "deposit_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "储蓄账户", force: :cascade do |t|
+    t.bigint "account_id"
+    t.float "interest_rate", comment: "利率"
+    t.string "currency", limit: 3, default: "BTC", comment: "货币类型"
+    t.index ["account_id"], name: "index_deposit_accounts_on_account_id"
+  end
+
   create_table "issues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "逐次支付", force: :cascade do |t|
     t.bigint "loans_id"
     t.date "date", comment: "日期"
@@ -106,10 +116,12 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
 
   add_foreign_key "accounts", "branches", on_delete: :cascade
   add_foreign_key "accounts", "clients"
+  add_foreign_key "check_accounts", "accounts", on_delete: :cascade
   add_foreign_key "clients", "staffs", column: "manager_id", on_delete: :nullify
   add_foreign_key "clients_loans", "clients"
   add_foreign_key "clients_loans", "loans", column: "loans_id", on_delete: :cascade
   add_foreign_key "contacts", "clients", on_delete: :cascade
+  add_foreign_key "deposit_accounts", "accounts", on_delete: :cascade
   add_foreign_key "issues", "loans", column: "loans_id", on_delete: :cascade
   add_foreign_key "loans", "branches"
   add_foreign_key "staffs", "branches"
