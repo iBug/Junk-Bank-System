@@ -1,0 +1,10 @@
+<h1>客户 <%= @client.name %> 的联系人</h1>
+
+<dl class="row my-3">
+  <% contact_fields_with_name.each do |field, name| %>
+    <dt class="col col-12 col-md-2"><%= name %></dt>
+    <dd class="col col-12 col-md-10"><%= @contact[field] %></dd>
+  <% end %>
+</dl>
+
+<%= link_to '返回', @contact.client, class: 'btn btn-secondary' %>

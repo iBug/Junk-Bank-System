@@ -1,2 +1,20 @@
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+<h1>查看客户</h1>
+
+<%= @client.attributes %>
+
+<dl class="row my-3">
+  <% fields_with_name.each do |field, name| %>
+    <dt class="col col-12 col-md-2"><%= name %></dt>
+    <dd class="col col-12 col-md-10"><%= @client[field] %></dd>
+  <% end %>
+  <dt class="col col-12 col-md-2">负责人</dt>
+  <dd class="col col-12 col-md-10"><%= link_to @client.manager.name, @client.manager %></dd>
+  <dt class="col col-12 col-md-2">负责人类型</dt>
+  <dd class="col col-12 col-md-10"><%= 'Unimplemented' %></dd>
+  <dt class="col col-12 col-md-2">联系人</dt>
+  <dd class="col col-12 col-md-10"><%= link_to @client.contact.name, @client.contact %></dd>
+</dl>
+
+<%= link_to '编辑', edit_client_path(@client), class: 'btn btn-primary' %>
+<%= link_to '返回', clients_path, class: 'btn btn-secondary' %>
+<%= link_to '删除', @client, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>

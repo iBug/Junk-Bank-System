@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
+  before_action :set_client, only: %i[show edit update destroy contact]
 
   # GET /clients
   # GET /clients.json
@@ -10,6 +10,11 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
+  end
+
+  # GET /clients/1/contact
+  def contact
+    @contact = @client.contact
   end
 
   # GET /clients/new

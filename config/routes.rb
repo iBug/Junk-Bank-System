@@ -5,4 +5,8 @@ Rails.application.routes.draw do
   resources :departments
   resources :staffs
   resources :clients
+
+  scope :clients do
+    get ':id/contact', to: 'clients#contact', as: :contact
+  end
 end
