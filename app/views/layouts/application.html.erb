@@ -35,8 +35,20 @@
               员工
             <% end %>
           </li>
+          <li class="nav-item <%= active_page clients_url %>">
+            <%= link_to clients_url, class: 'nav-link' do %>
+              <i class="fas fa-fw fa-user-friends"></i>
+              客户
+            <% end %>
+          </li>
         </ul>
         <ul class="navbar-nav my-2 my-md-0">
+          <li class="nav-item">
+            <%= link_to 'https://github.com/iBug/Junk-Bank-System', class: 'nav-link' do %>
+              <i class="fab fa-fw fa-github"></i>
+              GitHub
+            <% end %>
+          </li>
         </ul>
       </div>
     </nav>

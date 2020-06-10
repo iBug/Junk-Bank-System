@@ -26,7 +26,7 @@ class ClientsController < ApplicationController
   # POST /clients.json
   def create
     @client = Client.new(client_params)
-    @client.build_contact(client_params[:contact])
+    @client.build_contact(client_params[:contact_attributes])
 
     respond_to do |format|
       if @client.save
@@ -71,6 +71,6 @@ class ClientsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def client_params
-      params.fetch(:client, {})
+      params.fetch(:client, {}).permit(helpers.fields, :manager_id, contact_attributes: helpers.contact_fields)
     end
 end

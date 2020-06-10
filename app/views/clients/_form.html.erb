@@ -23,7 +23,7 @@
     <%= f.label :manager %>
     <%= f.select :manager_id, options_for_select(Staff.all.map do |staff| %>
       <% [staff.name, staff.id] %>
-    <% end), class: 'form-control' %>
+      <% end), {}, {class: 'form-control'} %>
   </div>
 
   <%= f.fields_for :contact do |c| %>

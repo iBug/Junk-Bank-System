@@ -59,12 +59,11 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
     t.index ["loans_id"], name: "index_clients_loans_on_loans_id"
   end
 
-  create_table "contacts", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "联系人", force: :cascade do |t|
+  create_table "contacts", primary_key: "client_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "联系人", force: :cascade do |t|
     t.string "name", limit: 64, comment: "姓名"
     t.string "phone", limit: 64, comment: "电话"
     t.string "email", limit: 64, comment: "Email"
     t.string "relationship", limit: 64, comment: "与客户关系"
-    t.bigint "client_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_contacts_on_client_id"
