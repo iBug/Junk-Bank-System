@@ -7,6 +7,6 @@
   <dd class="col col-12 col-md-10"><%= @department.kind %></dd>
 </dl>
 
-<%= link_to 'Edit', edit_department_path(@department), class: 'btn btn-primary' %>
-<%= link_to 'Back', departments_path, class: 'btn btn-secondary' %>
-<%= link_to 'Destroy', @department, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<%= link_to '编辑', edit_department_path(@department), class: 'btn btn-primary' %>
+<%= link_to '返回', departments_path, class: 'btn btn-secondary' %>
+<%= link_to '删除', @department, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>

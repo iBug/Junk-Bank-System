@@ -3,8 +3,8 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>身份证号</th>
       <th>姓名</th>
+      <th>身份证号</th>
       <th>电话</th>
       <th>地址</th>
       <th>开始工作日期</th>
@@ -18,12 +18,12 @@
   <tbody>
     <% @staffs.each do |staff| %>
       <tr>
+        <td><%= link_to staff.name, staff %></td>
         <td><%= staff.person_id %></td>
-        <td><%= staff.name %></td>
         <td><%= staff.phone %></td>
         <td><%= staff.address %></td>
         <td><%= staff.start_date %></td>
-        <td><%= staff.manager %></td>
+        <td><%= boolean_s staff.manager %></td>
         <td><%= staff.branch.name %></td>
         <td><%= staff.department.name %></td>
         <td>

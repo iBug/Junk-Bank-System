@@ -6,4 +6,8 @@ module ApplicationHelper
   def active_page(page)
     'active' if current_page? page
   end
+
+  def boolean_s(bool)
+    bool ? '是' : '否'
+  end
 end

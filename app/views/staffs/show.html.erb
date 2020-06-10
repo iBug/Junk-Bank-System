@@ -12,7 +12,7 @@
   <dt class="col col-12 col-md-2">开始工作日期</dt>
   <dd class="col col-12 col-md-10"><%= @staff.start_date %></dd>
   <dt class="col col-12 col-md-2">经理</dt>
-  <dd class="col col-12 col-md-10"><%= @staff.manager ? '是' : '否' %></dd>
+  <dd class="col col-12 col-md-10"><%= boolean_s @staff.manager %></dd>
   <dt class="col col-12 col-md-2">支行</dt>
   <dd class="col col-12 col-md-10"><%= link_to @staff.branch.name, @staff.branch %></dd>
   <dt class="col col-12 col-md-2">部门</dt>

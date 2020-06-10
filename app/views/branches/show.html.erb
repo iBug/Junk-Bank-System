@@ -9,6 +9,6 @@
   <dd class="col col-12 col-md-10"><%= @branch.assets %></dd>
 </dl>
 
-<%= link_to 'Edit', edit_branch_path(@branch), class: 'btn btn-primary' %>
-<%= link_to 'Back', branches_path, class: 'btn btn-secondary' %>
-<%= link_to 'Destroy', @branch, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<%= link_to '编辑', edit_branch_path(@branch), class: 'btn btn-primary' %>
+<%= link_to '返回', branches_path, class: 'btn btn-secondary' %>
+<%= link_to '删除', @branch, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
