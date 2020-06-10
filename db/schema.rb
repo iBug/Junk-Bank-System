@@ -15,14 +15,16 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "账户", force: :cascade do |t|
     t.bigint "branch_id"
     t.bigint "client_id"
-    t.string "type", null: false, comment: "账户类型"
+    t.string "accountable_type", null: false
+    t.bigint "accountable_id", null: false, comment: "类型账户ID"
     t.decimal "balance", precision: 12, scale: 2, comment: "余额"
     t.date "open_date", comment: "开户日期"
     t.datetime "last_access", default: -> { "current_timestamp()" }, comment: "最近访问"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id"
     t.index ["branch_id"], name: "index_accounts_on_branch_id"
-    t.index ["client_id", "branch_id", "type"], name: "index_accounts_on_client_id_and_branch_id_and_type", unique: true
+    t.index ["client_id", "branch_id", "accountable_type"], name: "index_accounts_on_client_id_and_branch_id_and_accountable_type", unique: true
     t.index ["client_id"], name: "index_accounts_on_client_id"
   end
 
