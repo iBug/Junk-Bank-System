@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang=zh>
   <head>
     <title>Junk Bank System</title>
     <%= csrf_meta_tags %>
@@ -11,9 +11,30 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
-      <%= link_to site_name, "/", class: 'navbar-brand' %>
+      <%= link_to root_url, class: 'navbar-brand' do %>
+        <i class="fas fa-lg fa-fw fa-crown"></i>
+        <%= site_name %>
+      <% end %>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item <%= active_page branches_url %>">
+            <%= link_to branches_url, class: 'nav-link' do %>
+              <i class="fas fa-fw fa-university"></i>
+              支行
+            <% end %>
+          </li>
+          <li class="nav-item <%= active_page departments_url %>">
+            <%= link_to departments_url, class: 'nav-link' do %>
+              <i class="fas fa-fw fa-building"></i>
+              部门
+            <% end %>
+          </li>
+          <li class="nav-item <%= active_page staffs_url %>">
+            <%= link_to staffs_url, class: 'nav-link' do %>
+              <i class="fas fa-fw fa-user-tie"></i>
+              员工
+            <% end %>
+          </li>
         </ul>
         <ul class="navbar-nav my-2 my-md-0">
         </ul>
