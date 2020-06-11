@@ -27,3 +27,7 @@
   { name: 'Steve', person_id: 'player-1', phone: '87654321-0', address: 'Overworld', start_date: '2011-11-18', manager: true, branch_id: 4, department_id: 3 },
   { name: 'Franklin Clinton', person_id: 'OXOX-NGGA', phone: '(555)555-1234', address: '3671 Whispymound Drive, Vinewood Hills, Los Santos', start_date: '2013-09-17', manager: true, branch_id: 3, department_id: 1 },
 ].each { |h| Staff.create h }
+
+[
+  { name: 'TaoStrong', person_id: '123TQL', phone: '6666-9999', address: 'Haha', manager_id: 1, manager_type: 3, contact_attributes: { name: 'taoky S', phone: '9999-6666', email: 'taoky@strong.com', relationship: 'God' } },
+].each { |h| Client.create h }
