@@ -15,19 +15,19 @@
     <%= form.label :branch_id, '支行' %>
     <%= form.select :branch_id, options_for_select(Branch.all.map do |branch| %>
       <% [branch.name, branch.id] %>
-      <% end), {}, { class: 'form-control' } %>
+      <% end, account.branch_id), {}, { class: 'form-control' } %>
   </div>
 
   <div class="form-group">
     <%= form.label :client_id, '开户客户' %>
     <%= form.select :client_id, options_for_select(Client.all.map do |client| %>
       <% [client.name, client.id] %>
-      <% end), {}, { class: 'form-control' } %>
+      <% end, account.client_id), {}, { class: 'form-control' } %>
   </div>
 
   <div class="form-group">
     <%= form.label :accountable_type, '账户类型' %>
-    <%= form.select :accountable_type, options_for_select(%w[储蓄账户 支票账户].zip %i[DepositAccount CheckAccount]), {}, { class: 'form-control', 'v-model': 'accountType' } %>
+    <%= form.select :accountable_type, options_for_select(%w[储蓄账户 支票账户].zip(%i[DepositAccount CheckAccount]), account.accountable_type), {}, { class: 'form-control', 'v-model': 'accountType', disabled: !account.new_record? } %>
   </div>
 
   <div class="form-group">
@@ -44,27 +44,31 @@
     </div>
   </div>
 
-  <div v-if="accountType === 'DepositAccount'">
-    <%= form.fields_for :deposit_account, (DepositAccount.new if account.new_record?) do |f| %>
-      <div class="form-group">
-        <%= f.label :interest_rate, '利率' %>
-        <%= f.number_field :interest_rate, class: 'form-control' %>
-      </div>
-      <div class="form-group">
-        <%= f.label :currency, '货币类型' %>
-        <%= f.text_field :currency, class: 'form-control', maxlength: 3, value: f.object.currency.upcase %>
-      </div>
-    <% end %>
-  </div>
+  <% if account.new_record? || account.accountable_type == 'DepositAccount' %>
+    <div v-if="accountType === 'DepositAccount'">
+      <%= form.fields_for :deposit_account, (account.accountable || DepositAccount.new) do |f| %>
+        <div class="form-group">
+          <%= f.label :interest_rate, '利率' %>
+          <%= f.number_field :interest_rate, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :currency, '货币类型' %>
+          <%= f.text_field :currency, class: 'form-control', maxlength: 3, value: f.object.currency.upcase %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
-  <div v-if="accountType === 'CheckAccount'">
-    <%= form.fields_for :check_account, (CheckAccount.new if account.new_record?) do |f| %>
-      <div class="form-group">
-        <%= f.label :withdraw_amount, '透支额' %>
-        <%= f.number_field :withdraw_amount, class: 'form-control' %>
-      </div>
-    <% end %>
-  </div>
+  <% if account.new_record? || account.accountable_type == 'CheckAccount' %>
+    <div v-if="accountType === 'CheckAccount'">
+      <%= form.fields_for :check_account, (account.accountable || CheckAccount.new) do |f| %>
+        <div class="form-group">
+          <%= f.label :withdraw_amount, '透支额' %>
+          <%= f.number_field :withdraw_amount, class: 'form-control' %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit class: 'btn btn-success' %>
@@ -74,7 +78,7 @@
     <script type="text/javascript">
       var app = new Vue({
         el: '#account-form',
-        data: {accountType: undefined}
+        data: {accountType: document.querySelector('[v-model="accountType"]').value}
       });
     </script>
   <% end %>
