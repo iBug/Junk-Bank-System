@@ -30,4 +30,5 @@
 
 [
   { name: 'TaoStrong', person_id: '123TQL', phone: '6666-9999', address: 'Haha', manager_id: 1, manager_type: 3, contact_attributes: { name: 'taoky S', phone: '9999-6666', email: 'taoky@strong.com', relationship: 'God' } },
+  { name: 'Thor', person_id: 'THUNDER', phone: '7777-7777', address: 'XXXX', manager_id: 3, manager_type: 1, contact_attributes: { name: 'Donald Trump', phone: '6969-6969', email: 'president@whitehouse.gov', relationship: 'President' } },
 ].each { |h| Client.create h }
