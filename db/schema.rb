@@ -37,9 +37,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
   end
 
   create_table "check_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "支票账户", force: :cascade do |t|
-    t.bigint "account_id"
     t.decimal "withdraw_amount", precision: 12, scale: 2, comment: "透支额"
-    t.index ["account_id"], name: "index_check_accounts_on_account_id"
   end
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "客户", force: :cascade do |t|
@@ -79,10 +77,8 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
   end
 
   create_table "deposit_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "储蓄账户", force: :cascade do |t|
-    t.bigint "account_id"
     t.float "interest_rate", comment: "利率"
     t.string "currency", limit: 3, default: "BTC", comment: "货币类型"
-    t.index ["account_id"], name: "index_deposit_accounts_on_account_id"
   end
 
   create_table "issues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "逐次支付", force: :cascade do |t|
@@ -118,12 +114,10 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
 
   add_foreign_key "accounts", "branches", on_delete: :cascade
   add_foreign_key "accounts", "clients"
-  add_foreign_key "check_accounts", "accounts", on_delete: :cascade
   add_foreign_key "clients", "staffs", column: "manager_id"
   add_foreign_key "clients_loans", "clients"
   add_foreign_key "clients_loans", "loans", column: "loans_id", on_delete: :cascade
   add_foreign_key "contacts", "clients", on_delete: :cascade
-  add_foreign_key "deposit_accounts", "accounts", on_delete: :cascade
   add_foreign_key "issues", "loans", column: "loans_id", on_delete: :cascade
   add_foreign_key "loans", "branches"
   add_foreign_key "staffs", "branches"
