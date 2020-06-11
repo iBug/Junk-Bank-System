@@ -46,7 +46,7 @@
 
   <% if account.new_record? || account.accountable_type == 'DepositAccount' %>
     <div v-if="accountType === 'DepositAccount'">
-      <%= form.fields_for :deposit_account, (account.accountable || DepositAccount.new) do |f| %>
+      <%= form.fields_for :accountable, (account.accountable || DepositAccount.new) do |f| %>
         <div class="form-group">
           <%= f.label :interest_rate, '利率' %>
           <%= f.number_field :interest_rate, class: 'form-control' %>
@@ -61,7 +61,7 @@
 
   <% if account.new_record? || account.accountable_type == 'CheckAccount' %>
     <div v-if="accountType === 'CheckAccount'">
-      <%= form.fields_for :check_account, (account.accountable || CheckAccount.new) do |f| %>
+      <%= form.fields_for :accountable, (account.accountable || CheckAccount.new) do |f| %>
         <div class="form-group">
           <%= f.label :withdraw_amount, '透支额' %>
           <%= f.number_field :withdraw_amount, class: 'form-control' %>

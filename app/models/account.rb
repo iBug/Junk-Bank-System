@@ -6,4 +6,9 @@ class Account < ApplicationRecord
   belongs_to :accountable, polymorphic: true
 
   accepts_nested_attributes_for :accountable
+
+  # Credits: https://stackoverflow.com/a/32915379/5958455
+  def build_accountable(params)
+    self.accountable = accountable_type.safe_constantize.new params
+  end
 end
