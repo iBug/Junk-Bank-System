@@ -4,10 +4,6 @@ module ClientsHelper
 
   private_constant :MANAGER_TYPE_NAMES, :MANAGER_TYPE_NAMES_SHORT
 
-  def fields
-    PersonsHelper::fields
-  end
-
   def contact_fields
     ContactsHelper::fields
   end

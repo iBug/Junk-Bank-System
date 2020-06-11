@@ -4,13 +4,13 @@
   <thead>
     <tr>
       <th>姓名</th>
-      <th>身份证号</th>
-      <th>电话</th>
-      <th>地址</th>
+      <th class="d-none d-xl-table-cell">身份证号</th>
+      <th class="d-none d-lg-table-cell">电话</th>
+      <th class="d-none">地址</th>
       <th>开始工作日期</th>
       <th>经理？</th>
-      <th>支行</th>
-      <th>部门</th>
+      <th class="d-none d-md-table-cell">支行</th>
+      <th class="d-none d-lg-table-cell">部门</th>
       <th>操作</th>
     </tr>
   </thead>
@@ -19,17 +19,17 @@
     <% @staffs.each do |staff| %>
       <tr>
         <td><%= link_to staff.name, staff %></td>
-        <td><%= staff.person_id %></td>
-        <td><%= staff.phone %></td>
-        <td><%= staff.address %></td>
+        <td class="d-none d-xl-table-cell"><%= staff.person_id %></td>
+        <td class="d-none d-lg-table-cell"><%= staff.phone %></td>
+        <td class="d-none"><%= staff.address %></td>
         <td><%= staff.start_date %></td>
         <td><%= boolean_s staff.manager %></td>
-        <td><%= staff.branch.name %></td>
-        <td><%= staff.department.name %></td>
+        <td class="d-none d-md-table-cell"><%= staff.branch.name %></td>
+        <td class="d-none d-lg-table-cell"><%= staff.department.name %></td>
         <td>
           <%= link_to '查看', staff, class: 'btn btn-primary' %>
           <%= link_to '编辑', edit_staff_path(staff), class: 'btn btn-secondary' %>
-          <%= link_to '删除', staff, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <%= link_to '删除', staff, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-md-inline-block' %>
         </td>
       </tr>
     <% end %>
