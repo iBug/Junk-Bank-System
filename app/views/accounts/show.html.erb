@@ -12,9 +12,9 @@
   <dt class="col col-12 col-md-2">余额</dt>
   <dd class="col col-12 col-md-10"><%= @account.balance %></dd>
   <dt class="col col-12 col-md-2">开户日期</dt>
-  <dd class="col col-12 col-md-10"><%= @account.open_date %></dd>
+  <dd class="col col-12 col-md-10"><%= l @account.open_date %></dd>
   <dt class="col col-12 col-md-2">最近访问</dt>
-  <dd class="col col-12 col-md-10"><%= @account.last_access %></dd>
+  <dd class="col col-12 col-md-10"><%= l @account.last_access %></dd>
 
   <%# Type-specific data %>
   <% case @account.accountable_type %>

@@ -36,5 +36,6 @@ module JunkBank
     end
 
     config.site_name = "银行业务管理系统"
+    config.time_zone = "Asia/Shanghai"
   end
 end

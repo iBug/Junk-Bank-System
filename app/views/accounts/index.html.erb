@@ -6,8 +6,8 @@
       <th>支行</th>
       <th>类型</th>
       <th>余额</th>
-      <th>开户日期</th>
-      <th>最近访问</th>
+      <th class="d-none d-md-table-cell">开户日期</th>
+      <th class="d-none d-lg-table-cell">最近访问</th>
       <th>操作</th>
     </tr>
   </thead>
@@ -18,12 +18,12 @@
         <td><%= link_to account.branch.name, account.branch %></td>
         <td><%= account_type_name account.accountable_type %></td>
         <td><%= account.balance %></td>
-        <td><%= account.open_date %></td>
-        <td><%= account.last_access %></td>
+        <td class="d-none d-md-table-cell"><%= l account.open_date %></td>
+        <td class="d-none d-lg-table-cell"><%= l account.last_access %></td>
         <td>
           <%= link_to '查看', account, class: 'btn btn-primary' %>
           <%= link_to '编辑', edit_account_path(account), class: 'btn btn-secondary' %>
-          <%= link_to '删除', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <%= link_to '删除', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-sm-inline-block' %>
         </td>
       </tr>
     <% end %>
