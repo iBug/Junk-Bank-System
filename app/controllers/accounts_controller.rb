@@ -24,7 +24,9 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(account_params)
+    account_type = account_params[:accountable_type]
+    typed_account = account_type.safe_constantize.new(account_params[account_type.underscore])
+    @account = typed_account.build_account(account_params.except account_type.underscore)
 
     respond_to do |format|
       if @account.save
@@ -69,6 +71,6 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(:branch_id, :client_id, :accountable_id, :accountable_type, :balance, :open_date, :last_access)
+      params.require(:account).permit(%i[branch_id client_id accountable_type balance open_date], deposit_account: %i[interest_rate currency], check_account: [:withdraw_amount])
     end
 end

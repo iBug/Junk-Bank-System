@@ -1,34 +1,34 @@
-<p id="notice"><%= notice %></p>
+<h1>查看账户</h1>
 
-<p>
-  <strong>Branch:</strong>
-  <%= @account.branch_id %>
-</p>
+<dl class="row my-3">
+  <dt class="col col-12 col-md-2">账户号</dt>
+  <dd class="col col-12 col-md-10"><%= @account.id %></dd>
+  <dt class="col col-12 col-md-2">支行</dt>
+  <dd class="col col-12 col-md-10"><%= link_to @account.branch.name, @account.branch %></dd>
+  <dt class="col col-12 col-md-2">开户客户</dt>
+  <dd class="col col-12 col-md-10"><%= link_to @account.client.name, @account.client %></dd>
+  <dt class="col col-12 col-md-2">账户类型</dt>
+  <dd class="col col-12 col-md-10"><%= account_type_name @account.accountable_type %></dd>
+  <dt class="col col-12 col-md-2">余额</dt>
+  <dd class="col col-12 col-md-10"><%= @account.balance %></dd>
+  <dt class="col col-12 col-md-2">开户日期</dt>
+  <dd class="col col-12 col-md-10"><%= @account.open_date %></dd>
+  <dt class="col col-12 col-md-2">最近访问</dt>
+  <dd class="col col-12 col-md-10"><%= @account.last_access %></dd>
 
-<p>
-  <strong>Client:</strong>
-  <%= @account.client_id %>
-</p>
+  <%# Type-specific data %>
+  <% case @account.accountable_type %>
+  <% when 'DepositAccount' %>
+    <dt class="col col-12 col-md-2">利率</dt>
+    <dd class="col col-12 col-md-10"><%= @account.accountable.interest_rate %></dd>
+    <dt class="col col-12 col-md-2">货币类型</dt>
+    <dd class="col col-12 col-md-10"><%= @account.accountable.currency.upcase %></dd>
+  <% when 'CheckAccount' %>
+    <dt class="col col-12 col-md-2">透支额</dt>
+    <dd class="col col-12 col-md-10"><%= @account.accountable.withdraw_amount %></dd>
+  <% end %>
+</dl>
 
-<p>
-  <strong>Accountable:</strong>
-  <%= @account.accountable_id %>
-</p>
-
-<p>
-  <strong>Balance:</strong>
-  <%= @account.balance %>
-</p>
-
-<p>
-  <strong>Open date:</strong>
-  <%= @account.open_date %>
-</p>
-
-<p>
-  <strong>Last access:</strong>
-  <%= @account.last_access %>
-</p>
-
-<%= link_to 'Edit', edit_account_path(@account) %> |
-<%= link_to 'Back', accounts_path %>
+<%= link_to '编辑', edit_account_path(@account), class: 'btn btn-primary' %>
+<%= link_to '返回', accounts_path, class: 'btn btn-secondary' %>
+<%= link_to '删除', @account, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
