@@ -1,37 +1,33 @@
-<p id="notice"><%= notice %></p>
+<h1>账户</h1>
 
-<h1>Accounts</h1>
-
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Branch</th>
-      <th>Client</th>
-      <th>Accountable</th>
-      <th>Balance</th>
-      <th>Open date</th>
-      <th>Last access</th>
-      <th colspan="3"></th>
+      <th>支行</th>
+      <th>类型</th>
+      <th>余额</th>
+      <th>开户日期</th>
+      <th>最近访问</th>
+      <th>操作</th>
     </tr>
   </thead>
 
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= account.branch_id %></td>
-        <td><%= account.client_id %></td>
-        <td><%= account.accountable_id %></td>
+        <td><%= link_to account.branch.name, account.branch %></td>
+        <td><%= account_type_name account.accountable_type %></td>
         <td><%= account.balance %></td>
         <td><%= account.open_date %></td>
         <td><%= account.last_access %></td>
-        <td><%= link_to 'Show', account %></td>
-        <td><%= link_to 'Edit', edit_account_path(account) %></td>
-        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to '查看', account, class: 'btn btn-primary' %>
+          <%= link_to '编辑', edit_account_path(account), class: 'btn btn-secondary' %>
+          <%= link_to '删除', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Account', new_account_path %>
+<%= link_to '新建账户', new_account_path, class: 'btn btn-success' %>

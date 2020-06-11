@@ -1,6 +1,6 @@
-<%= form_with model: account, local: true, class: 'my-3' do |form| %>
+<%= form_with model: account, local: true, id: 'account-form', class: 'my-3' do |form| %>
   <% if account.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
 
       <ul>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :client_id, '客户' %>
+    <%= form.label :client_id, '开户客户' %>
     <%= form.select :client_id, options_for_select(Client.all.map do |client| %>
       <% [client.name, client.id] %>
       <% end), {}, { class: 'form-control' } %>
@@ -27,11 +27,11 @@
 
   <div class="form-group">
     <%= form.label :accountable_type, '账户类型' %>
-    <%= form.select :accountable_type, options_for_select(%w[储蓄账户 支票账户].zip %i[DepositAccount CheckAccount]), {}, { class: 'form-control' } %>
+    <%= form.select :accountable_type, options_for_select(%w[储蓄账户 支票账户].zip %i[DepositAccount CheckAccount]), {}, { class: 'form-control', 'v-model': 'accountType' } %>
   </div>
 
   <div class="form-group">
-    <%= form.label :balance %>
+    <%= form.label :balance, '余额' %>
     <%= form.number_field :balance, class: 'form-control' %>
   </div>
 
@@ -44,7 +44,38 @@
     </div>
   </div>
 
+  <div v-if="accountType === 'DepositAccount'">
+    <%= form.fields_for :deposit_account, (DepositAccount.new if account.new_record?) do %>
+      <div class="form-group">
+        <%= form.label :interest_rate, '利率' %>
+        <%= form.number_field :interest_rate, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :currency, '货币类型' %>
+        <%= form.text_field :currency, class: 'form-control', maxlength: 3 %>
+      </div>
+    <% end %>
+  </div>
+
+  <div v-if="accountType === 'CheckAccount'">
+    <%= form.fields_for :check_account, (CheckAccount.new if account.new_record?) do %>
+      <div class="form-group">
+        <%= form.label :withdraw_amount, '透支额' %>
+        <%= form.number_field :withdraw_amount, class: 'form-control' %>
+      </div>
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= form.submit class: 'btn btn-success' %>
   </div>
+
+  <% content_for :body_after do %>
+    <script type="text/javascript">
+      var app = new Vue({
+        el: '#account-form',
+        data: {accountType: undefined}
+      });
+    </script>
+  <% end %>
 <% end %>

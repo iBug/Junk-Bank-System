@@ -1,6 +1,6 @@
 module ApplicationHelper
   def active_page(page)
-    'active' if current_page? page
+    current_page?(page) ? 'active' : ''
   end
 
   def boolean_s(bool)
