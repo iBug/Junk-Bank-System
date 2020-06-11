@@ -45,23 +45,23 @@
   </div>
 
   <div v-if="accountType === 'DepositAccount'">
-    <%= form.fields_for :deposit_account, (DepositAccount.new if account.new_record?) do %>
+    <%= form.fields_for :deposit_account, (DepositAccount.new if account.new_record?) do |f| %>
       <div class="form-group">
-        <%= form.label :interest_rate, '利率' %>
-        <%= form.number_field :interest_rate, class: 'form-control' %>
+        <%= f.label :interest_rate, '利率' %>
+        <%= f.number_field :interest_rate, class: 'form-control' %>
       </div>
       <div class="form-group">
-        <%= form.label :currency, '货币类型' %>
-        <%= form.text_field :currency, class: 'form-control', maxlength: 3 %>
+        <%= f.label :currency, '货币类型' %>
+        <%= f.text_field :currency, class: 'form-control', maxlength: 3, value: f.object.currency.upcase %>
       </div>
     <% end %>
   </div>
 
   <div v-if="accountType === 'CheckAccount'">
-    <%= form.fields_for :check_account, (CheckAccount.new if account.new_record?) do %>
+    <%= form.fields_for :check_account, (CheckAccount.new if account.new_record?) do |f| %>
       <div class="form-group">
-        <%= form.label :withdraw_amount, '透支额' %>
-        <%= form.number_field :withdraw_amount, class: 'form-control' %>
+        <%= f.label :withdraw_amount, '透支额' %>
+        <%= f.number_field :withdraw_amount, class: 'form-control' %>
       </div>
     <% end %>
   </div>
