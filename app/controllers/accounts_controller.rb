@@ -27,7 +27,6 @@ class AccountsController < ApplicationController
     account_type = account_params[:accountable_type]
     typed_account = account_type.safe_constantize.new(account_params[:accountable_attributes])
     @account = typed_account.build_account(account_params)
-    @account.update_attribute :last_access, Time.now
 
     respond_to do |format|
       if @account.save
@@ -43,8 +42,6 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
   def update
-    @account.update_attribute :last_access, Time.now
-
     respond_to do |format|
       if @account.update(account_params)
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
