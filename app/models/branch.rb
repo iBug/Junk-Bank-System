@@ -6,5 +6,6 @@ class Branch < ApplicationRecord
   has_many :created_check_accounts
 
   validates_uniqueness_of :name
+  validates :city, presence: true
   validates :assets, numericality: { greater_than_or_equal_to: 0 }
 end
