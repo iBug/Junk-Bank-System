@@ -14,7 +14,7 @@
       <br />
       &hellip;
       <br />
-      共 <%= @account.ownerships.size %> 个
+      共 <%= @account.ownerships.size %> 个，<%= link_to '查看全部', account_owners_path(@account) %>
     <% end %>
   </dd>
   <dt class="col col-12 col-md-2">账户类型</dt>

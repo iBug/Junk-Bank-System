@@ -14,7 +14,7 @@
       <br />
       &hellip;
       <br />
-      <%= link_to "查看全部 #{@loan.clients.size} 个", loan_clients_path(@loan) %>
+      共 <%= @loan.clients.size %> 个，<%= link_to "查看全部", loan_clients_path(@loan) %>
     <% end %>
   </dd>
   <dt class="col col-12 col-md-2">状态</dt>
