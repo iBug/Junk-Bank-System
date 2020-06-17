@@ -53,6 +53,6 @@ development:
 #
 production:
   <<: *default
-  database: junk_bank_production
-  username: junk_bank
+  database: <%= ENV.fetch 'DB_2020_DATABASE', 'junk_bank' %>
+  username: <%= ENV.fetch 'DB_2020_DATABASE_USERNAME', 'root' %>
   password: <%= ENV['DB_2020_DATABASE_PASSWORD'] %>
