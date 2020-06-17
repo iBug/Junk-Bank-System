@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   scope :accounts do
     get ':id/owners', to: 'accounts#owners', as: :account_owners
-    post ':id/owners', to: 'accounts#owner_create', as: :new_account_owner
+    post ':id/owners', to: 'ownerships#create', as: :new_account_owner
+    delete ':id/owners/:client_id', to: 'ownerships#destroy', as: :destroy_account_owner
   end
 end
