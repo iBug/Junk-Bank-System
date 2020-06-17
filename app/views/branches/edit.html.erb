@@ -1,6 +1,6 @@
-<h1>Editing Branch</h1>
+<h1>编辑支行 <%= @branch.name %></h1>
 
 <%= render 'form', branch: @branch %>
 
-<%= link_to 'Show', @branch, class: 'btn btn-primary' %>
-<%= link_to 'Back', branches_path, class: 'btn btn-secondary' %>
+<%= link_to raw(t'actions.view'), @branch, class: 'btn btn-primary' %>
+<%= link_to raw(t'actions.back'), branches_path, class: 'btn btn-secondary' %>

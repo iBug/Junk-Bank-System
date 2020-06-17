@@ -2,5 +2,5 @@
 
 <%= render 'form', department: @department %>
 
-<%= link_to 'Show', @department, class: 'btn btn-primary' %>
-<%= link_to 'Back', departments_path, class: 'btn btn-secondary' %>
+<%= link_to raw(t'actions.view'), @department, class: 'btn btn-primary' %>
+<%= link_to raw(t'actions.back'), departments_path, class: 'btn btn-secondary' %>

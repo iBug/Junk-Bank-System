@@ -1,6 +1,6 @@
-<h1>编辑账户</h1>
+<h1>编辑账户 <%= "##{@account.id}"%></h1>
 
 <%= render 'form', account: @account %>
 
-<%= link_to '查看', @account, class: 'btn btn-primary' %>
-<%= link_to '返回', accounts_path, class: 'btn btn-secondary' %>
+<%= link_to raw(t'actions.view'), @account, class: 'btn btn-primary' %>
+<%= link_to raw(t'actions.back'), accounts_path, class: 'btn btn-secondary' %>
