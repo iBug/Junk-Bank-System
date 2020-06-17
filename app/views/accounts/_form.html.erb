@@ -15,7 +15,7 @@
     <%= form.label :branch_id, '支行' %>
     <%= form.select :branch_id, options_for_select(Branch.all.map do |branch| %>
       <% [branch.name, branch.id] %>
-      <% end, account.branch_id), {}, { class: 'form-control' } %>
+      <% end, account.branch_id), {}, { class: 'form-control', disabled: !account.new_record? } %>
   </div>
 
   <% if account.new_record? %>

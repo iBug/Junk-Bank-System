@@ -101,7 +101,7 @@ class AccountsController < ApplicationController
     end
 
     def update_params
-      account_params.except(%i[branch_id accountable_type ownerships_attributes])
+      account_params.except(*%i[branch_id accountable_type ownerships_attributes])
     end
 
     def ownership_params

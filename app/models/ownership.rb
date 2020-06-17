@@ -5,6 +5,8 @@ class Ownership < ApplicationRecord
   belongs_to :client
   belongs_to :account
 
+  validates_uniqueness_of :client, scope: %i[branch accountable_type]
+
   before_save :update_access_time
   before_destroy :check_owners_count
 
