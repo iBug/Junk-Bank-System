@@ -7,5 +7,5 @@ class Branch < ApplicationRecord
 
   validates_uniqueness_of :name
   validates :city, presence: true
-  validates :assets, numericality: { greater_than_or_equal_to: 0 }
+  validates :assets, numericality: { greater_than_or_equal_to: 0.0 }
 end

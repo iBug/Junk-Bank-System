@@ -20,7 +20,7 @@
 
   <div class="form-group">
     <%= form.label :amount, '金额' %>
-    <%= form.number_field :amount, class: 'form-control' %>
+    <%= form.number_field :amount, step: 0.01, class: 'form-control' %>
   </div>
 
   <div class="actions">

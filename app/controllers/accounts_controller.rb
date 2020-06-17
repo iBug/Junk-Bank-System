@@ -50,7 +50,7 @@ class AccountsController < ApplicationController
     @typed_account = accountable_type.safe_constantize.new(params[:accountable_attributes])
     # Insert account and branch info into ownership
     params[:ownerships_attributes]&.each_value do |attr|
-      attr.merge!(accountable_type: params[:accountable_type], branch_id: params[:branch_id])
+      attr.merge!(accountable_type: accountable_type, branch_id: params[:branch_id])
     end
     @account = @typed_account.build_account(params)
 
@@ -97,7 +97,7 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(%i[branch_id accountable_type balance open_date], accountable_attributes: %i[interest_rate currency withdraw_amount], ownerships_attributes: %i[client_id])
+      params.require(:account).permit(%i[id branch_id accountable_type balance open_date], accountable_attributes: %i[interest_rate currency withdraw_amount], ownerships_attributes: %i[client_id])
     end
 
     def update_params

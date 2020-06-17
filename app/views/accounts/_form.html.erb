@@ -36,7 +36,7 @@
 
   <div class="form-group">
     <%= form.label :balance, '余额' %>
-    <%= form.number_field :balance, class: 'form-control' %>
+    <%= form.number_field :balance, step: 0.01, class: 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -53,7 +53,7 @@
       <%= form.fields_for :accountable, (account.new_record? ? DepositAccount.new : account.accountable) do |f| %>
         <div class="form-group pr-sm-0 col">
           <%= f.label :interest_rate, '利率' %>
-          <%= f.number_field :interest_rate, class: 'form-control' %>
+          <%= f.number_field :interest_rate, step: :any, class: 'form-control' %>
         </div>
         <div class="form-group col col-12 col-sm-4 col-lg-3 col-xl-2">
           <%= f.label :currency, '货币类型' %>
@@ -68,7 +68,7 @@
       <%= form.fields_for :accountable, (account.new_record? ? CheckAccount.new : account.accountable) do |f| %>
         <div class="form-group">
           <%= f.label :withdraw_amount, '透支额' %>
-          <%= f.number_field :withdraw_amount, class: 'form-control' %>
+          <%= f.number_field :withdraw_amount, step: 0.01, class: 'form-control' %>
         </div>
       <% end %>
     </div>
