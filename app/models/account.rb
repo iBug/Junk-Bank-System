@@ -17,6 +17,6 @@ class Account < ApplicationRecord
   end
 
   def has_owners
-    #errors.add :base, 'Requires at least one owner' if ownerships.empty?
+    errors.add :base, 'Requires at least one owner' if ownerships.empty?
   end
 end

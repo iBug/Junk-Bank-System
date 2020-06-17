@@ -7,8 +7,13 @@
   <dd class="col col-12 col-md-10"><%= link_to @account.branch.name, @account.branch %></dd>
   <dt class="col col-12 col-md-2">客户</dt>
   <dd class="col col-12 col-md-10">
-    <%# link_to @account.client.name, @account.client %>
-    Placeholder
+    <% @account.ownerships.limit(3).map do |owner| %>
+      <%= link_to owner.client.name, owner.client %>
+    <% end.join "<br />" %>
+    <% if @account.ownerships.size > 3 %>
+      <br />
+      共 <%= @account.ownerships.size %> 个
+    <% end %>
   </dd>
   <dt class="col col-12 col-md-2">账户类型</dt>
   <dd class="col col-12 col-md-10"><%= account_type_name @account.accountable_type %></dd>
@@ -30,6 +35,7 @@
   <% end %>
 </dl>
 
+<%= link_to '关联客户', account_owners_path(@account), class: 'btn btn-info' %>
 <%= link_to '编辑', edit_account_path(@account), class: 'btn btn-primary' %>
 <%= link_to '返回', accounts_path, class: 'btn btn-secondary' %>
 <%= link_to '删除', @account, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>

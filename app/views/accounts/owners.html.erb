@@ -1,0 +1,45 @@
+<h1>账户 #<%= @account.id %> 的关联客户</h1>
+
+<ul class="list-group">
+  <% @account.ownerships.each do |owner| %>
+    <li class="list-group-item">
+      <%= link_to owner.client.name, owner.client %>
+      <div class="float-right">
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<% if @available_clients.empty? %>
+  <div class="my-3">
+    <p>无客户可添加</p>
+  </div>
+<% else %>
+  <% ownership ||= @account.ownerships %>
+  <%= form_with url: new_account_owner_path, local: true, id: 'owner-form', class: 'my-3' do |form| %>
+    <% if @account.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@account.errors.count, "error") %> prohibited this owner account from being saved:</h2>
+
+        <ul>
+          <% @account.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.fields_for :ownerships, Ownership.new do |f| %>
+        <%= f.label :client_id, '新增关联客户' %>
+        <%= f.select :client_id, options_for_select(@available_clients.map do |client| %>
+          <% [client.name, client.id] %>
+          <% end), {}, { class: 'form-control' } %>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit '添加客户', class: 'btn btn-success' %>
+    </div>
+  <% end %>
+<% end %>

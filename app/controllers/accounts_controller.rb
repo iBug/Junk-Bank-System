@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :set_account, only: %i[show edit owners owner_create update destroy]
 
   # GET /accounts
   # GET /accounts.json
@@ -19,6 +19,27 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
+  end
+
+  # GET /accounts/1/owners
+  def owners
+    @ownership = Ownership.new
+    @available_clients = Client.where.not(id: Ownership.where(account: @account, accountable_type: @account.accountable_type).select(:client_id)).select(:id, :name)
+  end
+
+  # POST /accounts/1/owners
+  def owner_create
+    owner = Ownership.new ownership_params
+
+    respond_to do |format|
+      if owner.save
+        format.html { redirect_to account_owners_url(@account), notice: 'Owner was successfully added.' }
+        format.json { render :show, status: :created, location: @account }
+      else
+        format.html { render :new }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /accounts
@@ -81,5 +102,9 @@ class AccountsController < ApplicationController
 
     def update_params
       account_params.except(%i[branch_id accountable_type ownerships_attributes])
+    end
+
+    def ownership_params
+      params.require(:ownerships).permit(:client_id).merge(account: @account, accountable_type: @account.accountable_type, branch: @account.branch)
     end
 end

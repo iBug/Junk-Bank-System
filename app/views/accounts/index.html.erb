@@ -7,7 +7,6 @@
       <th>类型</th>
       <th>余额</th>
       <th class="d-none d-md-table-cell">开户日期</th>
-      <th class="d-none d-lg-table-cell">最近访问</th>
       <th>操作</th>
     </tr>
   </thead>
@@ -19,7 +18,6 @@
         <td><%= account_type_name account.accountable_type %></td>
         <td><%= account.balance %></td>
         <td class="d-none d-md-table-cell"><%= l account.open_date %></td>
-        <td class="d-none d-lg-table-cell"><%= l account.last_access %></td>
         <td>
           <%= link_to '查看', account, class: 'btn btn-primary' %>
           <%= link_to '编辑', edit_account_path(account), class: 'btn btn-secondary' %>
