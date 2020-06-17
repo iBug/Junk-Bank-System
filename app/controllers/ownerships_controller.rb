@@ -1,11 +1,6 @@
 class OwnershipsController < ApplicationController
-  before_action :set_account, only: %i[show create destroy]
+  before_action :set_account, only: %i[create destroy]
   before_action :set_ownership, only: %i[destroy]
-
-  # GET /accounts/1/owners
-  # GET /accounts/1/owners.json
-  def show
-  end
 
   # POST /accounts/1/owners
   # POST /accounts/1/owners.json
@@ -26,10 +21,14 @@ class OwnershipsController < ApplicationController
   # DELETE /accounts/1/owners
   # DELETE /accounts/1/owners.json
   def destroy
-    @ownership.destroy
     respond_to do |format|
-      format.html { redirect_to account_owners_url(@account), notice: 'Client was successfully removed from account.' }
-      format.json { head :no_content }
+      if @ownership.destroy
+        format.html { redirect_to account_owners_url(@account), notice: 'Client was successfully removed from account.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to account_owners_url(@account), alert: 'Failed to remove client from account.' }
+        format.json { render json: @account.errors, status: :unprocessable_entity }
+      end
     end
   end
 

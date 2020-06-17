@@ -2,10 +2,10 @@
 
 <ul class="list-group">
   <% @account.ownerships.each do |owner| %>
-    <li class="list-group-item">
+    <li class="list-group-item list-group-item-action">
       <%= link_to owner.client.name, owner.client %>
       <div class="float-right">
-        <%= link_to '删除', destroy_account_owner_path(owner.account_id, owner.client_id), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+        <%= link_to '删除', destroy_account_owner_path(owner.account_id, owner.client_id), method: :delete, class: 'text-danger', data: { confirm: 'Are you sure?' } %>
       </div>
     </li>
   <% end %>

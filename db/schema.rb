@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_000012) do
+ActiveRecord::Schema.define(version: 2020_05_25_000013) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "账户", force: :cascade do |t|
     t.bigint "branch_id", comment: "开户支行"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_000012) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_ownerships_on_account_id"
+    t.index ["branch_id", "accountable_type", "client_id"], name: "index_ownerships_on_branch_id_and_accountable_type_and_client_id", unique: true
     t.index ["branch_id"], name: "index_ownerships_on_branch_id"
     t.index ["client_id"], name: "index_ownerships_on_client_id"
   end

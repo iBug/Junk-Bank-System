@@ -6,8 +6,15 @@ class Ownership < ApplicationRecord
   belongs_to :account
 
   before_save :update_access_time
+  before_destroy :check_owners_count
 
   def update_access_time
     self.last_access = Time.now
+  end
+
+  def check_owners_count
+    return if account.ownerships.count > 1
+    errors.add :base, 'Account must have at least one owner'
+    throw :abort
   end
 end

@@ -42,7 +42,10 @@
         </ul>
       </div>
     </nav>
-    <div class="initial-content flex-grow-1 my-3 my-md-4 container px-0">
+    <div class="initial-content flex-grow-1 my-3 my-md-4 container px-sm-0">
+      <% unless alert.nil? %>
+        <div id="alert" class="alert alert-danger"><%= alert %></div>
+      <% end %>
       <% unless notice.nil? %>
         <div id="notice" class="alert alert-primary"><%= notice %></div>
       <% end %>
@@ -50,7 +53,7 @@
       <%= yield %>
     </div>
     <footer class="footer shadow bg-light py-3 py-md-4 border-top">
-      <div class="container px-0">
+      <div class="container px-sm-0">
         <p class="text-muted">
         <a href="https://github.com/iBug/Junk-Bank-System">Junk Bank System</a>, Copyright &copy; 2020-<%= Time.now.strftime '%Y' %> <a href="https://github.com/iBug">iBug</a>
         </p>
