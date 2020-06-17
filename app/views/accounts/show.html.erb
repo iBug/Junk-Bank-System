@@ -5,8 +5,10 @@
   <dd class="col col-12 col-md-10"><%= @account.id %></dd>
   <dt class="col col-12 col-md-2">支行</dt>
   <dd class="col col-12 col-md-10"><%= link_to @account.branch.name, @account.branch %></dd>
-  <dt class="col col-12 col-md-2">开户客户</dt>
-  <dd class="col col-12 col-md-10"><%= link_to @account.client.name, @account.client %></dd>
+  <dt class="col col-12 col-md-2">客户</dt>
+  <dd class="col col-12 col-md-10">
+    <%= link_to @account.client.name, @account.client %>
+  </dd>
   <dt class="col col-12 col-md-2">账户类型</dt>
   <dd class="col col-12 col-md-10"><%= account_type_name @account.accountable_type %></dd>
   <dt class="col col-12 col-md-2">余额</dt>

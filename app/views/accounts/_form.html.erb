@@ -18,12 +18,16 @@
       <% end, account.branch_id), {}, { class: 'form-control' } %>
   </div>
 
-  <div class="form-group">
-    <%= form.label :client_id, '开户客户' %>
-    <%= form.select :client_id, options_for_select(Client.all.map do |client| %>
-      <% [client.name, client.id] %>
-      <% end, account.client_id), {}, { class: 'form-control' } %>
-  </div>
+  <% if account.new_record? %>
+    <div class="form-group">
+      <%= form.fields_for :clients, Client.new do |f| %>
+        <%= f.label :id, '开户客户' %>
+        <%= f.select :id, options_for_select(Client.all.map do |client| %>
+          <% [client.name, client.id] %>
+          <% end), {}, { class: 'form-control' } %>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= form.label :accountable_type, '账户类型' %>
