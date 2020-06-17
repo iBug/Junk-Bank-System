@@ -3,6 +3,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>编号</th>
       <th>支行</th>
       <th>类型</th>
       <th>余额</th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
+        <td><%= account.id %></td>
         <td><%= link_to account.branch.name, account.branch %></td>
         <td><%= account_type_name account.accountable_type %></td>
         <td><%= account.balance %></td>

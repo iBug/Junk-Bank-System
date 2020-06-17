@@ -3,6 +3,7 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>编号</th>
       <th>支行</th>
       <th>金额</th>
       <th>操作</th>
@@ -12,6 +13,7 @@
   <tbody>
     <% @loans.each do |loan| %>
       <tr>
+        <td><%= loan.id %></td>
         <td><%= link_to loan.branch.name, loan.branch %></td>
         <td><%= loan.amount %></td>
         <td><%= link_to raw(t'actions.view'), loan, class: 'btn btn-primary' %></td>
