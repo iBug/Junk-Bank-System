@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2020_05_25_000013) do
     t.bigint "branch_id", comment: "开户支行"
     t.string "accountable_type", null: false
     t.bigint "accountable_id", null: false, comment: "类型账户ID"
-    t.decimal "balance", precision: 12, scale: 2, comment: "余额"
+    t.decimal "balance", precision: 12, scale: 2, default: "0.0", comment: "余额"
     t.date "open_date", comment: "开户日期"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(version: 2020_05_25_000013) do
   create_table "branches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "支行", force: :cascade do |t|
     t.string "name", limit: 64, comment: "名称"
     t.string "city", limit: 64, comment: "城市"
-    t.decimal "assets", precision: 12, scale: 2, comment: "资产"
+    t.decimal "assets", precision: 12, scale: 2, default: "0.0", comment: "资产"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "check_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "支票账户", force: :cascade do |t|
-    t.decimal "withdraw_amount", precision: 12, scale: 2, comment: "透支额"
+    t.decimal "withdraw_amount", precision: 12, scale: 2, default: "0.0", comment: "透支额"
   end
 
   create_table "clients", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "客户", force: :cascade do |t|
@@ -73,19 +73,19 @@ ActiveRecord::Schema.define(version: 2020_05_25_000013) do
   end
 
   create_table "deposit_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "储蓄账户", force: :cascade do |t|
-    t.float "interest_rate", comment: "利率"
+    t.float "interest_rate", default: 1.0, comment: "利率"
     t.string "currency", limit: 3, default: "BTC", comment: "货币类型"
   end
 
   create_table "issues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "逐次支付", force: :cascade do |t|
     t.bigint "loans_id"
     t.date "date", comment: "日期"
-    t.decimal "amount", precision: 12, scale: 2, comment: "金额"
+    t.decimal "amount", precision: 12, scale: 2, default: "0.0", comment: "金额"
     t.index ["loans_id"], name: "index_issues_on_loans_id"
   end
 
   create_table "loans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "贷款", force: :cascade do |t|
-    t.decimal "amount", precision: 12, scale: 2, comment: "金额"
+    t.decimal "amount", precision: 12, scale: 2, default: "0.0", comment: "金额"
     t.bigint "branch_id"
     t.integer "status", limit: 1, comment: "状态"
     t.datetime "created_at", precision: 6, null: false
