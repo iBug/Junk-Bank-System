@@ -25,6 +25,6 @@ Rails.application.routes.draw do
   end
 
   scope :stats do
-    get '', to: 'home#index', as: :stats
+    get '', to: 'stats#index', as: :stats
   end
 end
