@@ -24,9 +24,14 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    account_type = account_params[:accountable_type]
-    typed_account = account_type.safe_constantize.new(account_params[:accountable_attributes])
-    @account = typed_account.build_account(account_params)
+    params = account_params
+    accountable_type = params[:accountable_type]
+    @typed_account = accountable_type.safe_constantize.new(params[:accountable_attributes])
+    # Insert account and branch info into ownership
+    params[:ownerships_attributes]&.each_value do |attr|
+      attr.merge!(accountable_type: params[:accountable_type], branch_id: params[:branch_id])
+    end
+    @account = @typed_account.build_account(params)
 
     respond_to do |format|
       if @account.save
@@ -43,7 +48,7 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1.json
   def update
     respond_to do |format|
-      if @account.update(account_params)
+      if @account.update(update_params)
         format.html { redirect_to @account, notice: 'Account was successfully updated.' }
         format.json { render :show, status: :ok, location: @account }
       else
@@ -71,6 +76,10 @@ class AccountsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def account_params
-      params.require(:account).permit(%i[branch_id client_id accountable_type balance open_date], accountable_attributes: %i[interest_rate currency withdraw_amount])
+      params.require(:account).permit(%i[branch_id accountable_type balance open_date], accountable_attributes: %i[interest_rate currency withdraw_amount], ownerships_attributes: %i[client_id])
+    end
+
+    def update_params
+      account_params.except(%i[branch_id accountable_type ownerships_attributes])
     end
 end

@@ -7,7 +7,8 @@
   <dd class="col col-12 col-md-10"><%= link_to @account.branch.name, @account.branch %></dd>
   <dt class="col col-12 col-md-2">客户</dt>
   <dd class="col col-12 col-md-10">
-    <%= link_to @account.client.name, @account.client %>
+    <%# link_to @account.client.name, @account.client %>
+    Placeholder
   </dd>
   <dt class="col col-12 col-md-2">账户类型</dt>
   <dd class="col col-12 col-md-10"><%= account_type_name @account.accountable_type %></dd>
@@ -15,8 +16,6 @@
   <dd class="col col-12 col-md-10"><%= @account.balance %></dd>
   <dt class="col col-12 col-md-2">开户日期</dt>
   <dd class="col col-12 col-md-10"><%= l @account.open_date %></dd>
-  <dt class="col col-12 col-md-2">最近访问</dt>
-  <dd class="col col-12 col-md-10"><%= l @account.last_access %></dd>
 
   <%# Type-specific data %>
   <% case @account.accountable_type %>
