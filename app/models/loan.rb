@@ -5,6 +5,7 @@ class Loan < ApplicationRecord
   has_and_belongs_to_many :clients
   has_many :issues
 
+  validates_presence_of :clients
   validates_numericality_of :amount, greater_than: 0.0
 
   scope :unissued, -> { includes(:issues).where(issues: { loan_id: nil }) }

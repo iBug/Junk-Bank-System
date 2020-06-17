@@ -37,9 +37,7 @@
     <div class="form-group">
       <%= form.fields_for :ownerships, Ownership.new do |f| %>
         <%= f.label :client_id, '新增关联客户' %>
-        <%= f.select :client_id, options_for_select(@available_clients.map do |client| %>
-          <% [client.name, client.id] %>
-          <% end), {}, { class: 'form-control' } %>
+        <%= f.select :client_id, options_from_collection_for_select(@available_clients, :id, :name), {}, { class: 'form-control' } %>
       <% end %>
     </div>
 

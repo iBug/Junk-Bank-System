@@ -13,18 +13,14 @@
 
   <div class="form-group">
     <%= form.label :branch_id, '支行' %>
-    <%= form.select :branch_id, options_for_select(Branch.all.map do |branch| %>
-      <% [branch.name, branch.id] %>
-      <% end, account.branch_id), {}, { class: 'form-control', disabled: !account.new_record? } %>
+    <%= form.select :branch_id, options_from_collection_for_select(Branch.all, :id, :name), {}, { class: 'form-control', disabled: !account.new_record? } %>
   </div>
 
   <% if account.new_record? %>
     <div class="form-group">
       <%= form.fields_for :ownerships, Ownership.new do |f| %>
         <%= f.label :client_id, '开户客户' %>
-        <%= f.select :client_id, options_for_select(Client.all.map do |client| %>
-          <% [client.name, client.id] %>
-          <% end), {}, { class: 'form-control' } %>
+        <%= f.select :client_id, options_from_collection_for_select(Client.all, :id, :name), {}, { class: 'form-control' } %>
       <% end %>
     </div>
   <% end %>

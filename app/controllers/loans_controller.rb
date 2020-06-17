@@ -1,5 +1,5 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: %i[show issues destroy]
+  before_action :set_loan, only: %i[show issues clients add_client destroy_client destroy]
 
   # GET /loans
   # GET /loans.json
@@ -16,6 +16,11 @@ class LoansController < ApplicationController
   # GET /loans/1/issues.json
   def issues
     @issue = Issue.new
+  end
+
+  # GET /loans/1/clients
+  # GET /loans/1/clients.json
+  def clients
   end
 
   # GET /loans/new
@@ -57,6 +62,6 @@ class LoansController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def loan_params
-      params.require(:loan).permit(:branch_id, :amount)
+      params.require(:loan).permit(%i[branch_id amount], client_ids: [])
     end
 end

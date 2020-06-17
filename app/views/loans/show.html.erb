@@ -5,6 +5,18 @@
   <dd class="col col-12 col-md-10"><%= link_to @loan.branch.name, @loan.branch %></dd>
   <dt class="col col-12 col-md-2">金额</dt>
   <dd class="col col-12 col-md-10"><%= @loan.amount %></dd>
+  <dt class="col col-12 col-md-2">客户</dt>
+  <dd class="col col-12 col-md-10">
+    <%= raw(@loan.clients.limit(3).map do |client| %>
+      <% link_to client.name, client %>
+    <% end.join("<br />")) %>
+    <% if @loan.clients.size > 3 %>
+      <br />
+      &hellip;
+      <br />
+      <%= link_to "查看全部 #{@loan.clients.size} 个", loan_clients_path(@loan) %>
+    <% end %>
+  </dd>
   <dt class="col col-12 col-md-2">状态</dt>
   <dd class="col col-12 col-md-10"><%= @loan.status_s %></dd>
 </dl>

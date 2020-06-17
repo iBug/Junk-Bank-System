@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   scope :loans do
     get ':id/issues', to: 'loans#issues', as: :loan_issues
     post ':id/issues', to: 'issues#create', as: :new_issue
+    get ':id/clients', to: 'loans#clients', as: :loan_clients
   end
 
   scope :stats do

@@ -21,9 +21,7 @@
   <%# Select manager %>
   <div class="form-group">
     <%= f.label :manager_id, '负责人' %>
-    <%= f.select :manager_id, options_for_select(Staff.all.map do |staff| %>
-      <% [staff.name, staff.id] %>
-      <% end), {}, {class: 'form-control'} %>
+    <%= f.select :manager_id, options_from_collection_for_select(Staff.all, :id, :name), {}, {class: 'form-control'} %>
   </div>
   <div class="form-group">
     <%= f.label :manager_type, '负责人类型' %>

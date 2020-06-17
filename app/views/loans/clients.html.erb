@@ -1,0 +1,13 @@
+<h1>贷款 #<%= @loan.id %> 的关联客户</h1>
+
+<ul class="list-group">
+  <% @loan.clients.each do |client| %>
+    <li class="list-group-item list-group-item-action">
+      <%= link_to client.name, client %>
+    </li>
+  <% end %>
+</ul>
+
+<div class="my-3">
+  <%= link_to raw(t'actions.back'), @loan, class: 'btn btn-secondary' %>
+</div>
