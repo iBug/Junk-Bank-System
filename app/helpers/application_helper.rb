@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def navbar_models
-    [Branch, Department, Staff, Client, Account].zip %w[university building user-tie user-friends user-circle]
+    [Branch, Department, Staff, Client, Account, Loan].zip %w[university building user-tie user-friends user-circle money-bill-alt]
   end
 
   def site_name

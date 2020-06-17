@@ -1,0 +1,29 @@
+<%= form_with model: loan, local: true, class: 'my-3' do |form| %>
+  <% if loan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
+
+      <ul>
+        <% loan.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :branch_id, '支行' %>
+    <%= form.select :branch_id, options_for_select(Branch.all.map do |branch| %>
+      <% [branch.name, branch.id] %>
+      <% end), {}, { class: 'form-control' } %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :amount, '金额' %>
+    <%= form.number_field :amount, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-success' %>
+  </div>
+<% end %>

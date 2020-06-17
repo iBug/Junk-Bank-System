@@ -1,0 +1,11 @@
+<h1>查看贷款</h1>
+
+<dl class="row my-3">
+  <dt class="col col-12 col-md-2">支行</dt>
+  <dd class="col col-12 col-md-10"><%= link_to @loan.branch.name, @loan.branch %></dd>
+  <dt class="col col-12 col-md-2">金额</dt>
+  <dd class="col col-12 col-md-10"><%= @loan.amount %></dd>
+</dl>
+
+<%= link_to raw(t'actions.back'), loans_path, class: 'btn btn-secondary' %>
+<%= link_to raw(t'actions.destroy'), @loan, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>

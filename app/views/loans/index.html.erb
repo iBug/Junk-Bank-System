@@ -1,0 +1,23 @@
+<h1>贷款</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>支行</th>
+      <th>金额</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @loans.each do |loan| %>
+      <tr>
+        <td><%= loan.branch_id %></td>
+        <td><%= loan.amount %></td>
+        <td><%= link_to raw(t'actions.view'), loan, class: 'btn btn-primary' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新建贷款', new_loan_path, class: 'btn btn-success' %>

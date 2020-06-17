@@ -49,10 +49,10 @@ ActiveRecord::Schema.define(version: 2020_05_25_000013) do
   end
 
   create_table "clients_loans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "loans_id"
+    t.bigint "loan_id"
     t.bigint "client_id"
     t.index ["client_id"], name: "index_clients_loans_on_client_id"
-    t.index ["loans_id"], name: "index_clients_loans_on_loans_id"
+    t.index ["loan_id"], name: "index_clients_loans_on_loan_id"
   end
 
   create_table "contacts", primary_key: "client_id", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "联系人", force: :cascade do |t|
@@ -78,16 +78,15 @@ ActiveRecord::Schema.define(version: 2020_05_25_000013) do
   end
 
   create_table "issues", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "逐次支付", force: :cascade do |t|
-    t.bigint "loans_id"
+    t.bigint "loan_id"
     t.date "date", comment: "日期"
     t.decimal "amount", precision: 12, scale: 2, default: "0.0", comment: "金额"
-    t.index ["loans_id"], name: "index_issues_on_loans_id"
+    t.index ["loan_id"], name: "index_issues_on_loan_id"
   end
 
   create_table "loans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", comment: "贷款", force: :cascade do |t|
     t.decimal "amount", precision: 12, scale: 2, default: "0.0", comment: "金额"
     t.bigint "branch_id"
-    t.integer "status", limit: 1, comment: "状态"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["branch_id"], name: "index_loans_on_branch_id"
@@ -125,9 +124,9 @@ ActiveRecord::Schema.define(version: 2020_05_25_000013) do
   add_foreign_key "accounts", "branches", on_delete: :cascade
   add_foreign_key "clients", "staffs", column: "manager_id"
   add_foreign_key "clients_loans", "clients"
-  add_foreign_key "clients_loans", "loans", column: "loans_id", on_delete: :cascade
+  add_foreign_key "clients_loans", "loans", on_delete: :cascade
   add_foreign_key "contacts", "clients", on_delete: :cascade
-  add_foreign_key "issues", "loans", column: "loans_id", on_delete: :cascade
+  add_foreign_key "issues", "loans", on_delete: :cascade
   add_foreign_key "loans", "branches"
   add_foreign_key "ownerships", "accounts", on_delete: :cascade
   add_foreign_key "ownerships", "branches"

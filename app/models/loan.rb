@@ -9,4 +9,22 @@ class Loan < ApplicationRecord
   # Rails 6.1: unissued = where.missing(:issues)
   scope :issued, -> { joins(:issues).group(:id).having('SUM(issues.amount) = amount') }
   scope :issuing, -> { where.not(id: unissued).where.not(id: issued) }
+
+  before_destroy :check_issuing
+
+  def check_issuing
+    throw :abort if issuing?
+  end
+
+  def unissued?
+    self.class.unissued.exists?(self.id)
+  end
+
+  def issued?
+    self.class.issued.exists?(self.id)
+  end
+
+  def issuing?
+    self.class.issuing.exists?(self.id)
+  end
 end
