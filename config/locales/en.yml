@@ -40,3 +40,8 @@ en:
     submit:
       create: '创建%{model}'
       update: '更新%{model}'
+  actions:
+    back: '<i class="fa fas fa-chevron-circle-left"></i> 返回'
+    destroy: '<i class="fa fas fa-times-circle"></i> 删除'
+    edit: '<i class="fa fas fa-edit"></i> 编辑'
+    view: '<i class="fa fas fa-eye"></i> 查看'

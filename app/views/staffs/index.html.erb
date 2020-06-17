@@ -27,9 +27,9 @@
         <td class="d-none d-md-table-cell"><%= staff.branch.name %></td>
         <td class="d-none d-lg-table-cell"><%= staff.department.name %></td>
         <td>
-          <%= link_to '查看', staff, class: 'btn btn-primary' %>
-          <%= link_to '编辑', edit_staff_path(staff), class: 'btn btn-secondary' %>
-          <%= link_to '删除', staff, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-md-inline-block' %>
+          <%= link_to raw(t'actions.view'), staff, class: 'btn btn-primary' %>
+          <%= link_to raw(t'actions.edit'), edit_staff_path(staff), class: 'btn btn-secondary' %>
+          <%= link_to raw(t'actions.destroy'), staff, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-md-inline-block' %>
         </td>
       </tr>
     <% end %>

@@ -2,5 +2,5 @@
 
 <%= render 'form', staff: @staff %>
 
-<%= link_to '查看', @staff, class: 'btn btn-primary' %>
-<%= link_to '返回', staffs_path, class: 'btn btn-secondary' %>
+<%= link_to raw(t'actions.view'), @staff, class: 'btn btn-primary' %>
+<%= link_to raw(t'actions.back'), staffs_path, class: 'btn btn-secondary' %>

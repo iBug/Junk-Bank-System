@@ -17,9 +17,9 @@
         <td><%= branch.city %></td>
         <td><%= branch.assets %></td>
         <td>
-          <%= link_to '查看', branch, class: 'btn btn-primary' %>
-          <%= link_to '编辑', edit_branch_path(branch), class: 'btn btn-secondary' %>
-          <%= link_to '删除', branch, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+          <%= link_to raw(t'actions.view'), branch, class: 'btn btn-primary' %>
+          <%= link_to raw(t'actions.edit'), edit_branch_path(branch), class: 'btn btn-secondary' %>
+          <%= link_to raw(t'actions.destroy'), branch, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

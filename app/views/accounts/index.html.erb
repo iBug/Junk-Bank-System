@@ -19,9 +19,9 @@
         <td><%= account.balance %></td>
         <td class="d-none d-md-table-cell"><%= l account.open_date %></td>
         <td>
-          <%= link_to '查看', account, class: 'btn btn-primary' %>
-          <%= link_to '编辑', edit_account_path(account), class: 'btn btn-secondary' %>
-          <%= link_to '删除', account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-sm-inline-block' %>
+          <%= link_to raw(t'actions.view'), account, class: 'btn btn-primary' %>
+          <%= link_to raw(t'actions.edit'), edit_account_path(account), class: 'btn btn-secondary' %>
+          <%= link_to raw(t'actions.destroy'), account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-sm-inline-block' %>
         </td>
       </tr>
     <% end %>

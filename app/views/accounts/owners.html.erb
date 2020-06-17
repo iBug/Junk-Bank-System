@@ -5,11 +5,15 @@
     <li class="list-group-item list-group-item-action">
       <%= link_to owner.client.name, owner.client %>
       <div class="float-right">
-        <%= link_to '删除', destroy_account_owner_path(owner.account_id, owner.client_id), method: :delete, class: 'text-danger', data: { confirm: 'Are you sure?' } %>
+        <%= link_to raw(t'actions.destroy'), destroy_account_owner_path(owner.account_id, owner.client_id), method: :delete, class: 'text-danger', data: { confirm: 'Are you sure?' } %>
       </div>
     </li>
   <% end %>
 </ul>
+
+<div class="my-3">
+  <%= link_to raw(t'actions.back'), @account, class: 'btn btn-secondary' %>
+</div>
 
 <% if @available_clients.empty? %>
   <div class="my-3">

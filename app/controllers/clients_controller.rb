@@ -60,10 +60,14 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   # DELETE /clients/1.json
   def destroy
-    @client.destroy
     respond_to do |format|
-      format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
-      format.json { head :no_content }
+      if @client.destroy
+        format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to clients_url, alert: 'Failed to destroy client.' }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
     end
   end
 

@@ -23,9 +23,9 @@
         <td class="d-none d-md-table-cell"><%= manager_type_name_short client.manager_type %></td>
         <td><%= link_to client.contact.name, client.contact %></td>
         <td>
-          <%= link_to '查看', client, class: 'btn btn-primary' %>
-          <%= link_to '编辑', edit_client_path(client), class: 'btn btn-secondary' %>
-          <%= link_to '删除', client, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-sm-inline-block' %>
+          <%= link_to raw(t'actions.view'), client, class: 'btn btn-primary' %>
+          <%= link_to raw(t'actions.edit'), edit_client_path(client), class: 'btn btn-secondary' %>
+          <%= link_to raw(t'actions.destroy'), client, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-sm-inline-block' %>
         </td>
       </tr>
     <% end %>

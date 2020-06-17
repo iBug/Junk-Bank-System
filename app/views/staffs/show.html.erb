@@ -19,6 +19,6 @@
   <dd class="col col-12 col-md-10"><%= link_to @staff.department.name, @staff.department %></dd>
 </dl>
 
-<%= link_to '编辑', edit_staff_path(@staff), class: 'btn btn-primary' %>
-<%= link_to '返回', staffs_path, class: 'btn btn-secondary' %>
-<%= link_to '删除', @staff, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<%= link_to raw(t'actions.edit'), edit_staff_path(@staff), class: 'btn btn-primary' %>
+<%= link_to raw(t'actions.back'), staffs_path, class: 'btn btn-secondary' %>
+<%= link_to raw(t'actions.destroy'), @staff, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>

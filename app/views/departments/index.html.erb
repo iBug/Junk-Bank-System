@@ -17,9 +17,9 @@
         <td><%= department.name %></td>
         <td><%= department.kind %></td>
         <td>
-          <%= link_to '查看', department, class: 'btn btn-primary' %>
-          <%= link_to '编辑', edit_department_path(department), class: 'btn btn-secondary' %>
-          <%= link_to '删除', department, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          <%= link_to raw(t'actions.view'), department, class: 'btn btn-primary' %>
+          <%= link_to raw(t'actions.edit'), edit_department_path(department), class: 'btn btn-secondary' %>
+          <%= link_to raw(t'actions.destroy'), department, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </td>
       </tr>
     <% end %>

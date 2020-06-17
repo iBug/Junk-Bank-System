@@ -25,10 +25,15 @@
   { name: 'CWK', person_id: '3594-FLXG', phone: '2333-2333', address: '1st Teaching Bldg, USTC', start_date: '1958-01-01', manager: false, branch_id: 3, department_id: 3 },
   { name: 'Volltin', person_id: 'AAAA-ZZZZ', phone: '0000-0000', address: 'Hello, world!', start_date: '2016-09-01', manager: true, branch_id: 2, department_id: 1 },
   { name: 'Steve', person_id: 'player-1', phone: '87654321-0', address: 'Overworld', start_date: '2011-11-18', manager: true, branch_id: 4, department_id: 3 },
-  { name: 'Franklin Clinton', person_id: 'OXOX-NGGA', phone: '(555)555-1234', address: '3671 Whispymound Drive, Vinewood Hills, Los Santos', start_date: '2013-09-17', manager: true, branch_id: 3, department_id: 1 },
+  { name: 'Thor', person_id: 'THUNDER', phone: '7777-7777', address: 'XXXX', start_date: '1999-12-31', manager: true, branch_id: 3, department_id: 1 },
 ].each { |h| Staff.create h }
 
+CONTACT_COMMON = { name: 'Example', phone: '0000-0000', email: 'hello@example.com', relationship: 'Good' }
 [
-  { name: 'TaoStrong', person_id: '123TQL', phone: '6666-9999', address: 'Haha', manager_id: 1, manager_type: 3, contact_attributes: { name: 'taoky S', phone: '9999-6666', email: 'taoky@strong.com', relationship: 'God' } },
-  { name: 'Thor', person_id: 'THUNDER', phone: '7777-7777', address: 'XXXX', manager_id: 3, manager_type: 1, contact_attributes: { name: 'Donald Trump', phone: '6969-6969', email: 'president@whitehouse.gov', relationship: 'President' } },
+  { name: 'Franklin Clinton', person_id: 'AAAA-BBBB', phone: '328-555-0156', address: '3671 Whispymound Drive, Vinewood Hills, Los Santos', manager_id: 1, manager_type: 3, contact_attributes: CONTACT_COMMON },
+  { name: 'Michael De Santa', person_id: 'CCCC-DDDD', phone: '328-555-0108', address: 'Portola Drive, Rockford Hills, Los Santos', manager_id: 2, manager_type: 1, contact_attributes: CONTACT_COMMON },
+  { name: 'Trevor Philips', person_id: 'EEEE-FFFF', phone: '273-555-0136', address: 'Zancudo Avenue, Sandy Shores, Blaine County', manager_id: 1, manager_type: 2, contact_attributes: CONTACT_COMMON },
+  { name: 'Lamar Davis', person_id: 'GGGG-HHHH', phone: 'N/A', address: 'Forum Drive, Strawberry, Los Santos', manager_id: 1, manager_type: 1, contact_attributes: CONTACT_COMMON },
+  { name: 'Lester Crest', person_id: 'IIII-JJJJ', phone: 'N/A', address: 'Amarillo Vista, El Burro Heights, Los Santos', manager_id: 6, manager_type: 2, contact_attributes: CONTACT_COMMON },
+  { name: 'Devin Weston', person_id: 'KKKK-LLLL', phone: 'N/A', address: 'Buen Vino Road, Tongva Hills, Los Santos County', manager_id: 3, manager_type: 3, contact_attributes: CONTACT_COMMON },
 ].each { |h| Client.create h }
