@@ -5,7 +5,12 @@
   <dd class="col col-12 col-md-10"><%= link_to @loan.branch.name, @loan.branch %></dd>
   <dt class="col col-12 col-md-2">金额</dt>
   <dd class="col col-12 col-md-10"><%= @loan.amount %></dd>
+  <dt class="col col-12 col-md-2">状态</dt>
+  <dd class="col col-12 col-md-10"><%= @loan.status_s %></dd>
 </dl>
 
+<%= link_to raw('<i class="fa fas fa-money-bill-wave"></i> 支付'), loan_issues_path(@loan), class: 'btn btn-primary' %>
 <%= link_to raw(t'actions.back'), loans_path, class: 'btn btn-secondary' %>
-<%= link_to raw(t'actions.destroy'), @loan, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<% unless @loan.issuing? %>
+  <%= link_to raw(t'actions.destroy'), @loan, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<% end %>

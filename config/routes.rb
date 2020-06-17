@@ -17,4 +17,13 @@ Rails.application.routes.draw do
     post ':id/owners', to: 'ownerships#create', as: :new_account_owner
     delete ':id/owners/:client_id', to: 'ownerships#destroy', as: :destroy_account_owner
   end
+
+  scope :loans do
+    get ':id/issues', to: 'loans#issues', as: :loan_issues
+    post ':id/issues', to: 'issues#create', as: :new_issue
+  end
+
+  scope :stats do
+    get '', to: 'home#index', as: :stats
+  end
 end

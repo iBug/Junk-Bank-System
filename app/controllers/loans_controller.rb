@@ -1,5 +1,5 @@
 class LoansController < ApplicationController
-  before_action :set_loan, only: %i[show destroy]
+  before_action :set_loan, only: %i[show issues destroy]
 
   # GET /loans
   # GET /loans.json
@@ -10,6 +10,12 @@ class LoansController < ApplicationController
   # GET /loans/1
   # GET /loans/1.json
   def show
+  end
+
+  # GET /loans/1/issues
+  # GET /loans/1/issues.json
+  def issues
+    @issue = Issue.new
   end
 
   # GET /loans/new

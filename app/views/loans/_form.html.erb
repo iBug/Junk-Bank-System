@@ -1,6 +1,6 @@
 <%= form_with model: loan, local: true, class: 'my-3' do |form| %>
   <% if loan.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(loan.errors.count, "error") %> prohibited this loan from being saved:</h2>
 
       <ul>

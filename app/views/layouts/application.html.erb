@@ -31,6 +31,13 @@
               <% end %>
             </li>
           <% end %>
+
+          <li class="nav-item <%= active_page stats_path %>">
+            <%= link_to stats_path, class: 'nav-link' do %>
+              <i class="fas fa-fw fa-chart-area"></i>
+              统计
+            <% end %>
+          </li>
         </ul>
         <ul class="navbar-nav my-2 my-md-0">
           <li class="nav-item">

@@ -10,9 +10,9 @@ class OwnershipsController < ApplicationController
     respond_to do |format|
       if owner.save
         format.html { redirect_to account_owners_url(@account), notice: 'Owner was successfully added.' }
-        format.json { render :show, status: :created, location: @account }
+        format.json { render :show, status: :created, location: account_owners_url(@account) }
       else
-        format.html { render :new }
+        format.html { render 'accounts/owners' }
         format.json { render json: @account.errors, status: :unprocessable_entity }
       end
     end
