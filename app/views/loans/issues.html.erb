@@ -33,38 +33,44 @@
 
 <% unless @loan.issued? %>
   <%= form_with url: new_issue_path, local: true, class: 'my-3' do |form| %>
-    <h3>发放贷款</h3>
-
-    <% if @issue.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger">
-        <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
-
-        <ul>
-          <% @issue.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="my-0">发放贷款</h3>
       </div>
-    <% end %>
 
-    <%= form.fields_for :issues, Issue.new do |f| %>
-      <div class="form-group">
-        <%= f.label :date, '发放日期' %>
-        <div class="form-row">
-          <div class="col col-4">
-            <%= f.date_select :date, { date_separator: '</div><div class="col col-4">' }, { class: 'form-control' } %>
+      <div class="card-body">
+        <% if @issue.errors.any? %>
+          <div id="error_explanation" class="alert alert-danger">
+            <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
+
+            <ul>
+              <% @issue.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
           </div>
-        </div>
+        <% end %>
+
+        <%= form.fields_for :issues, Issue.new do |f| %>
+          <div class="form-group">
+            <%= f.label :date, '发放日期' %>
+            <div class="form-row">
+              <div class="col col-4">
+                <%= f.date_select :date, { date_separator: '</div><div class="col col-4">' }, { class: 'form-control' } %>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :amount, '金额' %>
+            <%= f.number_field :amount, min: 0.0, max: @loan.remaining, step: 0.01, class: 'form-control' %>
+          </div>
+        <% end %>
       </div>
 
-      <div class="form-group">
-        <%= f.label :amount, '金额' %>
-        <%= f.number_field :amount, step: 0.01, class: 'form-control' %>
+      <div class="card-footer">
+        <%= form.submit '发放贷款', class: 'btn btn-success' %>
       </div>
-    <% end %>
-
-    <div class="actions">
-      <%= form.submit '添加支付', class: 'btn btn-success' %>
     </div>
   <% end %>
 <% end %>
