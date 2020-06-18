@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang=zh>
   <head>
-    <title>Junk Bank System</title>
+    <title>
+      <%= if content_for?(:title) then yield(:title) + ' - ' end %>
+      <%= site_name %>
+    </title>
     <%= favicon_link_tag asset_path('bank.png') %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>

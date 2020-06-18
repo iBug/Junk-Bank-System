@@ -2,3 +2,24 @@
   <span><%= svg_tag 'piggy-bank.svg', class: 'svg-inline svg-xl zero-width' %></span>
   储蓄业务
 </h1>
+
+<%= form_with url: current_path, local: true, method: :get, class: 'card shadow-sm mb-3' do |form| %>
+  <div class="card-header">
+    <h3 class="mb-0">搜索<h3>
+  </div>
+
+  <div class="card-body">
+  </div>
+
+  <div class="card-footer">
+    <%= form.button class: 'btn btn-success', type: :submit, name: :action, value: :submit do %>
+      <i class="fa fas fa-search"></i> 搜索
+    <% end %>
+  </div>
+<% end %>
+
+<div class="card">
+  <div class="card-body">
+    <%= @action %>
+  </div>
+</div>

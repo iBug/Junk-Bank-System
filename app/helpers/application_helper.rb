@@ -11,6 +11,10 @@ module ApplicationHelper
     '%.2f' % value
   end
 
+  def current_path
+    request.path
+  end
+
   def navbar_models
     [Branch, Department, Staff, Client, Account, Loan].zip %w[university building user-tie user-friends user-circle money-bill-alt]
   end
@@ -25,5 +29,10 @@ module ApplicationHelper
       class: 'svg-inline',
     }.merge options
     image_tag filename, options
+  end
+
+  def title(text)
+    content_for :title, text
+    text
   end
 end

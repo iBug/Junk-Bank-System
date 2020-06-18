@@ -34,9 +34,16 @@ class StatsController < ApplicationController
 
   # GET /stats/deposit
   def deposit
+    @action = search_params[:action]
   end
 
   # GET /stats/loan
   def loan
+  end
+
+  private
+
+  def search_params
+    @url_params ||= request.GET
   end
 end
