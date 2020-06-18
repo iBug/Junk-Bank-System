@@ -1,4 +1,7 @@
-<h1 class="text-center py-5 display-4"><%= site_name %></h1>
+<h1 class="text-center py-5 display-4">
+  <%= image_tag "bank.svg", data: { svg_fallback: asset_path('bank.svg') }, style: 'font-size: 1.33333em; width: 1.25em; height: 1em; vertical-align: -0.225em;' %>
+  <%= site_name %>
+</h1>
 
 <div class="row">
   <% [Branch, Department, Staff, Client, Account, Loan].each do |model| %>

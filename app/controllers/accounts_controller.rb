@@ -4,12 +4,14 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.json
   def index
-    @accounts = Account.all
+    @accounts = Account.joins(:branch).select('accounts.*', 'branches.name AS branch_name')
   end
 
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+    @owners = @account.ownerships.joins(:client).limit(3).select(:client_id, 'clients.name AS client_name')
+    @owners_count = @account.ownerships.count
   end
 
   # GET /accounts/new
@@ -24,6 +26,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1/owners
   def owners
     @ownership = Ownership.new
+    @owners = @account.ownerships.joins(:client).select(:client_id, 'clients.name AS client_name')
     @available_clients = Client.where.not(id: Ownership.where(account: @account, accountable_type: @account.accountable_type).select(:client_id)).select(:id, :name)
   end
 

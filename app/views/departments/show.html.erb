@@ -1,12 +1,20 @@
-<h1>查看部门</h1>
+<% content_for :heading do %>
+  <h1>部门 <%= @department.name %></h1>
+<% end %>
 
-<dl class="row my-3">
-  <dt class="col col-12 col-md-2">名称</dt>
-  <dd class="col col-12 col-md-10"><%= @department.name %></dd>
-  <dt class="col col-12 col-md-2">类型</dt>
-  <dd class="col col-12 col-md-10"><%= @department.kind %></dd>
-</dl>
+<% content_for :body do %>
+  <dl class="row my-0">
+    <dt class="col col-12 col-md-2">名称</dt>
+    <dd class="col col-12 col-md-10"><%= @department.name %></dd>
+    <dt class="col col-12 col-md-2">类型</dt>
+    <dd class="col col-12 col-md-10"><%= @department.kind %></dd>
+  </dl>
+<% end %>
 
-<%= link_to raw(t'actions.edit'), edit_department_path(@department), class: 'btn btn-primary' %>
-<%= link_to raw(t'actions.back'), departments_path, class: 'btn btn-secondary' %>
-<%= link_to raw(t'actions.destroy'), @department, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<% content_for :footer do %>
+  <%= link_to raw(t'actions.edit'), edit_department_path(@department), class: 'btn btn-primary' %>
+  <%= link_to raw(t'actions.back'), departments_path, class: 'btn btn-secondary' %>
+  <%= link_to raw(t'actions.destroy'), @department, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<%= render template: 'layouts/card' %>

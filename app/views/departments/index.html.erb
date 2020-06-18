@@ -1,29 +1,37 @@
-<h1>部门</h1>
+<% content_for :heading do %>
+  <h1 class="mb-0">部门</h1>
+<% end %>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>编号</th>
-      <th>名称</th>
-      <th>类型</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @departments.each do |department| %>
+<% content_for :body do %>
+  <table class="table table-hover mb-0">
+    <thead>
       <tr>
-        <td><%= link_to department.id, department %></td>
-        <td><%= department.name %></td>
-        <td><%= department.kind %></td>
-        <td>
-          <%= link_to raw(t'actions.view'), department, class: 'btn btn-primary' %>
-          <%= link_to raw(t'actions.edit'), edit_department_path(department), class: 'btn btn-secondary' %>
-          <%= link_to raw(t'actions.destroy'), department, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </td>
+        <th>编号</th>
+        <th>名称</th>
+        <th>类型</th>
+        <th>操作</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<%= link_to '新建部门', new_department_path, class: 'btn btn-success' %>
+    <tbody>
+      <% @departments.each do |department| %>
+        <tr>
+          <td><%= link_to department.id, department %></td>
+          <td><%= department.name %></td>
+          <td><%= department.kind %></td>
+          <td>
+            <%= link_to raw(t'actions.view'), department, class: 'btn btn-outline-primary' %>
+            <%= link_to raw(t'actions.edit'), edit_department_path(department), class: 'btn btn-outline-secondary' %>
+            <%= link_to raw(t'actions.destroy'), department, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% content_for :footer do %>
+  <%= link_to '新建部门', new_department_path, class: 'btn btn-success' %>
+<% end %>
+
+<%= render template: 'layouts/listing' %>

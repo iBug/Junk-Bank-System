@@ -1,39 +1,53 @@
-<h1>员工</h1>
+<% content_for :heading do %>
+  <h1 class="mb-0">员工</h1>
+<% end %>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>姓名</th>
-      <th class="d-none d-xl-table-cell">身份证号</th>
-      <th class="d-none d-lg-table-cell">电话</th>
-      <th class="d-none">地址</th>
-      <th>开始工作日期</th>
-      <th>经理？</th>
-      <th class="d-none d-md-table-cell">支行</th>
-      <th class="d-none d-lg-table-cell">部门</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @staffs.each do |staff| %>
+<% content_for :body do %>
+  <table class="table table-hover mb-0">
+    <thead>
       <tr>
-        <td><%= link_to staff.name, staff %></td>
-        <td class="d-none d-xl-table-cell"><%= staff.person_id %></td>
-        <td class="d-none d-lg-table-cell"><%= staff.phone %></td>
-        <td class="d-none"><%= staff.address %></td>
-        <td><%= staff.start_date %></td>
-        <td><%= boolean_s staff.manager %></td>
-        <td class="d-none d-md-table-cell"><%= staff.branch.name %></td>
-        <td class="d-none d-lg-table-cell"><%= staff.department.name %></td>
-        <td>
-          <%= link_to raw(t'actions.view'), staff, class: 'btn btn-primary' %>
-          <%= link_to raw(t'actions.edit'), edit_staff_path(staff), class: 'btn btn-secondary' %>
-          <%= link_to raw(t'actions.destroy'), staff, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-md-inline-block' %>
-        </td>
+        <th>姓名</th>
+        <th class="d-none d-xl-table-cell">身份证号</th>
+        <th class="d-none d-lg-table-cell">电话</th>
+        <th class="d-none">地址</th>
+        <th>开始工作日期</th>
+        <th>经理？</th>
+        <th class="d-none d-md-table-cell">支行</th>
+        <th class="d-none d-lg-table-cell">部门</th>
+        <th>操作</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<%= link_to '新建员工', new_staff_path, class: 'btn btn-success' %>
+    <tbody>
+      <% @staffs.each do |staff| %>
+        <tr>
+          <td><%= link_to staff.name, staff %></td>
+          <td class="d-none d-xl-table-cell"><%= staff.person_id %></td>
+          <td class="d-none d-lg-table-cell"><%= staff.phone %></td>
+          <td class="d-none"><%= staff.address %></td>
+          <td><%= staff.start_date %></td>
+          <td>
+            <% if staff.manager %>
+              <i class="fa fas fa-check text-success"></i>
+            <% else %>
+              <i class="fa fas fa-times text-danger"></i>
+            <% end %>
+          </td>
+          <td class="d-none d-md-table-cell"><%= staff.branch.name %></td>
+          <td class="d-none d-lg-table-cell"><%= staff.department.name %></td>
+          <td>
+            <%= link_to raw(t'actions.view'), staff, class: 'btn btn-outline-primary' %>
+            <%= link_to raw(t'actions.edit'), edit_staff_path(staff), class: 'btn btn-outline-secondary' %>
+            <%= link_to raw(t'actions.destroy'), staff, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger d-none d-md-inline' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% content_for :footer do %>
+  <%= link_to '新建员工', new_staff_path, class: 'btn btn-success' %>
+<% end %>
+
+<%= render template: 'layouts/listing' %>

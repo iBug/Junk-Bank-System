@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'home#index'
+  root to: 'stats#home'
 
   resources :branches
   resources :departments

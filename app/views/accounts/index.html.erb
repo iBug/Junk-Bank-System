@@ -1,33 +1,42 @@
-<h1>账户</h1>
+<% content_for :heading do %>
+  <h1 class="mb-0">账户</h1>
+<% end %>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>编号</th>
-      <th>支行</th>
-      <th>类型</th>
-      <th>余额</th>
-      <th class="d-none d-md-table-cell">开户日期</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @accounts.each do |account| %>
+<% content_for :body do %>
+  <table class="table table-hover mb-0">
+    <thead>
       <tr>
-        <td><%= account.id %></td>
-        <td><%= link_to account.branch.name, account.branch %></td>
-        <td><%= account_type_name account.accountable_type %></td>
-        <td><%= account.balance %></td>
-        <td class="d-none d-md-table-cell"><%= l account.open_date %></td>
-        <td>
-          <%= link_to raw(t'actions.view'), account, class: 'btn btn-primary' %>
-          <%= link_to raw(t'actions.edit'), edit_account_path(account), class: 'btn btn-secondary' %>
-          <%= link_to raw(t'actions.destroy'), account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger d-none d-sm-inline-block' %>
-        </td>
+        <th>编号</th>
+        <th>支行</th>
+        <th>类型</th>
+        <th>余额</th>
+        <th class="d-none d-md-table-cell">开户日期</th>
+        <th>操作</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<%= link_to '新建账户', new_account_path, class: 'btn btn-success' %>
+    <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= account.id %></td>
+          <td><%= link_to account.branch_name, branch_path(account.branch_id) %></td>
+          <td><%= account_type_name account.accountable_type %></td>
+          <td><%= account.balance %></td>
+          <td class="d-none d-md-table-cell"><%= l account.open_date %></td>
+          <td>
+            <%= link_to raw(t'actions.view'), account, class: 'btn btn-outline-primary' %>
+            <%= link_to raw(t'actions.edit'), edit_account_path(account), class: 'btn btn-outline-secondary' %>
+            <%= link_to raw(t'actions.destroy'), account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger d-none d-sm-inline-block' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+
+<% content_for :footer do %>
+  <%= link_to '新建账户', new_account_path, class: 'btn btn-success' %>
+<% end %>
+
+<%= render template: 'layouts/listing' %>

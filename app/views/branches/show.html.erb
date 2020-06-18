@@ -1,14 +1,22 @@
-<h1>查看支行</h1>
+<% content_for :heading do %>
+  <h1 class="mb-0">支行 <%= @branch.name %></h1>
+<% end %>
 
-<dl class="row my-3">
-  <dt class="col col-12 col-md-2">名称</dt>
-  <dd class="col col-12 col-md-10"><%= @branch.name %></dd>
-  <dt class="col col-12 col-md-2">城市</dt>
-  <dd class="col col-12 col-md-10"><%= @branch.city %></dd>
-  <dt class="col col-12 col-md-2">资产</dt>
-  <dd class="col col-12 col-md-10"><%= @branch.assets %></dd>
-</dl>
+<% content_for :body do %>
+  <dl class="row my-0">
+    <dt class="col col-12 col-md-2">名称</dt>
+    <dd class="col col-12 col-md-10"><%= @branch.name %></dd>
+    <dt class="col col-12 col-md-2">城市</dt>
+    <dd class="col col-12 col-md-10"><%= @branch.city %></dd>
+    <dt class="col col-12 col-md-2">资产</dt>
+    <dd class="col col-12 col-md-10"><%= @branch.assets %></dd>
+  </dl>
+<% end %>
 
-<%= link_to raw(t'actions.edit'), edit_branch_path(@branch), class: 'btn btn-primary' %>
-<%= link_to raw(t'actions.back'), branches_path, class: 'btn btn-secondary' %>
-<%= link_to raw(t'actions.destroy'), @branch, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<% content_for :footer do %>
+  <%= link_to raw(t'actions.edit'), edit_branch_path(@branch), class: 'btn btn-primary' %>
+  <%= link_to raw(t'actions.back'), branches_path, class: 'btn btn-secondary' %>
+  <%= link_to raw(t'actions.destroy'), @branch, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<%= render template: 'layouts/card.html' %>

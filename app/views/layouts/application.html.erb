@@ -13,10 +13,11 @@
   </head>
 
   <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light shadow-sm">
       <%= link_to root_url, class: 'navbar-brand' do %>
         <%= image_tag "bank.svg", data: { svg_fallback: asset_path('bank.svg') }, style: 'font-size: 1.33333em; width: 1.25em; height: 1em; vertical-align: -0.225em;' %>
-        <%= site_name %>
+        <%# site_name %>
+        JB 银行
       <% end %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -59,7 +60,7 @@
 
       <%= yield %>
     </div>
-    <footer class="footer shadow bg-light py-3 py-md-4 border-top">
+    <footer class="footer shadow py-3 py-md-4 border-top">
       <div class="container px-sm-0">
         <p class="text-muted">
         <a href="https://github.com/iBug/Junk-Bank-System">Junk Bank System</a>, Copyright &copy; 2020-<%= Time.now.strftime '%Y' %> <a href="https://github.com/iBug">iBug</a>
