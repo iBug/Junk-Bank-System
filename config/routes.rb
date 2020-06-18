@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   scope :clients do
     get ':id/contact', to: 'clients#contact', as: :contact
+    get ':id/accounts', to: 'clients#accounts', as: :client_accounts
+    get ':id/loans', to: 'clients#loans', as: :client_loans
   end
 
   scope :accounts do

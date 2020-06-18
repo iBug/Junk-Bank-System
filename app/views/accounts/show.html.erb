@@ -44,7 +44,7 @@
 <% content_for :footer do %>
   <%= link_to raw('<i class="fa fab fa-user-friends"></i> 关联客户'), account_owners_path(@account), class: 'btn btn-success' %>
   <%= link_to raw(t'actions.edit'), edit_account_path(@account), class: 'btn btn-primary' %>
-  <%= link_to raw(t'actions.back'), accounts_path, class: 'btn btn-secondary' %>
+  <%= link_to raw(t'actions.back'), :back, class: 'btn btn-secondary' %>
   <%= link_to raw(t'actions.destroy'), @account, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
 <% end %>
 

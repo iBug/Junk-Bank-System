@@ -8,6 +8,4 @@ class Client < Person
   has_and_belongs_to_many :loans
 
   accepts_nested_attributes_for :contact, update_only: true, allow_destroy: true
-
-  default_scope { includes :contact }
 end

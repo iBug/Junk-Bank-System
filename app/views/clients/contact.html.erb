@@ -1,5 +1,5 @@
 <% content_for :heading do %>
-  <h1 class="mb-0">客户 <%= @client.name %> 的联系人</h1>
+  <h1 class="mb-0">客户 <%= @contact.client_name %> 的联系人</h1>
 <% end %>
 
 <% content_for :body do %>
@@ -12,7 +12,7 @@
 <% end %>
 
 <% content_for :footer do %>
-  <%= link_to raw(t'actions.back'), @contact.client, class: 'btn btn-primary' %>
+  <%= link_to raw(t'actions.back'), :back, class: 'btn btn-primary' %>
   <%= link_to '返回列表', clients_url, class: 'btn btn-secondary' %>
 <% end %>
 

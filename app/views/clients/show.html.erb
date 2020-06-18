@@ -9,11 +9,11 @@
       <dd class="col col-12 col-md-10"><%= @client[field] %></dd>
     <% end %>
     <dt class="col col-12 col-md-2">负责人</dt>
-    <dd class="col col-12 col-md-10"><%= link_to @client.manager.name, @client.manager %></dd>
+    <dd class="col col-12 col-md-10"><%= link_to @client.manager_name, staff_path(@client.manager_id) %></dd>
     <dt class="col col-12 col-md-2">负责人类型</dt>
     <dd class="col col-12 col-md-10"><%= manager_type_name @client.manager_type %></dd>
     <dt class="col col-12 col-md-2">联系人</dt>
-    <dd class="col col-12 col-md-10"><%= link_to @client.contact.name, @client.contact %></dd>
+    <dd class="col col-12 col-md-10"><%= link_to @client.contact_name, contact_path(@client.id) %></dd>
   </dl>
 <% end %>
 

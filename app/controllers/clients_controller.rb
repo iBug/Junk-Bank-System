@@ -1,5 +1,7 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i[show edit update destroy contact]
+  include AccountsHelper
+
+  before_action :set_client, only: %i[edit update destroy accounts loans]
 
   # GET /clients
   # GET /clients.json
@@ -10,11 +12,17 @@ class ClientsController < ApplicationController
   # GET /clients/1
   # GET /clients/1.json
   def show
+    @client = Client.joins(:contact, :manager).select('clients.*', 'contacts.name AS contact_name', 'staffs.name AS manager_name').find(params[:id])
   end
 
   # GET /clients/1/contact
   def contact
-    @contact = @client.contact
+    @contact = Contact.joins(:client).select('contacts.*', 'clients.name AS client_name').find_by(client_id: params[:id])
+  end
+
+  # GET /clients/1/accounts
+  def accounts
+    @accounts = Ownership.joins(:branch).where(client: @client).select('ownerships.*', 'branches.name AS branch_name')
   end
 
   # GET /clients/new
