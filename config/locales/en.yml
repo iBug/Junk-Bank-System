@@ -44,4 +44,5 @@ en:
     back: '<i class="fa fas fa-chevron-circle-left"></i> 返回'
     destroy: '<i class="fa fas fa-times-circle"></i> 删除'
     edit: '<i class="fa fas fa-edit"></i> 编辑'
+    info: '<i class="fa fas fa-info-circle"></i> 信息'
     view: '<i class="fa fas fa-eye"></i> 查看'

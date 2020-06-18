@@ -8,6 +8,10 @@
 		width: initial;
 	}
 
+	&.zero-width {
+		margin-left: -1em;
+	}
+
 	&.svg-xl {
 		font-size: 2.5em;
 		margin-top: -1em;
