@@ -4,7 +4,7 @@ class StaffsController < ApplicationController
   # GET /staffs
   # GET /staffs.json
   def index
-    @staffs = Staff.all
+    staffs
   end
 
   # GET /staffs/1
@@ -63,8 +63,12 @@ class StaffsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def staffs
+      @staffs ||= Staff.joins(:branch, :department).select('staffs.*', 'branches.name AS branch_name', 'departments.name AS department_name')
+    end
+
     def set_staff
-      @staff = Staff.find(params[:id])
+      @staff = staffs.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
