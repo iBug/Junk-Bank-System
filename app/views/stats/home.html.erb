@@ -1,17 +1,23 @@
 <h1 class="text-center py-5 display-4">
-  <%= image_tag "bank.svg", data: { svg_fallback: asset_path('bank.svg') }, style: 'font-size: 1.33333em; width: 1.25em; height: 1em; vertical-align: -0.225em;' %>
+  <%= image_tag 'bank.svg', data: { svg_fallback: asset_path('bank.svg') }, class: 'svg-inline' %>
   <%= site_name %>
 </h1>
 
 <div class="row">
-  <% [Branch, Department, Staff, Client, Account, Loan].each do |model| %>
+  <% home_cards.each do |model, svg| %>
     <div class="px-3 mb-4 mb-md-5 col col-12 col-sm-6 col-md-4">
       <div class="card shadow text-center">
         <div class="card-header">
           <h4 class="my-0 fonr-weight-normal"><%= model.display_name %></h4>
         </div>
         <div class="card-body">
-          <h3 class="card-title mb-3"><%= model.count %> 个<%= model.display_name %></h3>
+          <h3 class="card-title mb-3">
+            <% if svg %>
+              <% filename = "#{svg}.svg" %>
+              <%= image_tag filename, data: { svg_fallback: asset_path(filename) }, class: 'svg-inline' %>
+            <% end %>
+            <%= model.count %> 个<%# model.display_name %>
+          </h3>
           <%= link_to '查看', send(model.name.underscore.pluralize + '_url'), class: "btn btn-lg btn-block btn-primary" %>
         </div>
       </div>
