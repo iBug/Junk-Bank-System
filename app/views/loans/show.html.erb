@@ -1,31 +1,41 @@
-<h1>查看贷款</h1>
-
-<dl class="row my-3">
-  <dt class="col col-12 col-md-2">支行</dt>
-  <dd class="col col-12 col-md-10"><%= link_to @loan.branch.name, @loan.branch %></dd>
-  <dt class="col col-12 col-md-2">金额</dt>
-  <dd class="col col-12 col-md-10"><%= @loan.amount %></dd>
-  <dt class="col col-12 col-md-2">客户</dt>
-  <dd class="col col-12 col-md-10">
-    <%= raw(@loan.clients.limit(3).map do |client| %>
-      <% link_to client.name, client %>
-    <% end.join("<br />")) %>
-    <% if @loan.clients.size > 3 %>
-      <br />
-      &hellip;
-      <br />
-      共 <%= @loan.clients.size %> 个，<%= link_to "查看全部", loan_clients_path(@loan) %>
-    <% end %>
-  </dd>
-  <dt class="col col-12 col-md-2">状态</dt>
-  <dd class="col col-12 col-md-10">
-    <%= render partial: 'status_icon', locals: { status: @loan.status } %>
-    <%= @loan.status_s %>
-  </dd>
-</dl>
-
-<%= link_to raw('<i class="fa fas fa-money-bill-wave"></i> 支付'), loan_issues_path(@loan), class: 'btn btn-primary' %>
-<%= link_to raw(t'actions.back'), loans_path, class: 'btn btn-secondary' %>
-<% unless @loan.issuing? %>
-  <%= link_to raw(t'actions.destroy'), @loan, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+<% content_for :heading do %>
+  <h1 class="mb-0">查看贷款</h1>
 <% end %>
+
+<% content_for :body do %>
+  <dl class="row my-0">
+    <dt class="col col-12 col-md-2">支行</dt>
+    <dd class="col col-12 col-md-10"><%= link_to @loan.branch_name, branch_path(@loan.branch_id) %></dd>
+    <dt class="col col-12 col-md-2">金额</dt>
+    <dd class="col col-12 col-md-10"><%= @loan.amount %></dd>
+    <dt class="col col-12 col-md-2">已支付</dt>
+    <dd class="col col-12 col-md-10"><%= @loan.amount_issued %></dd>
+    <dt class="col col-12 col-md-2">客户</dt>
+    <dd class="col col-12 col-md-10">
+      <%= raw(@clients.limit(3).map do |row| %>
+        <% link_to row.client_name, client_path(row.client_id) %>
+      <% end.join("<br />")) %>
+      <% if @clients.size > 3 %>
+        <br />
+        &hellip;
+        <br />
+        共 <%= @clients.size %> 个，<%= link_to "查看全部", loan_clients_path(@loan) %>
+      <% end %>
+    </dd>
+    <dt class="col col-12 col-md-2">状态</dt>
+    <dd class="col col-12 col-md-10">
+      <%= render partial: 'status_icon', locals: { status: @status } %>
+      <%= status_s @status %>
+    </dd>
+  </dl>
+<% end %>
+
+<% content_for :footer do %>
+  <%= link_to raw('<i class="fa fas fa-money-bill-wave"></i> 支付'), loan_issues_path(@loan), class: 'btn btn-primary' %>
+  <%= link_to raw(t'actions.back'), loans_path, class: 'btn btn-secondary' %>
+  <% unless @loan.issuing? %>
+    <%= link_to raw(t'actions.destroy'), @loan, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+  <% end %>
+<% end %>
+
+<%= render template: 'layouts/card' %>

@@ -1,42 +1,48 @@
-<h1>贷款 #<%= @loan.id %> 的发放记录</h1>
-
-<ul class="list-group my-3">
-  <li class="list-group-item">
-    <strong>状态</strong>:
-    <%= render partial: 'status_icon', locals: { status: @loan.status } %>
-    <%= @loan.status_s %>
-  </li>
-  <% unless @loan.issued? %>
-    <li class="list-group-item">
-      <strong>剩余</strong>:
-      <%= @loan.remaining %>
-    </li>
-  <% end %>
-</ul>
-
-<% unless @loan.unissued? %>
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>日期</th>
-        <th>金额</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @loan.issues.order(date: :asc, id: :asc).each do |issue| %>
-        <tr>
-          <td><%= issue.date %></td>
-          <td><%= issue.amount %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<% content_for :heading do %>
+  <h1 class="mb-0">贷款 #<%= @loan.id %> 的发放记录</h1>
 <% end %>
 
-<div class="my-3">
+<% content_for :body do %>
+  <dl class="row <%= 'mb-0' if @status == :unissued %>">
+    <dt class="col col-12 col-md-2">状态</dt>
+    <dd class="col col-12 col-md-10">
+      <%= render partial: 'status_icon', locals: { status: @status } %>
+      <%= status_s @status %>
+    </dd>
+    <% unless @status == :issued %>
+      <dt class="col col-12 col-md-2">剩余</dt>
+      <dd class="col col-12 col-md-10">
+        <%= @loan.remaining %>
+      </dd>
+    <% end %>
+  </dl>
+
+  <% unless @status == :unissued %>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>日期</th>
+          <th>金额</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @issues.order(date: :asc, id: :asc).each do |issue| %>
+          <tr>
+            <td><%= issue.date %></td>
+            <td><%= issue.amount %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+<% end %>
+
+<% content_for :footer do %>
   <%= link_to raw(t'actions.back'), @loan, class: 'btn btn-secondary' %>
-</div>
+<% end %>
+
+<%= render template: 'layouts/card' %>
 
 <% unless @loan.issued? %>
   <%= form_with url: new_issue_path, local: true, class: 'my-3' do |form| %>

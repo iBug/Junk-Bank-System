@@ -11,7 +11,6 @@ class AccountsController < ApplicationController
   # GET /accounts/1.json
   def show
     @owners = @account.ownerships.joins(:client).limit(3).select(:client_id, 'clients.name AS client_name')
-    @owners_count = @account.owners_count
   end
 
   # GET /accounts/new

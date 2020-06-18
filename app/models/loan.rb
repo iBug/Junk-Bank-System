@@ -37,10 +37,6 @@ class Loan < ApplicationRecord
     end
   end
 
-  def status_s
-    { unissued: '未发放', issuing: '发放中', issued: '发放完毕' }.fetch status, 'Error'
-  end
-
   def unissued?
     status == :unissued
   end

@@ -1,35 +1,43 @@
-<h1>贷款</h1>
+<% content_for :heading do %>
+  <h1>贷款</h1>
+<% end %>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>编号</th>
-      <th>支行</th>
-      <th>金额</th>
-      <th>客户</th>
-      <th>状态</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @loans.each do |loan| %>
+<% content_for :body do %>
+  <table class="table table-hover mb-0">
+    <thead>
       <tr>
-        <td><%= loan.id %></td>
-        <td><%= link_to loan.branch.name, loan.branch %></td>
-        <td><%= loan.amount %></td>
-        <td><%= loan.clients.size %> 个</td>
-        <td>
-          <%= render partial: 'status_icon', locals: { status: loan.status } %>
-          <%= loan.status_s %>
-        </td>
-        <td>
-          <%= link_to raw(t'actions.view'), loan, class: 'btn btn-primary' %>
-          <%= link_to raw(t'actions.destroy'), loan, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger#{ " disabled invisible" if loan.issuing? }", disabled: loan.issuing? %>
-        </td>
+        <th>编号</th>
+        <th>支行</th>
+        <th>金额</th>
+        <th>状态</th>
+        <th>操作</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<%= link_to '新建贷款', new_loan_path, class: 'btn btn-success' %>
+    <tbody>
+      <% @loans.each do |loan| %>
+        <tr>
+          <td><%= loan.id %></td>
+          <td><%= link_to loan.branch_name, branch_path(loan.branch_id) %></td>
+          <td><%= loan.amount %></td>
+          <td>
+            <% status = status_of loan %>
+            <%= render partial: 'status_icon', locals: { status: status } %>
+            <%= status_s status %>
+          </td>
+          <td>
+            <%= link_to raw(t'actions.view'), loan, class: 'btn btn-primary' %>
+            <%= link_to raw(t'actions.destroy'), loan, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger#{ " disabled invisible" if status == :issuing }", disabled: (status == :issuing) %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+
+<% content_for :footer do %>
+  <%= link_to '新建贷款', new_loan_path, class: 'btn btn-success' %>
+<% end %>
+
+<%= render template: 'layouts/listing' %>
