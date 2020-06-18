@@ -13,7 +13,12 @@
 
   <div class="form-group">
     <%= form.label :branch_id, '支行' %>
-    <%= form.select :branch_id, options_from_collection_for_select(Branch.all, :id, :name), {}, { class: 'form-control', disabled: !account.new_record? } %>
+    <% if account.new_record? %>
+      <%= form.select :branch_id, options_from_collection_for_select(Branch.all, :id, :name), {}, { class: 'form-control' } %>
+    <% else %>
+      <%# Option is fixed for edits %>
+      <%= form.select :branch_id, [[account.branch_name, account.branch_id]], {}, { class: 'form-control', disabled: true } %>
+    <% end %>
   </div>
 
   <% if account.new_record? %>

@@ -7,17 +7,17 @@
     <dt class="col col-12 col-md-2">账户号</dt>
     <dd class="col col-12 col-md-10"><%= @account.id %></dd>
     <dt class="col col-12 col-md-2">支行</dt>
-    <dd class="col col-12 col-md-10"><%= link_to @account.branch.name, @account.branch %></dd>
+    <dd class="col col-12 col-md-10"><%= link_to @account.branch_name, branch_path(@account.branch_id) %></dd>
     <dt class="col col-12 col-md-2">客户</dt>
     <dd class="col col-12 col-md-10">
       <%= raw(@owners.map do |owner| %>
         <% link_to owner.client_name, clients_path(owner.client_id) %>
       <% end.join("<br />")) %>
-      <% if @owners_count > 3 %>
+      <% if @account.owners_count > 3 %>
         <br />
         &hellip;
         <br />
-        共 <%= @owners_count %> 个，<%= link_to '查看全部', account_owners_path(@account) %>
+        共 <%= @account.owners_count %> 个，<%= link_to '查看全部', account_owners_path(@account) %>
       <% end %>
     </dd>
     <dt class="col col-12 col-md-2">账户类型</dt>
@@ -42,7 +42,7 @@
 <% end %>
 
 <% content_for :footer do %>
-  <%= link_to raw('<i class="fa fab fa-user-friends"></i> 关联客户'), account_owners_path(@account), class: 'btn btn-info' %>
+  <%= link_to raw('<i class="fa fab fa-user-friends"></i> 关联客户'), account_owners_path(@account), class: 'btn btn-success' %>
   <%= link_to raw(t'actions.edit'), edit_account_path(@account), class: 'btn btn-primary' %>
   <%= link_to raw(t'actions.back'), accounts_path, class: 'btn btn-secondary' %>
   <%= link_to raw(t'actions.destroy'), @account, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>

@@ -11,7 +11,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1.json
   def show
     @owners = @account.ownerships.joins(:client).limit(3).select(:client_id, 'clients.name AS client_name')
-    @owners_count = @account.ownerships.count
+    @owners_count = @account.owners_count
   end
 
   # GET /accounts/new
@@ -95,7 +95,7 @@ class AccountsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find(params[:id])
+      @account = Account.joins(:branch, :ownerships).group(:id).select('accounts.*', 'branches.name AS branch_name', 'COUNT(ownerships.client_id) AS owners_count').find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
