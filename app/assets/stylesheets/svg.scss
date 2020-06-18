@@ -4,10 +4,15 @@
 	height: 1em;
 	vertical-align: -0.225em;
 
+	&.compact {
+		width: initial;
+	}
+
 	&.svg-xl {
 		font-size: 2.5em;
 		margin-top: -1em;
-		margin-bottom: -0.1em;
+		margin-bottom: -0.35em;
 		width: initial;
+		vertical-align: initial;
 	}
 }

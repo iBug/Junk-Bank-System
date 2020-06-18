@@ -12,10 +12,8 @@
         </div>
         <div class="card-body">
           <h3 class="card-title mb-3">
-            <% if svg %>
-              <%= svg_tag "#{svg}.svg" %>
-            <% end %>
-            <%= model.count %> 个<%# model.display_name %>
+            <%= svg_tag "#{svg}.svg", class: 'svg-inline compact' %>
+            <%= model.count %> <%# 个 model.display_name %>
           </h3>
           <%= link_to '查看', send(model.name.underscore.pluralize + '_url'), class: "btn btn-lg btn-block btn-primary" %>
         </div>

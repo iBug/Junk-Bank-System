@@ -10,6 +10,7 @@ class StatsController < ApplicationController
     @branches_count = Branch.count
     @accounts_count, @accounts_amount = Account.pluck('COUNT(id)', 'SUM(balance)').first
     @deposit_accounts_count = Account.where(accountable_type: :DepositAccount).size
+    Account.group(:accountable_type).select('COUNT(id)', :accountable_type)
     @check_accounts_count = Account.where(accountable_type: :CheckAccount).size
     @loans_count, @loans_amount = Loan.pluck('COUNT(id)', 'SUM(amount)').first
     loan_statuses = Loan.left_outer_joins(:issues).group(:id).select(:id, %[
