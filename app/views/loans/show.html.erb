@@ -33,7 +33,7 @@
 <% content_for :footer do %>
   <%= link_to raw('<i class="fa fas fa-money-bill-wave"></i> 支付'), loan_issues_path(@loan), class: 'btn btn-primary' %>
   <%= link_to raw(t'actions.back'), loans_path, class: 'btn btn-secondary' %>
-  <% unless @loan.issuing? %>
+  <% unless @status == :issuing %>
     <%= link_to raw(t'actions.destroy'), @loan, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
   <% end %>
 <% end %>

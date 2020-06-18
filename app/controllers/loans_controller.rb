@@ -15,14 +15,12 @@ class LoansController < ApplicationController
   # GET /loans/1.json
   def show
     @clients = Loan.joins(:clients).limit(3).select(:client_id, 'clients.name AS client_name')
-    @status = status_of @loan
   end
 
   # GET /loans/1/issues
   # GET /loans/1/issues.json
   def issues
     @issue = Issue.new
-    @status = status_of @loan
   end
 
   # GET /loans/1/clients
@@ -67,6 +65,7 @@ class LoansController < ApplicationController
       id = params[:id]
       @loan = Loan.left_outer_joins(:branch, :issues).group(:id).select('loans.*', 'branches.name AS branch_name', 'IFNULL(SUM(issues.amount), 0.0) AS amount_issued', 'loans.amount - IFNULL(SUM(issues.amount), 0.0) AS remaining').find(id)
       @clients = Loan.left_outer_joins(:clients).where('loans.id = ?', id)
+      @status = status_of @loan
     end
 
     def set_issues

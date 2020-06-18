@@ -16,15 +16,10 @@ class Loan < ApplicationRecord
   before_destroy :check_issuing
 
   def check_issuing
-    if issuing?
+    if status == :issuing
       errors.add :base, '发放中的贷款不允许删除'
       throw :abort
     end
-  end
-
-  def remaining
-    return amount if issues.empty?
-    amount - issues.sum(:amount)
   end
 
   def status
@@ -37,15 +32,11 @@ class Loan < ApplicationRecord
     end
   end
 
-  def unissued?
-    status == :unissued
+  def remaining
+    @remaining ||= issues.sum(:amount)
   end
 
-  def issued?
-    status == :issued
-  end
-
-  def issuing?
-    status == :issuing
+  def reset_remaining
+    @remaining = nil
   end
 end
