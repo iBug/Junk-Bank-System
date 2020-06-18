@@ -19,7 +19,10 @@
         <td><%= link_to loan.branch.name, loan.branch %></td>
         <td><%= loan.amount %></td>
         <td><%= loan.clients.size %> 个</td>
-        <td><%= loan.status_s %></td>
+        <td>
+          <%= render partial: 'status_icon', locals: { status: loan.status } %>
+          <%= loan.status_s %>
+        </td>
         <td>
           <%= link_to raw(t'actions.view'), loan, class: 'btn btn-primary' %>
           <%= link_to raw(t'actions.destroy'), loan, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger#{ " disabled invisible" if loan.issuing? }", disabled: loan.issuing? %>

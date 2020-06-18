@@ -18,7 +18,10 @@
     <% end %>
   </dd>
   <dt class="col col-12 col-md-2">状态</dt>
-  <dd class="col col-12 col-md-10"><%= @loan.status_s %></dd>
+  <dd class="col col-12 col-md-10">
+    <%= render partial: 'status_icon', locals: { status: @loan.status } %>
+    <%= @loan.status_s %>
+  </dd>
 </dl>
 
 <%= link_to raw('<i class="fa fas fa-money-bill-wave"></i> 支付'), loan_issues_path(@loan), class: 'btn btn-primary' %>

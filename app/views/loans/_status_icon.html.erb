@@ -1,0 +1,8 @@
+<% case status %>
+<% when :unissued %>
+  <i class="fa fas fa-dot-circle text-info"></i>
+<% when :issuing %>
+  <i class="fa fas fa-clock text-primary"></i>
+<% when :issued %>
+  <i class="fa fas fa-check-circle text-success"></i>
+<% end %>

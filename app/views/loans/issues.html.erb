@@ -1,14 +1,21 @@
 <h1>贷款 #<%= @loan.id %> 的发放记录</h1>
 
-<div class="my-3">
-  <p><strong>状态</strong>：<%= @loan.status_s %></p>
+<ul class="list-group my-3">
+  <li class="list-group-item">
+    <strong>状态</strong>:
+    <%= render partial: 'status_icon', locals: { status: @loan.status } %>
+    <%= @loan.status_s %>
+  </li>
   <% unless @loan.issued? %>
-    <p><strong>剩余</strong>：<%= @loan.remaining %></p>
+    <li class="list-group-item">
+      <strong>剩余</strong>:
+      <%= @loan.remaining %>
+    </li>
   <% end %>
-</div>
+</ul>
 
 <% unless @loan.unissued? %>
-  <table class="table table-hover">
+  <table class="table table-bordered table-hover">
     <thead>
       <tr>
         <th>日期</th>
