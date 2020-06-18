@@ -1,10 +1,10 @@
 <h1 class="text-center py-5 display-4">
-  <%= svg_tag 'bank.svg' %>
+  <%= svg_tag 'bank-home.svg', class: 'svg-inline svg-xl' %>
   <%= site_name %>
 </h1>
 
 <div class="row">
-  <% home_cards.each do |model, svg| %>
+  <% @cards.each do |model, svg| %>
     <div class="px-3 mb-4 mb-md-5 col col-12 col-sm-6 col-md-4">
       <div class="card shadow text-center">
         <div class="card-header">
