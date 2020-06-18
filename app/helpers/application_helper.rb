@@ -14,4 +14,12 @@ module ApplicationHelper
   def site_name
     Rails.configuration.site_name.to_s
   end
+
+  def svg_tag(filename, options = {})
+    options = {
+      data: { svg_fallback: filename },
+      class: 'svg-inline',
+    }.merge options
+    image_tag filename, options
+  end
 end

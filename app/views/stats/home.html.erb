@@ -1,5 +1,5 @@
 <h1 class="text-center py-5 display-4">
-  <%= image_tag 'bank.svg', data: { svg_fallback: asset_path('bank.svg') }, class: 'svg-inline' %>
+  <%= svg_tag 'bank.svg' %>
   <%= site_name %>
 </h1>
 
@@ -13,8 +13,7 @@
         <div class="card-body">
           <h3 class="card-title mb-3">
             <% if svg %>
-              <% filename = "#{svg}.svg" %>
-              <%= image_tag filename, data: { svg_fallback: asset_path(filename) }, class: 'svg-inline' %>
+              <%= svg_tag "#{svg}.svg" %>
             <% end %>
             <%= model.count %> 个<%# model.display_name %>
           </h3>
