@@ -1,11 +1,19 @@
-<h1>客户 <%= @client.name %> 的联系人</h1>
+<% content_for :heading do %>
+  <h1 class="mb-0">客户 <%= @client.name %> 的联系人</h1>
+<% end %>
 
-<dl class="row my-3">
-  <% contact_fields_with_name.each do |field, name| %>
-    <dt class="col col-12 col-md-2"><%= name %></dt>
-    <dd class="col col-12 col-md-10"><%= @contact[field] %></dd>
-  <% end %>
-</dl>
+<% content_for :body do %>
+  <dl class="row my-0">
+    <% contact_fields_with_name.each do |field, name| %>
+      <dt class="col col-12 col-md-2"><%= name %></dt>
+      <dd class="col col-12 col-md-10"><%= @contact[field] %></dd>
+    <% end %>
+  </dl>
+<% end %>
 
-<%= link_to raw(t'actions.back'), @contact.client, class: 'btn btn-primary' %>
-<%= link_to '返回列表', clients_url, class: 'btn btn-secondary' %>
+<% content_for :footer do %>
+  <%= link_to raw(t'actions.back'), @contact.client, class: 'btn btn-primary' %>
+  <%= link_to '返回列表', clients_url, class: 'btn btn-secondary' %>
+<% end %>
+
+<%= render template: 'layouts/card' %>
