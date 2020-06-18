@@ -6,7 +6,7 @@ No, this is not really a bank system. It's the 3rd lab of « Database Systems »
 
 Development and testing was done using stock [Ruby 2.7.0p0 in Ubuntu Focal][ruby-focal] and Rails 6.0.3.1 (provided in `Gemfile.lock`). Theoretically Ruby 2.5 to 2.7 should all work so feel free to use whichever is available.
 
-Windows and macOS are **not** supported so please don't expect anything when running on these platforms.
+Windows and macOS are **not** tested so please preparen for possible problems when running on these platforms.
 
 ### Install dependencies
 
@@ -39,6 +39,18 @@ bundle exec rails server
 ```
 
 Then visit <http://127.0.0.1:3000/> to see this application in action.
+
+### Start production server
+
+Production environment is mostly the same, except you have to initialize the database again.
+
+```shell
+export RAILS_ENV=production
+bundle exec rake db:setup
+bundle exec rails server --port=3333  # Change port number to whatever you want
+```
+
+And then you can configure Nginx or Apache2 as a reverse proxy.
 
 
   [ruby-focal]: https://packages.ubuntu.com/focal/ruby
