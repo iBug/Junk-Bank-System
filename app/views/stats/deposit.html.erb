@@ -1,7 +1,4 @@
-<h1 class="text-center py-5 display-4 d-flex justify-content-center">
-  <span><%= svg_tag 'piggy-bank.svg', class: 'svg-inline svg-xl zero-width' %></span>
-  储蓄业务
-</h1>
+<%= render partial: 'svg_header', locals: { file: 'piggy-bank.svg', text: '储蓄业务' } %>
 
 <%= form_with url: current_path, local: true, method: :get, class: 'card shadow-sm mb-3' do |form| %>
   <div class="card-header">

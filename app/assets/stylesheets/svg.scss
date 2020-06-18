@@ -9,7 +9,9 @@
 	}
 
 	&.zero-width {
-		margin-left: -1em;
+		@media screen and (min-width: 576px) {
+			margin-left: -1em;
+		}
 	}
 
 	&.svg-xl {
