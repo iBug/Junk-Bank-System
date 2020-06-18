@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = Client.joins(:contact, :manager).select('clients.*', 'contacts.name AS contact_name', 'staffs.name AS manager_name')
   end
 
   # GET /clients/1
@@ -23,6 +23,11 @@ class ClientsController < ApplicationController
   # GET /clients/1/accounts
   def accounts
     @accounts = Ownership.joins(:branch).where(client: @client).select('ownerships.*', 'branches.name AS branch_name')
+  end
+
+  # GET /clients/1/loans
+  def loans
+    @loans = Loan.joins(:clients, :branch).where('clients.id = ?', @client.id).select('loans.*', 'branches.name AS branch_name')
   end
 
   # GET /clients/new

@@ -22,9 +22,9 @@
           <% fields_with_name.zip(["", "d-none d-xl-table-cell", "d-none d-lg-table-cell", "d-none"]).each do |(field, name), classes| %>
             <td class="<%= classes %>"><%= client[field] %></td>
           <% end %>
-          <td><%= link_to client.manager.name, client.manager %></td>
+          <td><%= link_to client.manager_name, staff_path(client.manager_id) %></td>
           <td class="d-none d-md-table-cell"><%= manager_type_name_short client.manager_type %></td>
-          <td><%= link_to client.contact.name, client.contact %></td>
+          <td><%= link_to client.contact_name, contact_path(client) %></td>
           <td>
             <%= link_to raw(t'actions.view'), client, class: 'btn btn-outline-primary' %>
             <%= link_to raw(t'actions.edit'), edit_client_path(client), class: 'btn btn-outline-secondary' %>

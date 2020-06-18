@@ -13,7 +13,11 @@
     <dt class="col col-12 col-md-2">负责人类型</dt>
     <dd class="col col-12 col-md-10"><%= manager_type_name @client.manager_type %></dd>
     <dt class="col col-12 col-md-2">联系人</dt>
-    <dd class="col col-12 col-md-10"><%= link_to @client.contact_name, contact_path(@client.id) %></dd>
+    <dd class="col col-12 col-md-10"><%= link_to @client.contact_name, contact_path(@client) %></dd>
+    <dt class="col col-12 col-md-2">账户</dt>
+    <dd class="col col-12 col-md-10"><%= link_to '查看', client_accounts_path(@client) %></dd>
+    <dt class="col col-12 col-md-2">贷款</dt>
+    <dd class="col col-12 col-md-10"><%= link_to '查看', client_loans_path(@client) %></dd>
   </dl>
 <% end %>
 

@@ -1,0 +1,33 @@
+<% content_for :heading do %>
+  <h1 class="mb-0">客户 <%= @client.name %> 的贷款</h1>
+<% end %>
+
+<% content_for :body do %>
+  <table class="table table-hover mb-0">
+    <thead>
+      <tr>
+        <th>贷款号</th>
+        <th>支行</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @loans.each do |loan| %>
+        <tr>
+          <td><%= loan.id %></td>
+          <td><%= link_to loan.branch_name, branch_path(loan.branch_id) %></td>
+          <td>
+            <%= link_to raw(t'actions.view'), loan, class: 'btn btn-outline-primary' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% content_for :footer do %>
+  <%= link_to raw(t'actions.back'), @client, class: 'btn btn-secondary' %>
+<% end %>
+
+<%= render template: 'layouts/listing' %>
