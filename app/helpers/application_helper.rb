@@ -7,6 +7,10 @@ module ApplicationHelper
     bool ? '是' : '否'
   end
 
+  def currency_value(value)
+    '%.2f' % value
+  end
+
   def navbar_models
     [Branch, Department, Staff, Client, Account, Loan].zip %w[university building user-tie user-friends user-circle money-bill-alt]
   end

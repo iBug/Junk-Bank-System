@@ -1,33 +1,65 @@
+<% dl_class = 'row mb-0' %>
+<% dt_class = 'col col-3 col-md-4 col-lg-3 col-xl-2 pr-0' %>
+<% dd_class = 'col col-9 col-md-8 col-lg-9 col-xl-10' %>
+
 <h1 class="text-center py-5 display-4">
   <%= svg_tag 'chart.svg' %>
   数据统计
 </h1>
 
-<div class="row">
-  <div class="col col-12 col-md-6">
-    <div class="card shadow-sm mb-4">
+<div class="row d-flex flex-column flex-md-row">
+  <div class="col col-12 col-md-6 d-flex flex-column flex-grow-1">
+    <div class="card shadow-sm flex-grow-1 px-0 mb-4">
       <div class="card-header text-center">
         <h3 class="font-weight-normal">储蓄业务</h3>
       </div>
 
-      <div class="card-body">
+      <div class="card-body pb-3">
+        <dl class="<%= dl_class %>">
+          <dt class="<%= dt_class %>">支行</dt>
+          <dd class="<%= dd_class %>"><%= @branches_count %></dd>
+          <dt class="<%= dt_class %>">账户</dt>
+          <dd class="<%= dd_class %>"><%= @accounts_count %></dd>
+          <dt class="<%= dt_class %>">总金额</dt>
+          <dd class="<%= dd_class %>"><%= currency_value @accounts_amount %></dd>
+          <dt class="<%= dt_class %>">储蓄账户</dt>
+          <dd class="<%= dd_class %>"><%= @deposit_accounts_count %></dd>
+          <dt class="<%= dt_class %>">支票账户</dt>
+          <dd class="<%= dd_class %>"><%= @check_accounts_count %></dd>
+        </dl>
       </div>
 
       <div class="card-footer text-center">
+        <%= link_to raw(t'actions.view'), deposit_stats_path, class: 'btn btn-primary' %>
       </div>
     </div>
   </div>
 
-  <div class="col col-12 col-md-6">
-    <div class="card shadow-sm mb-4">
+  <div class="col col-12 col-md-6 d-flex flex-column flex-grow-1">
+    <div class="card shadow-sm flex-grow-1 px-0 mb-4">
       <div class="card-header text-center">
         <h3 class="font-weight-normal">贷款业务</h3>
       </div>
 
-      <div class="card-body">
+      <div class="card-body pb-3">
+        <dl class="<%= dl_class %>">
+          <dt class="<%= dt_class %>">支行</dt>
+          <dd class="<%= dd_class %>"><%= @branches_count %></dd>
+          <dt class="<%= dt_class %>">贷款</dt>
+          <dd class="<%= dd_class %>"><%= @loans_count %></dd>
+          <dt class="<%= dt_class %>">总金额</dt>
+          <dd class="<%= dd_class %>"><%= currency_value @loans_amount %></dd>
+          <dt class="<%= dt_class %>">未发放</dt>
+          <dd class="<%= dd_class %>"><%= @unissued ||= 0 %></dd>
+          <dt class="<%= dt_class %>">发放中</dt>
+          <dd class="<%= dd_class %>"><%= @issuing ||= 0 %></dd>
+          <dt class="<%= dt_class %>">已发放</dt>
+          <dd class="<%= dd_class %>"><%= @issued ||= 0 %></dd>
+        </dl>
       </div>
 
       <div class="card-footer text-center">
+        <%= link_to raw(t'actions.view'), loan_stats_path, class: 'btn btn-primary' %>
       </div>
     </div>
   </div>

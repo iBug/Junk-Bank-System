@@ -28,5 +28,7 @@ Rails.application.routes.draw do
 
   scope :stats do
     get '', to: 'stats#index', as: :stats
+    get 'deposit', to: 'stats#deposit', as: :deposit_stats
+    get 'loan', to: 'stats#loan', as: :loan_stats
   end
 end
