@@ -19,6 +19,10 @@ module ApplicationHelper
     [Branch, Department, Staff, Client, Account, Loan].zip %w[university building user-tie user-friends user-circle money-bill-alt]
   end
 
+  def navbar_stats
+    [stats_path, deposit_stats_path, loan_stats_path].zip %w[chart-area piggy-bank hand-holding-usd], %w[概览 储蓄业务 贷款业务]
+  end
+
   def site_name
     Rails.configuration.site_name.to_s
   end
