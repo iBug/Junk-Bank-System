@@ -30,6 +30,15 @@ class StatsController < ApplicationController
         @issuing = row.count
       end
     end
+
+    @deposit_card_content = %w[支行 账户 总金额 储蓄账户 支票账户].zip [
+      @branches_count, @accounts_count, helpers.currency_value(@accounts_amount),
+      @deposit_accounts_count, @check_accounts_count,
+    ]
+    @loan_card_content = %w[支行 贷款 总金额 未发放 发放中 已发放].zip [
+      @branches_count, @loans_count, helpers.currency_value(@loans_amount),
+      (@unissued ||= 0), (@issuing ||= 0), (@issued ||= 0),
+    ]
   end
 
   # GET /stats/deposit

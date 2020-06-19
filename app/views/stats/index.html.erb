@@ -1,3 +1,4 @@
+<% card_class = 'shadow flex-grow-1 px-0 mb-4' %>
 <% dl_class = 'row mb-0' %>
 <% dt_class = 'col col-6 px-2 text-right' %>
 <% dd_class = 'col col-6 px-2' %>
@@ -6,23 +7,17 @@
 
 <div class="row d-flex flex-column flex-md-row">
   <div class="col col-12 col-md-6 d-flex flex-column flex-grow-1">
-    <div class="card shadow-sm flex-grow-1 px-0 mb-4">
+    <div class="card <%= card_class %>">
       <div class="card-header text-center">
         <h3 class="mb-0 font-weight-normal">储蓄业务</h3>
       </div>
 
       <div class="card-body pb-3">
         <dl class="<%= dl_class %>">
-          <dt class="<%= dt_class %>">支行</dt>
-          <dd class="<%= dd_class %>"><%= @branches_count %></dd>
-          <dt class="<%= dt_class %>">账户</dt>
-          <dd class="<%= dd_class %>"><%= @accounts_count %></dd>
-          <dt class="<%= dt_class %>">总金额</dt>
-          <dd class="<%= dd_class %>"><%= currency_value @accounts_amount %></dd>
-          <dt class="<%= dt_class %>">储蓄账户</dt>
-          <dd class="<%= dd_class %>"><%= @deposit_accounts_count %></dd>
-          <dt class="<%= dt_class %>">支票账户</dt>
-          <dd class="<%= dd_class %>"><%= @check_accounts_count %></dd>
+          <% @deposit_card_content.each do |dt, dd| %>
+            <dt class="<%= dt_class %>"><%= dt %></dt>
+            <dd class="<%= dd_class %>"><%= dd %></dd>
+          <% end %>
         </dl>
       </div>
 
@@ -33,25 +28,17 @@
   </div>
 
   <div class="col col-12 col-md-6 d-flex flex-column flex-grow-1">
-    <div class="card shadow-sm flex-grow-1 px-0 mb-4">
+    <div class="card <%= card_class %>">
       <div class="card-header text-center">
         <h3 class="mb-0 font-weight-normal">贷款业务</h3>
       </div>
 
       <div class="card-body pb-3">
         <dl class="<%= dl_class %>">
-          <dt class="<%= dt_class %>">支行</dt>
-          <dd class="<%= dd_class %>"><%= @branches_count %></dd>
-          <dt class="<%= dt_class %>">贷款</dt>
-          <dd class="<%= dd_class %>"><%= @loans_count %></dd>
-          <dt class="<%= dt_class %>">总金额</dt>
-          <dd class="<%= dd_class %>"><%= currency_value @loans_amount %></dd>
-          <dt class="<%= dt_class %>">未发放</dt>
-          <dd class="<%= dd_class %>"><%= @unissued ||= 0 %></dd>
-          <dt class="<%= dt_class %>">发放中</dt>
-          <dd class="<%= dd_class %>"><%= @issuing ||= 0 %></dd>
-          <dt class="<%= dt_class %>">已发放</dt>
-          <dd class="<%= dd_class %>"><%= @issued ||= 0 %></dd>
+          <% @loan_card_content.each do |dt, dd| %>
+            <dt class="<%= dt_class %>"><%= dt %></dt>
+            <dd class="<%= dd_class %>"><%= dd %></dd>
+          <% end %>
         </dl>
       </div>
 
