@@ -60,7 +60,7 @@ class StatsController < ApplicationController
 
   def set_form
     @action = search_params[:action]
-    @branches = (p search_params[:branch] || '').split(' ').map(&:to_i)
+    @branches = (search_params[:branch] || '').split(' ').map(&:to_i)
     @start_year = Account.order(open_date: :asc).select(:open_date).first.open_date.year
     @end_year = Date.today.year
     @date_options = {
