@@ -2,7 +2,7 @@ class StatsController < ApplicationController
   # GET /
   def home
     @cards = [Branch, Department, Staff, Client, Account, Loan].zip \
-      %w[dollar-square department manager user credit-card debt]
+      %w[safe department manager user credit-card debt]
   end
 
   # GET /stats

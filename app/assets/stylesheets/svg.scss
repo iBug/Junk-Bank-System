@@ -14,6 +14,15 @@
 		}
 	}
 
+	&.svg-lg {
+		font-size: 2em;
+		width: initial;
+
+		&.short {
+			margin-top: -0.2em;
+		}
+	}
+
 	&.svg-xl {
 		font-size: 2.5em;
 		margin-top: -1em;
