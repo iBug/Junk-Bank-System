@@ -76,7 +76,7 @@ class StatsController < ApplicationController
       orders = { open_date: :asc, branch_id: :asc }
     end
 
-    @records = Account.select(selects).joins(:branch).where(wheres).group(*groups).order(**orders)
+    @records = Account.select(selects).joins(:branch).where(wheres).group(groups).order(orders)
   end
 
   # GET /stats/loan
