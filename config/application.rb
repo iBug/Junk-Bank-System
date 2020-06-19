@@ -30,6 +30,7 @@ module JunkBank
     # the framework and any gems in your application.
 
     config.generators do |g|
+      g.assets = false
       g.system_tests = nil
       g.test_framework = nil
       g.jbuilder = false

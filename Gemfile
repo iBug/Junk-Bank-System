@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'uglifier', '>= 1.3.0'
 gem 'sassc-rails'
 gem 'chartkick'
 

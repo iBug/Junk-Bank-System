@@ -1,0 +1,54 @@
+<%= form_with url: url, local: true, id: 'search-form', method: :get, class: 'card shadow-sm mb-3' do |form| %>
+  <div class="card-header">
+    <h3 class="mb-0">搜索<h3>
+  </div>
+
+  <div class="card-body">
+    <div class="form-group">
+      <%= form.label :branch_ids, '支行' %>
+      <%= form.hidden_field :branch %>
+      <%= form.select :branch_ids, options_from_collection_for_select(Branch.select(:id, :name), :id, :name, @branches), { include_hidden: false }, { class: 'form-control', multiple: true } %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :start_date, '开始日期' %>
+      <%= form.hidden_field :start_date %>
+      <div class="form-row">
+        <div class="col col-4">
+          <%= form.date_select :start_date, @date_options.merge({ default: @start_date }), { class: 'form-control' } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :end_date, '结束日期' %>
+      <%= form.hidden_field :end_date %>
+      <div class="form-row">
+        <div class="col col-4">
+          <%= form.date_select :end_date, @date_options.merge({ default: @end_date }), { class: 'form-control' } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :time_span, '时间段' %>
+      <div class="col-12">
+        <% @time_spans.each do |name, value| %>
+          <div class="form-check form-check-inline">
+            <%= form.radio_button :time_span, value, checked: (@time_span == value), class: 'form-check-input' %>
+            <%= form.label :time_span, name, value: value, class: 'form-check-label' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <%= form.button class: 'btn btn-success', type: :submit, name: :action, value: :submit, onclick: 'onSubmit()' do %>
+      <i class="fa fas fa-search"></i> 搜索
+    <% end %>
+    <%= link_to raw(t'actions.back'), :back, class: 'btn btn-secondary' %>
+  </div>
+<% end %>
+
+<%= javascript_include_tag 'search-form', async: true %>
