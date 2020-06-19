@@ -80,8 +80,9 @@ class StatsController < ApplicationController
       orders = { open_date: :asc, branch_id: :asc }
     end
 
-    records = Account.select(selects).joins(:branch).where(wheres).group(groups).order(orders)
-    @record_groups = records.group_by(&:branch_id).sort_by { |k, v| k }
+    @query = Account.select(selects).joins(:branch).where(wheres).group(groups).order(orders)
+    @data_branches = @query.except(:select, :group, :order).select('DISTINCT branch_id', 'branches.name AS branch_name').order(branch_id: :ASC)
+    @record_groups = @query.group_by(&:branch_id).sort_by { |k, v| k }
   end
 
   # GET /stats/loan
