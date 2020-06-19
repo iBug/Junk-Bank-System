@@ -1,3 +1,9 @@
+<% content_for :head do %>
+  <%# Chart libraries %>
+  <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/chartkick@3.2.0/dist/chartkick.min.js", integrity: "sha256-QQ42jSsvKp0SDBvW+xRjHWfK2I4ObL37tEF4+l8a0qg=", crossorigin: :anonymous %>
+  <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js", integrity: "sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=", crossorigin: :anonymous %>
+<% end %>
+
 <%= render partial: 'svg_header', locals: { file: 'piggy-bank.svg', text: '储蓄业务' } %>
 
 <%= render partial: 'search_form', locals: { url: current_path } %>
@@ -28,21 +34,14 @@
             <tbody>
               <% records.each do |record| %>
                 <tr>
-                  <% case @time_span %>
-                  <% when :year %>
-                    <td><%= record.open_year %></td>
-                  <% when :quarter %>
-                    <td><%= "#{record.open_year} Q#{record.open_quarter}" %></td>
-                  <% when :month %>
-                    <td><%= "#{record.open_year}-#{'%02i' % record.open_month}" %></td>
-                  <% else %>
-                    <td><%= record.open_date %></td>
-                  <% end %>
+                  <td><%= record.display_time %></td>
                   <td><%= record.total_amount %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
+
+          <%= column_chart deposit_chart_data records %>
         </div>
       <% end %>
     </div>

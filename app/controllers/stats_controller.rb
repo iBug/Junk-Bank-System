@@ -58,20 +58,24 @@ class StatsController < ApplicationController
     case @time_span
     when :year
       selects << 'YEAR(open_date) AS open_year'
+      selects << 'YEAR(open_date) AS display_time'
       groups << 'open_year'
       orders = { open_year: :asc, branch_id: :asc }
     when :quarter
       selects << 'YEAR(open_date) AS open_year'
       selects << '((MONTH(open_date) + 2) DIV 3) AS open_quarter'
+      selects << 'CONCAT(YEAR(open_date), " Q", (MONTH(open_date) + 2) DIV 3) AS display_time'
       groups << 'open_quarter'
       orders = { open_year: :asc, open_quarter: :asc, branch_id: :asc }
     when :month
       selects << 'YEAR(open_date) AS open_year'
       selects << 'MONTH(open_date) AS open_month'
+      selects << 'CONCAT(YEAR(open_date), "-", LPAD(MONTH(open_date), 2, "0")) AS display_time'
       groups << 'open_month'
       orders = { open_year: :asc, open_month: :asc, branch_id: :asc }
     else
       selects << 'open_date'
+      selects << 'open_date AS display_time'
       groups << 'open_date'
       orders = { open_date: :asc, branch_id: :asc }
     end
