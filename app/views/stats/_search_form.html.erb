@@ -47,7 +47,7 @@
     <%= form.button class: 'btn btn-success', type: :submit, name: :action, value: :submit, onclick: 'onSubmit()' do %>
       <i class="fa fas fa-search"></i> 搜索
     <% end %>
-    <%= link_to raw(t'actions.back'), :back, class: 'btn btn-secondary' %>
+    <%= link_to raw(t'actions.back'), stats_path, class: 'btn btn-secondary' %>
   </div>
 <% end %>
 
