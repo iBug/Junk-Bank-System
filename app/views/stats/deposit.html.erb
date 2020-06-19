@@ -25,12 +25,12 @@
         <% branch_id = record.branch_id %>
         <% records = @query.where(branch_id: branch_id) %>
         <div class="tab-pane fade <%= 'show active' if index.zero? %>" id="branch-<%= branch_id %>" role="tabpanel" aria-labelledby="tab-branch-<%= branch_id %>">
-          <table class="table table-hover border">
+          <table class="table table-hover border border-top-0">
             <thead>
               <tr>
-                <th>时间</th>
-                <th>客户数</th>
-                <th>业务额</th>
+                <th class="border-top-0">时间</th>
+                <th class="border-top-0">客户数</th>
+                <th class="border-top-0">业务额</th>
               </tr>
             </thead>
 
