@@ -29,6 +29,7 @@
             <thead>
               <tr>
                 <th>时间</th>
+                <th>客户数</th>
                 <th>业务额</th>
               </tr>
             </thead>
@@ -37,13 +38,21 @@
               <% records.each do |record| %>
                 <tr>
                   <td><%= record.display_time %></td>
+                  <td><%= record.clients_count %></td>
                   <td><%= record.total_amount %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
 
-          <%= column_chart deposit_chart_data records %>
+          <div class="row">
+            <div class="col col-12 col-md-6">
+              <%= column_chart deposit_amount_chart records %>
+            </div>
+            <div class="col col-12 col-md-6">
+              <%= column_chart deposit_clients_chart records %>
+            </div>
+          </div>
         </div>
       <% end %>
     </div>

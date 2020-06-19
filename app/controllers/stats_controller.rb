@@ -48,8 +48,11 @@ class StatsController < ApplicationController
   def deposit
     return unless @action
     wheres = {}
-    selects = ['accounts.*', 'SUM(balance) AS total_amount', 'branches.name AS branch_name']
-    groups = [:branch_id]
+    selects = ['accounts.*',
+               'COUNT(DISTINCT ownerships.client_id) AS clients_count',
+               'SUM(balance) AS total_amount',
+               'branches.name AS branch_name']
+    groups = ['accounts.branch_id']
     orders = {}
 
     wheres[:branch_id] = @branches unless @branches.empty?
@@ -82,6 +85,7 @@ class StatsController < ApplicationController
 
     @query = Account.select(selects).joins(:branch).where(wheres).group(groups).order(orders)
     @data_branches = @query.except(:select, :group, :order).select('DISTINCT branch_id', 'branches.name AS branch_name').order(branch_id: :ASC)
+    @query = @query.joins(:ownerships)
     @record_groups = @query.group_by(&:branch_id).sort_by { |k, v| k }
   end
 
