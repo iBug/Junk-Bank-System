@@ -4,5 +4,33 @@
 
 <% if @action %>
   <div class="border rounded bg-white p-3">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>支行</th>
+          <th>时间</th>
+          <th>业务额</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @records.each do |record| %>
+          <tr>
+            <td><%= record.branch_name %></td>
+            <% case @time_span %>
+            <% when :year %>
+              <td><%= record.open_year %></td>
+            <% when :quarter %>
+              <td><%= "#{record.open_year} Q#{record.open_quarter}" %></td>
+            <% when :month %>
+              <td><%= "#{record.open_year}-#{'%02i' %record.open_month}" %></td>
+            <% else %>
+              <td><%= record.open_date %></td>
+            <% end %>
+            <td><%= record.total_amount %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 <% end %>

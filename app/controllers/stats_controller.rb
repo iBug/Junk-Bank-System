@@ -46,6 +46,37 @@ class StatsController < ApplicationController
 
   # GET /stats/deposit
   def deposit
+    return unless @action
+    wheres = {}
+    selects = ['SUM(balance) AS total_amount', 'branches.name AS branch_name']
+    groups = [:branch_id]
+    orders = {}
+
+    wheres[:branch_id] = @branches unless @branches.empty?
+
+    # Apparently this is MySQL-specific
+    case @time_span
+    when :year
+      selects << 'YEAR(open_date) AS open_year'
+      groups << 'open_year'
+      orders = { open_year: :asc, branch_id: :asc }
+    when :quarter
+      selects << 'YEAR(open_date) AS open_year'
+      selects << '((MONTH(open_date) + 2) DIV 3) AS open_quarter'
+      groups << 'open_quarter'
+      orders = { open_year: :asc, open_quarter: :asc, branch_id: :asc }
+    when :month
+      selects << 'YEAR(open_date) AS open_year'
+      selects << 'MONTH(open_date) AS open_month'
+      groups << 'open_month'
+      orders = { open_year: :asc, open_month: :asc, branch_id: :asc }
+    else
+      selects << 'open_date'
+      groups << 'open_date'
+      orders = { open_date: :asc, branch_id: :asc }
+    end
+
+    @records = Account.select(selects).joins(:branch).where(wheres).group(*groups).order(**orders)
   end
 
   # GET /stats/loan
@@ -68,9 +99,11 @@ class StatsController < ApplicationController
       start_year: @start_year,
       end_year: @end_year,
     }
-    @start_date = Date.parse search_params[:start_date] rescue 7.days.ago
+    @start_date = Date.parse search_params[:start_date] rescue Date.today.at_beginning_of_month
     @end_date = Date.parse search_params[:end_date] rescue Date.today
-    @time_spans = %w[无 月 季度 年].zip %i[none month quarter year]
+    valid_time_spans = %i[none month quarter year]
+    @time_spans = %w[无 月 季度 年].zip valid_time_spans
     @time_span = (search_params[:time_span] || :none).to_sym
+    @time_span = :none unless valid_time_spans.include? @time_span
   end
 end
