@@ -1,0 +1,22 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE: ibugone/junk-bank-system
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v1
+      - name: Build docker image
+        run: |
+          docker build -t "$DOCKER_IMAGE" .
+      - name: Push docker image
+        run: |
+          docker login -u ibugone -p ${{ secrets.DOCKER_TOKEN }}
+          docker push "$DOCKER_IMAGE"
