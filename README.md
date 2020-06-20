@@ -2,11 +2,32 @@
 
 No, this is not really a bank system. It's the 3rd lab of « Database Systems » of USTC in Spring 2020.
 
-## Running
+## Quick start
+
+If you have [Docker Compose installed](https://docs.docker.com/compose/install/), then you can simply run `docker-compose up` with [docker-compose.yml](docker-compose.yml) provided in this repository.
+
+You can also pull the image and run it manually:
+
+```shell
+docker pull ibugone/junk-bank-system
+docker run --rm \
+  -e DATABASE_HOST=127.0.0.1 \
+  -e DATABASE_PORT=3306 \
+  -e DATABASE_NAME=junk_bank \
+  -e DATABASE_USER=junk_bank \
+  -e DATABASE_PASSWORD=junk_bank \
+  ibugone/junk-bank-system
+```
+
+Make sure your database information is correct.
+
+## Manual setup
+
+### Environment
 
 Development and testing was done using stock [Ruby 2.7.0p0 in Ubuntu Focal][ruby-focal] and Rails 6.0.3.1 (provided in `Gemfile.lock`). Theoretically Ruby 2.5 to 2.7 should all work so feel free to use whichever is available.
 
-Windows and macOS are **not** tested so please preparen for possible problems when running on these platforms.
+Windows and macOS are **not** tested so please prepare for possible problems when running on these platforms.
 
 ### Install dependencies
 
@@ -18,7 +39,7 @@ bundle install --path=vendor/bundle
 
 ### Initialize database
 
-Edit `config/database.yml` properly and then
+Edit `config/database.yml` properly and then initialize the database with the following commands:
 
 ```shell
 bundle exec rake db:create

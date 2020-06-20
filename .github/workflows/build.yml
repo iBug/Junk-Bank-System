@@ -13,10 +13,37 @@ jobs:
     steps:
       - name: Checkout 
         uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Setup cache for Bundler
+        id: cache
+        uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-bundler-2.7-${{ hashFiles('Gemfile') }}
+          restore-keys: |
+            ${{ runner.os }}-bundler-2.7-
+      - name: Install dependencies
+        run:
+          bundle install --path=vendor/bundle --jobs=4 --retry=3 --without development test
+      - name: Pull docker images
+        run: |
+          docker pull "$DOCKER_IMAGE"
+      - name: Precompile assets
+        run: |
+          bundle exec rake assets:precompile
       - name: Build docker image
         run: |
-          docker build -t "$DOCKER_IMAGE" .
+          docker build -t "$DOCKER_IMAGE:latest" .
       - name: Push docker image
         run: |
           docker login -u ibugone -p ${{ secrets.DOCKER_TOKEN }}
-          docker push "$DOCKER_IMAGE"
+          docker push "$DOCKER_IMAGE:latest"
+          for tag in $(git tag --points-at HEAD); do
+            docker tag "$DOCKER_IMAGE:latest" "$DOCKER_IMAGE:$tag"
+            docker push "$DOCKER_IMAGE:$tag"
+          done

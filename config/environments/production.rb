@@ -93,4 +93,8 @@ Rails.application.configure do
   # Initialize Git revision only once in production environment
   config.git_revision = %x{git rev-parse HEAD}
   config.git_revision_short = config.git_revision[0..7]
+
+  config.after_initialize do
+    ActiveRecord::MigrationContext.new("db/migrate/", ActiveRecord::SchemaMigration).migrate unless ENV['SKIP_MIGRATION']
+  end
 end

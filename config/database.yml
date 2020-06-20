@@ -53,6 +53,8 @@ development:
 #
 production:
   <<: *default
-  database: <%= ENV.fetch 'DB_2020_DATABASE', 'junk_bank' %>
-  username: <%= ENV.fetch 'DB_2020_DATABASE_USERNAME', 'root' %>
-  password: <%= ENV['DB_2020_DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV.fetch 'DATABASE_PORT', '3306' %>
+  database: <%= ENV.fetch 'DATABASE_NAME', 'junk_bank' %>
+  username: <%= ENV.fetch 'DATABASE_USER', 'root' %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
