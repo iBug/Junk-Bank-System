@@ -4,13 +4,11 @@ class ClientsController < ApplicationController
   before_action :set_client, only: %i[edit update destroy accounts loans]
 
   # GET /clients
-  # GET /clients.json
   def index
     @clients = Client.joins(:contact, :manager).select('clients.*', 'contacts.name AS contact_name', 'staffs.name AS manager_name')
   end
 
   # GET /clients/1
-  # GET /clients/1.json
   def show
     @client = Client.joins(:contact, :manager).select('clients.*', 'contacts.name AS contact_name', 'staffs.name AS manager_name').find(params[:id])
   end
@@ -41,46 +39,31 @@ class ClientsController < ApplicationController
   end
 
   # POST /clients
-  # POST /clients.json
   def create
     @client = Client.new(client_params)
 
-    respond_to do |format|
-      if @client.save
-        format.html { redirect_to @client, notice: 'Client was successfully created.' }
-        format.json { render :show, status: :created, location: @client }
-      else
-        format.html { render :new }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
+    if @client.save
+      redirect_to @client, success: '成功创建客户'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /clients/1
-  # PATCH/PUT /clients/1.json
   def update
-    respond_to do |format|
-      if @client.update(client_params)
-        format.html { redirect_to @client, notice: 'Client was successfully updated.' }
-        format.json { render :show, status: :ok, location: @client }
-      else
-        format.html { render :edit }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
+    if @client.update(client_params)
+      redirect_to @client, success: '成功更新客户'
+    else
+      render :edit
     end
   end
 
   # DELETE /clients/1
-  # DELETE /clients/1.json
   def destroy
-    respond_to do |format|
-      if @client.destroy
-        format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to clients_url, alert: 'Failed to destroy client.' }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
+    if @client.destroy
+      redirect_to clients_url, success: '客户已删除'
+    else
+      redirect_to clients_url, alert: '客户删除失败'
     end
   end
 

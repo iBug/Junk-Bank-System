@@ -2,13 +2,11 @@ class AccountsController < ApplicationController
   before_action :set_account, only: %i[show edit owners owner_create update destroy]
 
   # GET /accounts
-  # GET /accounts.json
   def index
     @accounts = Account.joins(:branch).select('accounts.*', 'branches.name AS branch_name')
   end
 
   # GET /accounts/1
-  # GET /accounts/1.json
   def show
     @owners = @account.ownerships.joins(:client).limit(3).select(:client_id, 'clients.name AS client_name')
   end
@@ -29,23 +27,7 @@ class AccountsController < ApplicationController
     @available_clients = Client.where.not(id: Ownership.where(branch_id: @account.branch_id, accountable_type: @account.accountable_type).select(:client_id)).select(:id, :name)
   end
 
-  # POST /accounts/1/owners
-  def owner_create
-    owner = Ownership.new ownership_params
-
-    respond_to do |format|
-      if owner.save
-        format.html { redirect_to account_owners_url(@account), notice: 'Owner was successfully added.' }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
   # POST /accounts
-  # POST /accounts.json
   def create
     params = account_params
     accountable_type = params[:accountable_type]
@@ -56,39 +38,26 @@ class AccountsController < ApplicationController
     end
     @account = @typed_account.build_account(params)
 
-    respond_to do |format|
-      if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+    if @account.save
+      redirect_to @account, success: '成功创建账户'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /accounts/1
-  # PATCH/PUT /accounts/1.json
   def update
-    respond_to do |format|
-      if @account.update(update_params)
-        format.html { redirect_to @account, notice: 'Account was successfully updated.' }
-        format.json { render :show, status: :ok, location: @account }
-      else
-        format.html { render :edit }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+    if @account.update(update_params)
+      redirect_to @account, success: '成功更新账户'
+    else
+      render :edit
     end
   end
 
   # DELETE /accounts/1
-  # DELETE /accounts/1.json
   def destroy
     @account.destroy
-    respond_to do |format|
-      format.html { redirect_to accounts_url, notice: 'Account was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to accounts_url, success: '账户已销户'
   end
 
   private

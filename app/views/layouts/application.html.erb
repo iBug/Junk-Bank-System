@@ -66,6 +66,9 @@
       <% unless alert.nil? %>
         <div id="alert" class="alert alert-danger"><%= alert %></div>
       <% end %>
+      <% unless success.nil? %>
+        <div id="success" class="alert alert-success"><%= success %></div>
+      <% end %>
       <% unless notice.nil? %>
         <div id="notice" class="alert alert-primary"><%= notice %></div>
       <% end %>

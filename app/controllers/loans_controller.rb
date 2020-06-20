@@ -5,26 +5,22 @@ class LoansController < ApplicationController
   before_action :set_issues, only: %i[issues]
 
   # GET /loans
-  # GET /loans.json
   def index
     #client_count = Loan.joins(:clients).select('COUNT(*)')
     @loans = Loan.left_outer_joins(:branch, :issues).group(:id).select('loans.*', 'branches.name AS branch_name', 'IFNULL(SUM(issues.amount), 0) AS amount_issued')
   end
 
   # GET /loans/1
-  # GET /loans/1.json
   def show
     @clients = Loan.joins(:clients).limit(3).select(:client_id, 'clients.name AS client_name')
   end
 
   # GET /loans/1/issues
-  # GET /loans/1/issues.json
   def issues
     @issue = Issue.new
   end
 
   # GET /loans/1/clients
-  # GET /loans/1/clients.json
   def clients
   end
 
@@ -34,29 +30,20 @@ class LoansController < ApplicationController
   end
 
   # POST /loans
-  # POST /loans.json
   def create
     @loan = Loan.new(loan_params)
 
-    respond_to do |format|
-      if @loan.save
-        format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
-        format.json { render :show, status: :created, location: @loan }
-      else
-        format.html { render :new }
-        format.json { render json: @loan.errors, status: :unprocessable_entity }
-      end
+    if @loan.save
+      redirect_to @loan, success: '成功创建贷款'
+    else
+      render :new
     end
   end
 
   # DELETE /loans/1
-  # DELETE /loans/1.json
   def destroy
     @loan.destroy
-    respond_to do |format|
-      format.html { redirect_to loans_url, notice: 'Loan was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to loans_url, success: '成功删除贷款'
   end
 
   private

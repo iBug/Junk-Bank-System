@@ -3,32 +3,22 @@ class OwnershipsController < ApplicationController
   before_action :set_ownership, only: %i[destroy]
 
   # POST /accounts/1/owners
-  # POST /accounts/1/owners.json
   def create
     owner = Ownership.new ownership_params
 
-    respond_to do |format|
-      if owner.save
-        format.html { redirect_to account_owners_url(@account), notice: 'Owner was successfully added.' }
-        format.json { render :show, status: :created, location: account_owners_url(@account) }
-      else
-        format.html { render 'accounts/owners' }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+    if owner.save
+      redirect_to account_owners_url(@account), success: '成功为账户添加客户'
+    else
+      render 'accounts/owners'
     end
   end
 
   # DELETE /accounts/1/owners
-  # DELETE /accounts/1/owners.json
   def destroy
-    respond_to do |format|
-      if @ownership.destroy
-        format.html { redirect_to account_owners_url(@account), notice: 'Client was successfully removed from account.' }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to account_owners_url(@account), alert: 'Failed to remove client from account.' }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+    if @ownership.destroy
+      redirect_to account_owners_url(@account), success: '客户已从账户删除'
+    else
+      redirect_to account_owners_url(@account), alert: '客户从账户删除失败'
     end
   end
 

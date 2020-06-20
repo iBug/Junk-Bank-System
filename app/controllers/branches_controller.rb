@@ -2,13 +2,11 @@ class BranchesController < ApplicationController
   before_action :set_branch, only: [:show, :edit, :update, :destroy]
 
   # GET /branches
-  # GET /branches.json
   def index
     @branches = Branch.all
   end
 
   # GET /branches/1
-  # GET /branches/1.json
   def show
   end
 
@@ -22,43 +20,29 @@ class BranchesController < ApplicationController
   end
 
   # POST /branches
-  # POST /branches.json
   def create
     @branch = Branch.new(branch_params)
 
-    respond_to do |format|
-      if @branch.save
-        format.html { redirect_to @branch, notice: 'Branch was successfully created.' }
-        format.json { render :show, status: :created, location: @branch }
-      else
-        format.html { render :new }
-        format.json { render json: @branch.errors, status: :unprocessable_entity }
-      end
+    if @branch.save
+      redirect_to @branch, success: '成功创建支行'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /branches/1
-  # PATCH/PUT /branches/1.json
   def update
-    respond_to do |format|
-      if @branch.update(branch_params)
-        format.html { redirect_to @branch, notice: 'Branch was successfully updated.' }
-        format.json { render :show, status: :ok, location: @branch }
-      else
-        format.html { render :edit }
-        format.json { render json: @branch.errors, status: :unprocessable_entity }
-      end
+    if @branch.update(branch_params)
+      redirect_to @branch, success: '成功更新支行'
+    else
+      render :edit
     end
   end
 
   # DELETE /branches/1
-  # DELETE /branches/1.json
   def destroy
     @branch.destroy
-    respond_to do |format|
-      format.html { redirect_to branches_url, notice: 'Branch was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to branches_url, success: '支行已删除'
   end
 
   private
