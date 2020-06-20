@@ -3,7 +3,7 @@ MAINTAINER iBug <docker@ibugone.com>
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get -y update && \
-    apt-get -y install --no-install-recommends mariadb-client && \
+    apt-get -y install --no-install-recommends nodejs default-mysql-client && \
     apt-get -y autoremove && \
     apt-get -y autoclean && \
     rm -rf /var/lib/apt/lists/*
