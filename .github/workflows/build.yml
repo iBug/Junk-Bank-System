@@ -12,7 +12,7 @@ jobs:
       DOCKER_IMAGE: ibugone/junk-bank-system
     steps:
       - name: Checkout 
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.7
@@ -24,21 +24,22 @@ jobs:
         uses: actions/cache@v1
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-bundler-2.7-${{ hashFiles('Gemfile') }}
+          key: ${{ runner.os }}-bundler-2.7-${{ hashFiles('Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-bundler-2.7-
       - name: Install dependencies
         run:
-          bundle install --path=vendor/bundle --jobs=4 --retry=3 --without development test
+          bundle install --path=vendor/bundle --deployment --jobs=4 --retry=3 --without development test
+          bundle clean
       - name: Pull docker images
         run: |
-          docker pull "$DOCKER_IMAGE"
+          docker pull "$DOCKER_IMAGE:latest"
       - name: Precompile assets
         run: |
           bundle exec rake assets:precompile
       - name: Build docker image
         run: |
-          docker build -t "$DOCKER_IMAGE:latest" .
+          docker build --cache-from "$DOCKER_IMAGE:latest" -t "$DOCKER_IMAGE:latest" .
       - name: Push docker image
         run: |
           docker login -u ibugone -p ${{ secrets.DOCKER_TOKEN }}
