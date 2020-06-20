@@ -52,15 +52,7 @@
     <%= link_to '新建员工', new_staff_path, class: 'btn btn-success' %>
     <a class="btn btn-primary" href="#search-form" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="search-form">搜索</a>
   </div>
-  <div class="collapse" id="search-form">
-    <div class="form-group pt-3 mb-0">
-      <input id="search-input" type="text" class="form-control" placeholder="输入以开始搜索">
-    </div>
-  </div>
-<% end %>
-
-<% content_for :after do %>
-  <%= javascript_include_tag "quick-search.js", async: true, defer: true %>
+  <%= render partial: 'stats/quick_search' %>
 <% end %>
 
 <%= render template: 'layouts/listing' %>

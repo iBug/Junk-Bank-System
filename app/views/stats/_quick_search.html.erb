@@ -1,0 +1,9 @@
+<div class="collapse" id="search-form">
+  <div class="form-group pt-3 mb-0">
+    <input id="search-input" type="text" class="form-control" placeholder="输入以开始搜索">
+  </div>
+</div>
+
+<% content_for :after do %>
+  <%= javascript_include_tag "quick-search.js", async: true, defer: true %>
+<% end %>

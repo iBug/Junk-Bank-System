@@ -16,7 +16,7 @@
       </tr>
     </thead>
 
-    <tbody>
+    <tbody id="search-content">
       <% @clients.each do |client| %>
         <tr>
           <% fields_with_name.zip(["", "d-none d-xl-table-cell", "d-none d-lg-table-cell", "d-none"]).each do |(field, name), classes| %>
@@ -37,7 +37,11 @@
 <% end %>
 
 <% content_for :footer do %>
-  <%= link_to '新建客户', new_client_path, class: 'btn btn-success' %>
+  <div>
+    <%= link_to '新建客户', new_client_path, class: 'btn btn-success' %>
+    <a class="btn btn-primary" href="#search-form" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="search-form">搜索</a>
+  </div>
+  <%= render partial: 'stats/quick_search' %>
 <% end %>
 
 <%= render template: 'layouts/listing' %>
