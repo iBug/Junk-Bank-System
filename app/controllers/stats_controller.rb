@@ -48,7 +48,7 @@ class StatsController < ApplicationController
 
   # GET /stats/deposit
   def deposit
-    @start_year = Account.order(open_date: :asc).select(:open_date).first.open_date.year
+    @start_year = Account.order(open_date: :asc).select(:open_date).first&.open_date&.year || Date.today.year
     return unless @action
 
     wheres = {}
@@ -95,7 +95,7 @@ class StatsController < ApplicationController
 
   # GET /stats/loan
   def loan
-    @start_year = Issue.order(date: :asc).select(:date).first.date.year
+    @start_year = Issue.order(date: :asc).select(:date).first&.date&.year || Date.today.year
     return unless @action
 
     wheres = {}

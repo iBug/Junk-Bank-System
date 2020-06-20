@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def currency_value(value)
-    '%.2f' % value
+    '%.2f' % (value || 0.0)
   end
 
   def current_path
