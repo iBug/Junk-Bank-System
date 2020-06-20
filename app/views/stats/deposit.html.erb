@@ -39,7 +39,7 @@
                 <tr>
                   <td><%= record.display_time %></td>
                   <td><%= record.clients_count %></td>
-                  <td><%= record.total_amount %></td>
+                  <td><%= currency_value record.total_amount %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -47,10 +47,10 @@
 
           <div class="row">
             <div class="col col-12 col-md-6">
-              <%= column_chart deposit_amount_chart records %>
+              <%= column_chart stats_amount_chart records %>
             </div>
             <div class="col col-12 col-md-6">
-              <%= column_chart deposit_clients_chart records %>
+              <%= column_chart stats_clients_chart records %>
             </div>
           </div>
         </div>

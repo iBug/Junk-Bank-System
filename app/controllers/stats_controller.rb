@@ -33,20 +33,24 @@ class StatsController < ApplicationController
         @issuing = row.count
       end
     end
+    @issues_amount = Issue.sum(:amount)
 
     @deposit_card_content = %w[支行 账户 总金额 储蓄账户 支票账户].zip [
       @branches_count, @accounts_count, helpers.currency_value(@accounts_amount),
       (@deposit_accounts_count ||= 0), (@check_accounts_count ||= 0),
     ]
-    @loan_card_content = %w[支行 贷款 总金额 未发放 发放中 已发放].zip [
-      @branches_count, @loans_count, helpers.currency_value(@loans_amount),
+    @loan_card_content = %w[支行 贷款 总金额 已支付 未发放 发放中 已发放].zip [
+      @branches_count, @loans_count,
+      helpers.currency_value(@loans_amount), helpers.currency_value(@issues_amount),
       (@unissued ||= 0), (@issuing ||= 0), (@issued ||= 0),
     ]
   end
 
   # GET /stats/deposit
   def deposit
+    @start_year = Account.order(open_date: :asc).select(:open_date).first.open_date.year
     return unless @action
+
     wheres = {}
     selects = ['accounts.*',
                'COUNT(DISTINCT ownerships.client_id) AS clients_count',
@@ -91,6 +95,48 @@ class StatsController < ApplicationController
 
   # GET /stats/loan
   def loan
+    @start_year = Issue.order(date: :asc).select(:date).first.date.year
+    return unless @action
+
+    wheres = {}
+    selects = ['loans.*', 'issues.date AS date',
+               '@clients_count := COUNT(DISTINCT clients.id) AS clients_count',
+               'SUM(issues.amount / @clients_count) AS total_amount',
+               'branches.name AS branch_name']
+    groups = ['loans.branch_id', 'loans.id']
+    orders = {}
+
+    wheres[:branch_id] = @branches unless @branches.empty?
+
+    case @time_span
+    when :year
+      selects << 'YEAR(date) AS year'
+      selects << 'YEAR(date) AS display_time'
+      groups << 'year'
+      orders = { year: :asc, branch_id: :asc }
+    when :quarter
+      selects << 'YEAR(date) AS year'
+      selects << '((MONTH(date) + 2) DIV 3) AS quarter'
+      selects << 'CONCAT(YEAR(date), " Q", (MONTH(date) + 2) DIV 3) AS display_time'
+      groups << 'quarter'
+      orders = { year: :asc, quarter: :asc, branch_id: :asc }
+    when :month
+      selects << 'YEAR(date) AS year'
+      selects << 'MONTH(date) AS month'
+      selects << 'CONCAT(YEAR(date), "-", LPAD(MONTH(date), 2, "0")) AS display_time'
+      groups << 'month'
+      orders = { year: :asc, month: :asc, branch_id: :asc }
+    else
+      selects << 'date'
+      selects << 'date AS display_time'
+      groups << 'date'
+      orders = { date: :asc, branch_id: :asc }
+    end
+
+    @query = Loan.select(selects).joins(:branch).where(wheres).group(groups).order(orders)
+    @data_branches = @query.except(:select, :group, :order).select('DISTINCT branch_id', 'branches.name AS branch_name').order(branch_id: :ASC)
+    @query = @query.joins(:clients, :issues)
+    @record_groups = @query.group_by(&:branch_id).sort_by { |k, v| k }
   end
 
   private
@@ -102,15 +148,9 @@ class StatsController < ApplicationController
   def set_form
     @action = search_params[:action]
     @branches = (search_params[:branch] || '').split(' ').map(&:to_i)
-    @start_year = Account.order(open_date: :asc).select(:open_date).first.open_date.year
-    @end_year = Date.today.year
-    @date_options = {
-      date_separator: '</div><div class="col col-4">',
-      start_year: @start_year,
-      end_year: @end_year,
-    }
     @start_date = Date.parse search_params[:start_date] rescue Date.today.at_beginning_of_month
     @end_date = Date.parse search_params[:end_date] rescue Date.today
+    @end_year = Date.today.year
     valid_time_spans = %i[none month quarter year]
     @time_spans = %w[无 月 季度 年].zip valid_time_spans
     @time_span = (search_params[:time_span] || :none).to_sym

@@ -1,1 +1,60 @@
+<% content_for :head do %>
+  <%# Chart libraries %>
+  <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/chartkick@3.2.0/dist/chartkick.min.js", integrity: "sha256-QQ42jSsvKp0SDBvW+xRjHWfK2I4ObL37tEF4+l8a0qg=", crossorigin: :anonymous %>
+  <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js", integrity: "sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=", crossorigin: :anonymous %>
+<% end %>
+
 <%= render partial: 'svg_header', locals: { file: 'loan.svg', text: '贷款业务' } %>
+
+<%= render partial: 'search_form', locals: { url: current_path } %>
+
+<% if @action %>
+  <div class="border rounded bg-white p-3">
+    <ul class="nav nav-tabs" id="branches-tabs" role="tablist">
+      <% @data_branches.each_with_index do |record, index| %>
+        <% branch_id = record.branch_id %>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link <%= 'active' if index.zero? %>" id="tab-branch-<%= branch_id %>" data-toggle="tab" href="#branch-<%= branch_id %>" role="tab" aria-controls="branch-<%= branch_id %>" aria-selected="<%= index.zero? %>">
+            <%= record.branch_name %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+    <div class="tab-content" id="branches">
+      <% @data_branches.each_with_index do |record, index| %>
+        <% branch_id = record.branch_id %>
+        <% records = @query.where(branch_id: branch_id) %>
+        <div class="tab-pane fade <%= 'show active' if index.zero? %>" id="branch-<%= branch_id %>" role="tabpanel" aria-labelledby="tab-branch-<%= branch_id %>">
+          <table class="table table-hover border border-top-0">
+            <thead>
+              <tr>
+                <th class="border-top-0">时间</th>
+                <th class="border-top-0">客户数</th>
+                <th class="border-top-0">业务额</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% records.each do |record| %>
+                <tr>
+                  <td><%= record.display_time %></td>
+                  <td><%= record.clients_count %></td>
+                  <td><%= currency_value record.total_amount %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
+          <div class="row">
+            <div class="col col-12 col-md-6">
+              <%= column_chart stats_amount_chart records %>
+            </div>
+            <div class="col col-12 col-md-6">
+              <%= column_chart stats_clients_chart records %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

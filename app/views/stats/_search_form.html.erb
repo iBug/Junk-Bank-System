@@ -1,3 +1,5 @@
+<% @date_options ||= { date_separator: '</div><div class="col col-4">', start_year: @start_year, end_year: @end_year } %>
+
 <%= form_with url: url, local: true, id: 'search-form', method: :get, class: 'card shadow-sm mb-3' do |form| %>
   <div class="card-header">
     <h3 class="mb-0">搜索<h3>
