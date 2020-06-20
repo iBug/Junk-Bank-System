@@ -1,5 +1,4 @@
 class Issue < ApplicationRecord
-  set_display_name '支付'
   belongs_to :loan
 
   validates_numericality_of :amount, greater_than: 0.0

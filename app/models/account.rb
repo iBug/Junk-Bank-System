@@ -1,6 +1,4 @@
 class Account < ApplicationRecord
-  set_display_name '账户'
-
   belongs_to :branch
   belongs_to :accountable, polymorphic: true
   has_many :ownerships
@@ -17,15 +15,15 @@ class Account < ApplicationRecord
   end
 
   def validate_owners
-    errors.add :base, 'Requires at least one owner' if ownerships.empty?
+    errors.add :base, '关联客户至少有一位' if ownerships.empty?
   end
 
   def check_balance
     case accountable_type
     when 'DepositAccount'
-      errors.add :base, 'Cannot overdraw from deposit account' if balance < 0.0
+      errors.add :base, '储蓄账户不允许欠款' if balance < 0.0
     when 'CheckAccount'
-      errors.add :base, 'Cannot overdraw for more than allowed' if balance + accountable.withdraw_amount < 0.0
+      errors.add :base, '支票账户欠款不允许超过透支额' if balance + accountable.withdraw_amount < 0.0
     end
   end
 end

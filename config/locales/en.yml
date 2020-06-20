@@ -46,3 +46,36 @@ en:
     edit: '<i class="fa fas fa-edit"></i> 编辑'
     info: '<i class="fa fas fa-info-circle"></i> 信息'
     view: '<i class="fa fas fa-eye"></i> 查看'
+  activerecord:
+    models:
+      branch: 支行
+      department: 部门
+      staff: 员工
+      client: 客户
+      account: 账户
+      loan: 贷款
+      issue: 支付
+    attributes:
+      branch:
+        name: 支行名
+        city: 城市
+        assets: 资产
+      department:
+        name: 部门名称
+        kind: 部门类型
+      staff:
+        person_id: 身份证号
+        name: 姓名
+        phone: 电话
+        address: 地址
+        start_date: 开始工作日期
+        manager: 经理
+        branch_id: 支行
+        department_id: 部门
+    errors:
+      messages:
+        taken: 不能重复
+        blank: 不能为空
+        greater_than_or_equal_to: '不能小于 %{count}'
+  errors:
+    format: '%{attribute}%{message}'

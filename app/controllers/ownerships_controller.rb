@@ -18,7 +18,7 @@ class OwnershipsController < ApplicationController
     if @ownership.destroy
       redirect_to account_owners_url(@account), success: '客户已从账户删除'
     else
-      redirect_to account_owners_url(@account), alert: '客户从账户删除失败'
+      redirect_to account_owners_url(@account), alert: @ownership.errors.full_messages.join("\n")
     end
   end
 

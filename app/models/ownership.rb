@@ -1,6 +1,4 @@
 class Ownership < ApplicationRecord
-  set_display_name '客户账户关系'
-
   belongs_to :branch
   belongs_to :client
   belongs_to :account
@@ -16,7 +14,7 @@ class Ownership < ApplicationRecord
 
   def check_owners_count
     return if account.ownerships.count > 1
-    errors.add :base, 'Account must have at least one owner'
+    errors.add :base, '关联客户至少有一位'
     throw :abort
   end
 end
