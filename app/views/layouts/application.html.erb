@@ -74,8 +74,10 @@
     </div>
     <footer class="footer shadow py-3 py-md-4 border-top">
       <div class="container px-sm-0">
-        <p class="text-muted">
+        <p class="text-muted my-0">
         <a href="https://github.com/iBug/Junk-Bank-System">Junk Bank System</a>, Copyright &copy; 2020-<%= Time.now.strftime '%Y' %> <a href="https://github.com/iBug">iBug</a>
+        <br />
+        Revision <a href="https://github.com/iBug/Junk-Bank-System/commit/<%= git_revision %>"><code><%= git_revision_short %></code></a>
         </p>
       </div>
     </footer>

@@ -15,6 +15,14 @@ module ApplicationHelper
     request.path
   end
 
+  def git_revision
+    @git_revision ||= Rails.application.config.git_revision
+  end
+
+  def git_revision_short
+    @git_revision_short ||= Rails.application.config.git_revision_short
+  end
+
   def navbar_models
     [Branch, Department, Staff, Client, Account, Loan].zip %w[university building user-tie user-friends user-circle money-bill-alt]
   end
