@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :staffs
   resources :clients
   resources :accounts
-  resources :loans
+  resources :loans, except: %i[edit update]
 
   scope :clients do
     get ':id/contact', to: 'clients#contact', as: :contact
