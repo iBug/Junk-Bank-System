@@ -1,4 +1,4 @@
-<h1>贷款 #<%= @loan.id %> 的关联客户</h1>
+<h1><%= title "贷款 \##{@loan.id} 的关联客户" %></h1>
 
 <ul class="list-group">
   <% @loan.clients.each do |client| %>

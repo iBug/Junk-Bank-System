@@ -1,5 +1,5 @@
 <% content_for :heading do %>
-  <h1 class="mb-0">客户 <%= @client.name %></h1>
+  <h1 class="mb-0"><%= title "客户 #{@client.name}" %></h1>
 <% end %>
 
 <% content_for :body do %>
@@ -15,9 +15,9 @@
     <dt class="col col-12 col-md-2">联系人</dt>
     <dd class="col col-12 col-md-10"><%= link_to @client.contact_name, contact_path(@client) %></dd>
     <dt class="col col-12 col-md-2">账户</dt>
-    <dd class="col col-12 col-md-10"><%= link_to '查看', client_accounts_path(@client) %></dd>
+    <dd class="col col-12 col-md-10"><%= link_to raw(t'actions.view'), client_accounts_path(@client) %></dd>
     <dt class="col col-12 col-md-2">贷款</dt>
-    <dd class="col col-12 col-md-10"><%= link_to '查看', client_loans_path(@client) %></dd>
+    <dd class="col col-12 col-md-10"><%= link_to raw(t'actions.view'), client_loans_path(@client) %></dd>
   </dl>
 <% end %>
 

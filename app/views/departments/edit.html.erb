@@ -1,4 +1,4 @@
-<h1>编辑部门 <%= @department.name %></h1>
+<h1><%= title "编辑部门 #{@department.name}" %></h1>
 
 <%= render 'form', department: @department %>
 

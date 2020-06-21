@@ -1,6 +1,6 @@
-<h1>编辑客户 <%= @client.name %></h1>
+<h1><%= title "编辑客户 #{@client.name}" %></h1>
 
 <%= render 'form', client: @client %>
 
-<%= link_to '查看', @client, class: 'btn btn-primary' %>
-<%= link_to '返回', clients_path, class: 'btn btn-secondary' %>
+<%= link_to raw(t'actions.view'), @client, class: 'btn btn-primary' %>
+<%= link_to raw(t'actions.back'), clients_path, class: 'btn btn-secondary' %>
