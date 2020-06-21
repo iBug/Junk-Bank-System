@@ -29,13 +29,13 @@ It's recommended that you load the provided seed into the database. To do this w
 docker exec <container name> bundle exec rake db:seed
 ```
 
-The name of the container may vary depending on how you spun it up. Find the correct container for yourself, which should be based on the image `ibugone/junk-bank-system:latest` or similar.
+The name of the container may vary depending on how you spun it up, for example `jbs` or `junk-bank-system_app_1`. Find the correct container for yourself, which should be based on the image `ibugone/junk-bank-system:latest` or similar.
 
 ## Manual setup
 
 ### Environment
 
-Development and testing was done using stock [Ruby 2.7.0p0 in Ubuntu Focal][ruby-focal] and Rails 6.0.3.1 (provided in `Gemfile.lock`). Theoretically Ruby 2.5 to 2.7 should all work so feel free to use whichever is available.
+Development and testing was done using stock [Ruby 2.7.0p0 in Ubuntu Focal][ruby-focal] and Rails 6.0 (provided in `Gemfile.lock`). Theoretically Ruby 2.5 to 2.7 should all work so feel free to use whichever is available.
 
 Windows and macOS are **not** tested so please prepare for possible problems when running on these platforms.
 

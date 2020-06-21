@@ -4,15 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '>= 2.5', '< 3.x'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.1'
+gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.4.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.1'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
-# Use Active Model has_secure_password
-gem 'bcrypt', '~> 3.1.7'
 
 gem 'uglifier', '>= 1.3.0'
 gem 'sassc-rails'
