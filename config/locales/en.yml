@@ -45,6 +45,7 @@ en:
     destroy: '<i class="fa fas fa-times-circle"></i> 删除'
     edit: '<i class="fa fas fa-edit"></i> 编辑'
     info: '<i class="fa fas fa-info-circle"></i> 信息'
+    search: '<i class="fa fas fa-search"></i> 搜索'
     view: '<i class="fa fas fa-eye"></i> 查看'
   activerecord:
     models:
@@ -72,6 +73,37 @@ en:
         manager: 经理
         branch_id: 支行
         department_id: 部门
+      client:
+        person_id: 身份证号
+        name: 姓名
+        phone: 电话
+        address: 地址
+        manager_id: 负责人
+        manager_type: 负责人类型
+      contact:
+        name: 联系人姓名
+        phone: 联系人电话
+        email: 联系人邮箱
+        relationship: 与客户关系
+      account:
+        branch_id: 支行
+        accountable_type: 账户类型
+        balance: 余额
+        open_date: 开户日期
+      deposit_account:
+        interest_rate: 利率
+        currency: 货币类型
+      check_account:
+        withdraw_amount: 透支额
+      ownership:
+        client_id: 关联客户
+      loan:
+        branch_id: 支行
+        amount: 金额
+        client_ids: 客户
+      issue:
+        date: 发放日期
+        amount: 金额
     errors:
       messages:
         taken: 不能重复

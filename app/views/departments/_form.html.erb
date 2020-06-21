@@ -1,15 +1,5 @@
 <%= form_with model: department, local: true, class: 'my-3' do |form| %>
-  <% if department.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(department.errors.count, "error") %> prohibited this department from being saved:</h2>
-
-      <ul>
-        <% department.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'error_explanation', locals: { model: department } %>
 
   <div class="form-group">
     <%= form.label :name %>

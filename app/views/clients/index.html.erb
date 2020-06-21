@@ -39,9 +39,9 @@
 <% content_for :footer do %>
   <div>
     <%= link_to '新建客户', new_client_path, class: 'btn btn-success' %>
-    <a class="btn btn-primary" href="#search-form" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="search-form">搜索</a>
+    <a class="btn btn-primary" href="#search-form" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="search-form"><%= raw(t'actions.search') %></a>
   </div>
-  <%= render partial: 'stats/quick_search' %>
+  <%= render partial: 'quick_search' %>
 <% end %>
 
 <%= render template: 'layouts/listing' %>

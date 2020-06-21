@@ -1,18 +1,8 @@
 <%= form_with model: account, local: true, id: 'account-form', class: 'my-3' do |form| %>
-  <% if account.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(account.errors.count, "error") %> prohibited this account from being saved:</h2>
-
-      <ul>
-        <% account.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'error_explanation', locals: { model: account } %>
 
   <div class="form-group">
-    <%= form.label :branch_id, '支行' %>
+    <%= form.label :branch_id %>
     <% if account.new_record? %>
       <%= form.select :branch_id, options_from_collection_for_select(Branch.all, :id, :name), {}, { class: 'form-control' } %>
     <% else %>
@@ -31,17 +21,17 @@
   <% end %>
 
   <div class="form-group">
-    <%= form.label :accountable_type, '账户类型' %>
+    <%= form.label :accountable_type %>
     <%= form.select :accountable_type, options_for_select(%w[储蓄账户 支票账户].zip(%i[DepositAccount CheckAccount]), account.accountable_type), {}, { class: 'form-control', 'v-model': 'accountType', disabled: !account.new_record? } %>
   </div>
 
   <div class="form-group">
-    <%= form.label :balance, '余额' %>
+    <%= form.label :balance %>
     <%= form.number_field :balance, step: 0.01, class: 'form-control' %>
   </div>
 
   <div class="form-group">
-    <%= form.label :open_date, '开户日期' %>
+    <%= form.label :open_date %>
     <div class="form-row">
       <div class="col col-4">
         <%= form.date_select :open_date, { date_separator: '</div><div class="col col-4">' }, { class: 'form-control' } %>
@@ -53,11 +43,11 @@
     <div class="row" v-if="accountType === 'DepositAccount'">
       <%= form.fields_for :accountable, (account.new_record? ? DepositAccount.new : account.accountable) do |f| %>
         <div class="form-group pr-sm-0 col">
-          <%= f.label :interest_rate, '利率' %>
+          <%= f.label :interest_rate %>
           <%= f.number_field :interest_rate, step: :any, class: 'form-control' %>
         </div>
         <div class="form-group col col-12 col-sm-4 col-lg-3 col-xl-2">
-          <%= f.label :currency, '货币类型' %>
+          <%= f.label :currency %>
           <%= f.text_field :currency, class: 'form-control', maxlength: 3, value: f.object.currency.upcase, style: 'font-family: Consolas, monospace; text-transform: uppercase;' %>
         </div>
       <% end %>
@@ -68,7 +58,7 @@
     <div v-if="accountType === 'CheckAccount'">
       <%= form.fields_for :accountable, (account.new_record? ? CheckAccount.new : account.accountable) do |f| %>
         <div class="form-group">
-          <%= f.label :withdraw_amount, '透支额' %>
+          <%= f.label :withdraw_amount %>
           <%= f.number_field :withdraw_amount, step: 0.01, class: 'form-control' %>
         </div>
       <% end %>

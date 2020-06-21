@@ -52,21 +52,11 @@
       </div>
 
       <div class="card-body">
-        <% if @issue.errors.any? %>
-          <div id="error_explanation" class="alert alert-danger">
-            <h2><%= pluralize(@issue.errors.count, "error") %> prohibited this issue from being saved:</h2>
-
-            <ul>
-              <% @issue.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+        <%= render partial: 'error_explanation', locals: { model: @issue } %>
 
         <%= form.fields_for :issues, Issue.new do |f| %>
           <div class="form-group">
-            <%= f.label :date, '发放日期' %>
+            <%= f.label :date %>
             <div class="form-row">
               <div class="col col-4">
                 <%= f.date_select :date, { date_separator: '</div><div class="col col-4">' }, { class: 'form-control' } %>
@@ -75,7 +65,7 @@
           </div>
 
           <div class="form-group">
-            <%= f.label :amount, '金额' %>
+            <%= f.label :amount %>
             <%= f.number_field :amount, min: 0.0, max: @loan.remaining, step: 0.01, class: 'form-control' %>
           </div>
         <% end %>

@@ -6,7 +6,7 @@ class Issue < ApplicationRecord
 
   def check_amount
     if amount > loan.remaining
-      errors.add :base, 'Cannot issue more than remaining amount'
+      errors.add :base, '支付不能超出贷款总额'
     else
       loan.reset_remaining
     end

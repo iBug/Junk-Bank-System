@@ -1,37 +1,27 @@
 <%= form_with model: client, local: true, class: 'my-3' do |f| %>
-  <% if client.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
-
-      <ul>
-        <% client.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'error_explanation', locals: { model: client } %>
 
   <% fields_with_name.each do |field, name| %>
     <div class="form-group">
-      <%= f.label field, name %>
+      <%= f.label field %>
       <%= f.text_field field, class: 'form-control' %>
     </div>
   <% end %>
 
   <%# Select manager %>
   <div class="form-group">
-    <%= f.label :manager_id, '负责人' %>
-    <%= f.select :manager_id, options_from_collection_for_select(Staff.all, :id, :name, client.manager_id), {}, {class: 'form-control'} %>
+    <%= f.label :manager_id %>
+    <%= f.select :manager_id, options_from_collection_for_select(Staff.all, :id, :name, client.manager_id), {}, { class: 'form-control' } %>
   </div>
   <div class="form-group">
-    <%= f.label :manager_type, '负责人类型' %>
-    <%= f.select :manager_type, manager_types_with_name, {}, {class: 'form-control'} %>
+    <%= f.label :manager_type %>
+    <%= f.select :manager_type, manager_types_with_name, {}, { class: 'form-control' } %>
   </div>
 
   <%= f.fields_for :contact do |c| %>
     <% contact_fields_with_name.each do |field, name| %>
       <div class="form-group">
-        <%= c.label field, name %>
+        <%= c.label field %>
         <%= c.text_field field, class: 'form-control' %>
       </div>
     <% end %>

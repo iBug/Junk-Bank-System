@@ -6,11 +6,6 @@ class Loan < ApplicationRecord
   validates_presence_of :clients
   validates_numericality_of :amount, greater_than: 0.0
 
-  scope :unissued, -> { includes(:issues).where(issues: { loan_id: nil }) }
-  # Rails 6.1: unissued = where.missing(:issues)
-  scope :issued, -> { joins(:issues).group(:id).having('SUM(issues.amount) = amount') }
-  scope :issuing, -> { where.not(id: unissued).where.not(id: issued) }
-
   before_destroy :check_issuing
 
   def check_issuing

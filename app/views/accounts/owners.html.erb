@@ -31,17 +31,7 @@
           <h3 class="my-0">新增客户</h3>
         </div>
         <div class="card-body">
-          <% if @account.errors.any? %>
-            <div id="error_explanation" class="alert alert-danger">
-              <h2><%= pluralize(@account.errors.count, "error") %> prohibited this owner account from being saved:</h2>
-
-              <ul>
-                <% @account.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+          <%= render partial: 'error_explanation', locals: { model: @account } %>
 
           <div class="form-group">
             <%= form.fields_for :ownerships, Ownership.new do |f| %>

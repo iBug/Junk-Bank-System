@@ -1,15 +1,5 @@
 <%= form_with model: staff, local: true, class: 'my-3' do |form| %>
-  <% if staff.errors.any? %>
-    <div id="error_explanation" class="alert alert-danger">
-      <p><%= pluralize(staff.errors.count, "error") %> prohibited this staff from being saved:</p>
-
-      <ul>
-        <% staff.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'error_explanation', locals: { model: staff } %>
 
   <div class="form-group">
     <%= form.label :person_id %>
