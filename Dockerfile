@@ -12,7 +12,7 @@ WORKDIR /app
 ADD Gemfile Gemfile.lock /app/
 RUN bundle install --deployment --without development test
 ADD . /app
-ENV RAILS_ENV=production
+ENV RAILS_ENV=production RAILS_SERVE_STATIC_FILES=true
 EXPOSE 3000
 
 CMD ["bundle", "exec", "rails", "server", "--environment=production", "--no-daemon", "--log-to-stdout"]
