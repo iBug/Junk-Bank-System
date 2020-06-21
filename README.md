@@ -4,13 +4,13 @@ No, this is not really a bank system. It's the 3rd lab of « Database Systems »
 
 ## Quick start
 
-If you have [Docker Compose installed](https://docs.docker.com/compose/install/), then you can simply run `docker-compose up` with [docker-compose.yml](docker-compose.yml) provided in this repository.
+If you have [Docker Compose installed](https://docs.docker.com/compose/install/), then you can get this project running easily with [docker-compose.yml](docker-compose.yml) provided in this repository.
 
 You can also pull the image and run it manually:
 
 ```shell
 docker pull ibugone/junk-bank-system
-docker run --rm \
+docker run --rm --name=jbs \
   -e DATABASE_HOST=127.0.0.1 \
   -e DATABASE_PORT=3306 \
   -e DATABASE_NAME=junk_bank \
@@ -20,6 +20,16 @@ docker run --rm \
 ```
 
 Make sure your database information is correct.
+
+### Database seeding
+
+It's recommended that you load the provided seed into the database. To do this with Docker, using the following command:
+
+```shell
+docker exec <container name> bundle exec rake db:seed
+```
+
+The name of the container may vary depending on how you spun it up. Find the correct container for yourself, which should be based on the image `ibugone/junk-bank-system:latest` or similar.
 
 ## Manual setup
 
