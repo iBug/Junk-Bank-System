@@ -19,7 +19,7 @@
             <%= svg_tag "#{svg}.svg", class: 'svg-inline compact' %>
             <%= model.count %> <%# 个 model.display_name %>
           </h3>
-          <%= link_to '查看', send(model.name.underscore.pluralize + '_url'), class: "btn btn-lg btn-block btn-primary" %>
+          <%= link_to '查看', send(model.name.underscore.pluralize + '_path'), class: "btn btn-lg btn-block btn-primary" %>
         </div>
       </div>
     </div>

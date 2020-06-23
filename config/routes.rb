@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'stats#home'
+  root 'stats#home'
 
   resources :branches
   resources :departments
@@ -26,9 +26,10 @@ Rails.application.routes.draw do
     get ':id/clients', to: 'loans#clients', as: :loan_clients
   end
 
-  scope :stats do
-    get '', to: 'stats#index', as: :stats
-    get 'deposit', to: 'stats#deposit', as: :deposit_stats
-    get 'loan', to: 'stats#loan', as: :loan_stats
+  resources :stats, only: %i[index] do
+    collection do
+      get 'deposit'
+      get 'loan'
+    end
   end
 end

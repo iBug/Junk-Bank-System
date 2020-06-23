@@ -13,7 +13,7 @@
 
 <% content_for :footer do %>
   <%= link_to raw(t'actions.back'), :back, class: 'btn btn-primary' %>
-  <%= link_to '返回列表', clients_url, class: 'btn btn-secondary' %>
+  <%= link_to '返回列表', clients_path, class: 'btn btn-secondary' %>
 <% end %>
 
 <%= render template: 'layouts/card' %>
