@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include PathHelper
+
   def active_page(page)
     current_page?(page) ? 'active' : ''
   end
@@ -21,6 +23,10 @@ module ApplicationHelper
 
   def git_revision_short
     @git_revision_short ||= Rails.application.config.git_revision_short
+  end
+
+  def list_items(items, options = {})
+    render partial: 'inline_listing', locals: options.merge(items: items)
   end
 
   def navbar_models

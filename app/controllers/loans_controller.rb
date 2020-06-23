@@ -12,7 +12,7 @@ class LoansController < ApplicationController
 
   # GET /loans/1
   def show
-    @clients = Loan.joins(:clients).limit(3).select(:client_id, 'clients.name AS client_name')
+    @clients = Client.joins(:loans).where('clients_loans.loan_id = ?', @loan.id)
   end
 
   # GET /loans/1/issues

@@ -10,16 +10,7 @@
     <dd class="col col-12 col-md-10"><%= link_to @account.branch_name, branch_path(@account.branch_id) %></dd>
     <dt class="col col-12 col-md-2">客户</dt>
     <dd class="col col-12 col-md-10">
-      <% @owners.each_with_index do |owner, index| %>
-        <%= raw('<br />') unless index.zero? %>
-        <%= link_to owner.client_name, client_path(owner.client_id) %>
-      <% end %>
-      <% if @account.owners_count > 3 %>
-        <br />
-        &hellip;
-        <br />
-        共 <%= @account.owners_count %> 个，<%= link_to '查看全部', account_owners_path(@account) %>
-      <% end %>
+      <%= list_items @owners, name_field: :client_name, view_all: account_owners_path(@account) %>
     </dd>
     <dt class="col col-12 col-md-2">账户类型</dt>
     <dd class="col col-12 col-md-10"><%= account_type_name @account.accountable_type %></dd>

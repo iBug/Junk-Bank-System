@@ -4,6 +4,8 @@
 
 <% content_for :body do %>
   <dl class="row my-0">
+    <dt class="col col-12 col-md-2">贷款号</dt>
+    <dd class="col col-12 col-md-10"><%= @loan.id %></dd>
     <dt class="col col-12 col-md-2">支行</dt>
     <dd class="col col-12 col-md-10"><%= link_to @loan.branch_name, branch_path(@loan.branch_id) %></dd>
     <dt class="col col-12 col-md-2">金额</dt>
@@ -12,16 +14,7 @@
     <dd class="col col-12 col-md-10"><%= @loan.amount_issued %></dd>
     <dt class="col col-12 col-md-2">客户</dt>
     <dd class="col col-12 col-md-10">
-      <% @clients.limit(3).each_with_index do |row, index| %>
-        <%= raw('<br />') unless index.zero? %>
-        <%= link_to row.client_name, client_path(row.client_id) %>
-      <% end %>
-      <% if @clients.size > 3 %>
-        <br />
-        &hellip;
-        <br />
-        共 <%= @clients.size %> 个，<%= link_to "查看全部", loan_clients_path(@loan) %>
-      <% end %>
+      <%= list_items @clients, view_all: loan_clients_path(@loan) %>
     </dd>
     <dt class="col col-12 col-md-2">状态</dt>
     <dd class="col col-12 col-md-10">

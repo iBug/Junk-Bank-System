@@ -1,0 +1,14 @@
+<% name_field ||= :name %>
+<% limit ||= 3 %>
+<% view_all ||= root_path %>
+
+<% items.limit(limit).each_with_index do |item, index| %>
+  <%= raw('<br />') unless index.zero? %>
+  <%= link_to item.send(name_field), item %>
+<% end %>
+<% if items.size > 3 %>
+  <br />
+  &hellip;
+  <br />
+  共 <%= items.size %> 个，<%= link_to '查看全部', view_all %>
+<% end %>
