@@ -1,5 +1,6 @@
 class BranchesController < ApplicationController
-  before_action :set_branch, only: [:show, :edit, :update, :destroy]
+  before_action :set_branch, only: %i[show staffs edit update destroy]
+  before_action :set_staffs, only: %i[show staffs]
 
   # GET /branches
   def index
@@ -54,5 +55,9 @@ class BranchesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def branch_params
       params.fetch(:branch, {}).permit(%i[name city assets])
+    end
+
+    def set_staffs
+      @staffs = Staff.where(branch: @branch)
     end
 end

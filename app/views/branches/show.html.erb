@@ -10,6 +10,19 @@
     <dd class="col col-12 col-md-10"><%= @branch.city %></dd>
     <dt class="col col-12 col-md-2">资产</dt>
     <dd class="col col-12 col-md-10"><%= @branch.assets %></dd>
+    <dt class="col col-12 col-md-2">员工</dt>
+    <dd class="col col-12 col-md-10">
+      <% @staffs.limit(3).each_with_index do |staff, index| %>
+        <%= raw('<br />') unless index.zero? %>
+        <%= link_to staff.name, staff %>
+      <% end %>
+      <% if @staffs.count > 3 %>
+        <br />
+        &hellip;
+        <br />
+        共 <%= @staffs.count %> 个，<%= link_to '查看全部', branch_staffs_path(@branch) %>
+      <% end %>
+    </dd>
   </dl>
 <% end %>
 

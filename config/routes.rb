@@ -8,6 +8,14 @@ Rails.application.routes.draw do
   resources :accounts
   resources :loans, except: %i[edit update]
 
+  scope :branches do
+    get ':id/staffs', to: 'branches#staffs', as: :branch_staffs
+  end
+
+  scope :departments do
+    get ':id/staffs', to: 'departments#staffs', as: :department_staffs
+  end
+
   scope :clients do
     get ':id/contact', to: 'clients#contact', as: :contact
     get ':id/accounts', to: 'clients#accounts', as: :client_accounts

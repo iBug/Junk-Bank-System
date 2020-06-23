@@ -1,0 +1,21 @@
+<% name_field ||= :name %>
+
+<% content_for :heading do %>
+  <h1 class="mb-0"><%= title heading %></h1>
+<% end %>
+
+<% content_for :body do %>
+  <ul class="list-group list-group-flush my-0">
+    <% items.each do |item| %>
+      <li class="list-group-item list-group-item-action">
+        <%= link_to item.send(name_field), item %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :footer do %>
+  <%= link_to raw(t'actions.back'), back_to, class: 'btn btn-primary' %>
+<% end %>
+
+<%= render template: 'layouts/listing' %>

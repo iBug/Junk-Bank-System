@@ -10,9 +10,10 @@
     <dd class="col col-12 col-md-10"><%= link_to @account.branch_name, branch_path(@account.branch_id) %></dd>
     <dt class="col col-12 col-md-2">客户</dt>
     <dd class="col col-12 col-md-10">
-      <%= raw(@owners.map do |owner| %>
-        <% link_to owner.client_name, clients_path(owner.client_id) %>
-      <% end.join("<br />")) %>
+      <% @owners.each_with_index do |owner, index| %>
+        <%= raw('<br />') unless index.zero? %>
+        <%= link_to owner.client_name, client_path(owner.client_id) %>
+      <% end %>
       <% if @account.owners_count > 3 %>
         <br />
         &hellip;

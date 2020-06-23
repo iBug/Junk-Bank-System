@@ -4,10 +4,25 @@
 
 <% content_for :body do %>
   <dl class="row my-0">
+    <dt class="col col-12 col-md-2">编号</dt>
+    <dd class="col col-12 col-md-10"><%= @department.id %></dd>
     <dt class="col col-12 col-md-2">名称</dt>
     <dd class="col col-12 col-md-10"><%= @department.name %></dd>
     <dt class="col col-12 col-md-2">类型</dt>
     <dd class="col col-12 col-md-10"><%= @department.kind %></dd>
+    <dt class="col col-12 col-md-2">员工</dt>
+    <dd class="col col-12 col-md-10">
+      <% @staffs.limit(3).each_with_index do |staff, index| %>
+        <%= raw('<br />') unless index.zero? %>
+        <%= link_to staff.name, staff %>
+      <% end %>
+      <% if @staffs.count > 3 %>
+        <br />
+        &hellip;
+        <br />
+        共 <%= @staffs.count %> 个，<%= link_to '查看全部', department_staffs_path(@department) %>
+      <% end %>
+    </dd>
   </dl>
 <% end %>
 

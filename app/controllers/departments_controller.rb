@@ -1,5 +1,6 @@
 class DepartmentsController < ApplicationController
-  before_action :set_department, only: [:show, :edit, :update, :destroy]
+  before_action :set_department, only: %i[show staffs edit update destroy]
+  before_action :set_staffs, only: %i[show staffs]
 
   # GET /departments
   def index
@@ -54,5 +55,9 @@ class DepartmentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def department_params
       params.require(:department).permit(%i[name kind])
+    end
+
+    def set_staffs
+      @staffs = Staff.where(department: @department)
     end
 end
