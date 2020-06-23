@@ -1,7 +1,8 @@
 class Branch < ApplicationRecord
-  has_many :staffs
-  has_many :created_deposit_accounts
-  has_many :created_check_accounts
+  has_many :staffs, dependent: :restrict_with_error
+  has_many :ownerships, dependent: :restrict_with_error
+  has_many :accounts, through: :ownerships
+  has_many :loans, dependent: :restrict_with_error
 
   validates_uniqueness_of :name
   validates :city, presence: true

@@ -1,7 +1,7 @@
 class Account < ApplicationRecord
   belongs_to :branch
   belongs_to :accountable, polymorphic: true
-  has_many :ownerships
+  has_many :ownerships, dependent: :destroy
   #has_and_belongs_to_many :clients, through: :ownerships
 
   accepts_nested_attributes_for :accountable, :ownerships, update_only: true

@@ -1,7 +1,7 @@
 class Loan < ApplicationRecord
   belongs_to :branch
   has_and_belongs_to_many :clients
-  has_many :issues
+  has_many :issues, dependent: :destroy
 
   validates_presence_of :clients
   validates_numericality_of :amount, greater_than: 0.0
