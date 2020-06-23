@@ -8,7 +8,7 @@
       <li class="list-group-item list-group-item-action">
         <%= link_to owner.client_name, clients_path(owner.client_id) %>
         <div class="float-right">
-          <%= link_to raw(t'actions.destroy'), destroy_account_owner_path(@account, owner.client_id), method: :delete, class: 'text-danger', data: { confirm: 'Are you sure?' } %>
+          <%= link_to raw(t'actions.destroy'), destroy_account_owner_path(@account, owner.client_id), method: :delete, class: 'text-danger', data: { confirm: t('confirm') } %>
         </div>
       </li>
     <% end %>

@@ -26,7 +26,7 @@
           <td>
             <%= link_to raw(t'actions.view'), account, class: 'btn btn-outline-primary' %>
             <%= link_to raw(t'actions.edit'), edit_account_path(account), class: 'btn btn-outline-secondary' %>
-            <%= link_to raw(t'actions.destroy'), account, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger d-none d-sm-inline-block' %>
+            <%= link_to raw(t'actions.destroy'), account, method: :delete, data: { confirm: t('confirm') }, class: 'btn btn-outline-danger d-none d-sm-inline-block' %>
           </td>
         </tr>
       <% end %>

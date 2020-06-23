@@ -24,7 +24,7 @@
 <% content_for :footer do %>
   <%= link_to raw(t'actions.edit'), edit_client_path(@client), class: 'btn btn-primary' %>
   <%= link_to raw(t'actions.back'), clients_path, class: 'btn btn-secondary' %>
-  <%= link_to raw(t'actions.destroy'), @client, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+  <%= link_to raw(t'actions.destroy'), @client, method: :delete, class: 'btn btn-danger', data: { confirm: t('confirm') } %>
 <% end %>
 
 <%= render template: 'layouts/card' %>

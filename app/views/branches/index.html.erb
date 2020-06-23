@@ -22,7 +22,7 @@
           <td>
             <%= link_to raw(t'actions.view'), branch, class: 'btn btn-outline-primary' %>
             <%= link_to raw(t'actions.edit'), edit_branch_path(branch), class: 'btn btn-outline-secondary' %>
-            <%= link_to raw(t'actions.destroy'), branch, method: :delete, class: 'btn btn-outline-danger', data: { confirm: 'Are you sure?' } %>
+            <%= link_to raw(t'actions.destroy'), branch, method: :delete, class: 'btn btn-outline-danger', data: { confirm: t('confirm') } %>
           </td>
         </tr>
       <% end %>

@@ -28,7 +28,7 @@
           <td>
             <%= link_to raw(t'actions.view'), client, class: 'btn btn-outline-primary' %>
             <%= link_to raw(t'actions.edit'), edit_client_path(client), class: 'btn btn-outline-secondary' %>
-            <%= link_to raw(t'actions.destroy'), client, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger d-none d-sm-inline-block' %>
+            <%= link_to raw(t'actions.destroy'), client, method: :delete, data: { confirm: t('confirm') }, class: 'btn btn-outline-danger d-none d-sm-inline-block' %>
           </td>
         </tr>
       <% end %>

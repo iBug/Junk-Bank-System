@@ -28,7 +28,7 @@
   <%= link_to raw('<i class="fa fas fa-money-bill-wave"></i> 支付'), loan_issues_path(@loan), class: 'btn btn-primary' %>
   <%= link_to raw(t'actions.back'), :back, class: 'btn btn-secondary' %>
   <% unless @status == :issuing %>
-    <%= link_to raw(t'actions.destroy'), @loan, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+    <%= link_to raw(t'actions.destroy'), @loan, method: :delete, class: 'btn btn-danger', data: { confirm: t('confirm') } %>
   <% end %>
 <% end %>
 

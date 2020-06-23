@@ -27,7 +27,7 @@
           </td>
           <td>
             <%= link_to raw(t'actions.view'), loan, class: 'btn btn-outline-primary' %>
-            <%= link_to raw(t'actions.destroy'), loan, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger#{ " disabled invisible" if status == :issuing }", disabled: (status == :issuing) %>
+            <%= link_to raw(t'actions.destroy'), loan, method: :delete, data: { confirm: t('confirm') }, class: "btn btn-outline-danger#{ " disabled invisible" if status == :issuing }", disabled: (status == :issuing) %>
           </td>
         </tr>
       <% end %>

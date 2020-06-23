@@ -47,6 +47,7 @@ en:
     info: '<i class="fa fas fa-info-circle"></i> 信息'
     search: '<i class="fa fas fa-search"></i> 搜索'
     view: '<i class="fa fas fa-eye"></i> 查看'
+  confirm: '你确定吗？'
   activerecord:
     models:
       branch: 支行

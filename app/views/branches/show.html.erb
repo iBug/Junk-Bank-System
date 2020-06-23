@@ -20,7 +20,7 @@
 <% content_for :footer do %>
   <%= link_to raw(t'actions.edit'), edit_branch_path(@branch), class: 'btn btn-primary' %>
   <%= link_to raw(t'actions.back'), branches_path, class: 'btn btn-secondary' %>
-  <%= link_to raw(t'actions.destroy'), @branch, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+  <%= link_to raw(t'actions.destroy'), @branch, method: :delete, class: 'btn btn-danger', data: { confirm: t('confirm') } %>
 <% end %>
 
 <%= render template: 'layouts/card.html' %>
