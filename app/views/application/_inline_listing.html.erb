@@ -6,7 +6,10 @@
   <%= raw('<br />') unless index.zero? %>
   <%= link_to item.send(name_field), item %>
 <% end %>
-<% if items.size > 3 %>
+
+<% if items.empty? %>
+  无
+<% elsif items.size > 3 %>
   <br />
   &hellip;
   <br />
