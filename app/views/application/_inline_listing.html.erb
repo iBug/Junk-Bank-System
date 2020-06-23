@@ -1,16 +1,17 @@
-<% name_field ||= :name %>
 <% limit ||= 3 %>
+<% name_field ||= :name %>
+<% separator ||= raw('<br />') %>
 <% view_all ||= root_path %>
 
 <% items.limit(limit).each_with_index do |item, index| %>
-  <%= raw('<br />') unless index.zero? %>
+  <%= separator unless index.zero? %>
   <%= link_to item.send(name_field), item %>
 <% end %>
 
 <% if items.empty? %>
   无
 <% elsif items.size > 3 %>
-  <br />
+  <% separator %>
   &hellip;
   <br />
   共 <%= items.size %> 个，<%= link_to '查看全部', view_all %>
