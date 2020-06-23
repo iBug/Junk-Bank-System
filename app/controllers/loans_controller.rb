@@ -56,7 +56,7 @@ class LoansController < ApplicationController
     end
 
     def set_issues
-      @issues = @loan.issues.order(date: :asc, id: :asc).all
+      @issues = @loan.issues.order(date: :asc, id: :asc)
     end
 
     # Only allow a list of trusted parameters through.

@@ -110,5 +110,6 @@ en:
         taken: 不能重复
         blank: 不能为空
         greater_than_or_equal_to: '不能小于 %{count}'
+        greater_than: '必须大于 %{count}'
   errors:
     format: '%{attribute}%{message}'

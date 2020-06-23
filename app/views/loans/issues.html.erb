@@ -27,7 +27,7 @@
       </thead>
 
       <tbody>
-        <% @issues.order(date: :asc, id: :asc).each do |issue| %>
+        <% @issues.each do |issue| %>
           <tr>
             <td><%= issue.date %></td>
             <td><%= issue.amount %></td>

@@ -26,7 +26,7 @@ class Loan < ApplicationRecord
   end
 
   def remaining
-    @remaining ||= issues.sum(:amount)
+    @remaining ||= amount - issues.sum(:amount)
   end
 
   def reset_remaining

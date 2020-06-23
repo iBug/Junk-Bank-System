@@ -8,7 +8,7 @@ class IssuesController < ApplicationController
     if @issue.save
       redirect_to loan_issues_url(@loan), success: '成功添加支付'
     else
-      render 'loans/issues'
+      redirect_to loan_issues_url(@loan), alert: @issue.errors.full_messages.first
     end
   end
 
