@@ -7,6 +7,10 @@ class StatsController < ApplicationController
       %w[safe department manager user credit-card debt]
   end
 
+  # GET /about
+  def about
+  end
+
   # GET /stats
   def index
     @branches_count = Branch.count

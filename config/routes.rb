@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'stats#home'
+  get '/about', to: 'stats#about', as: :about
 
   resources :branches
   resources :departments

@@ -54,9 +54,9 @@
         </ul>
         <ul class="navbar-nav my-2 my-md-0">
           <li class="nav-item">
-            <%= link_to 'https://github.com/iBug/Junk-Bank-System', class: 'nav-link d-none d-lg-block' do %>
-              <i class="fab fa-fw fa-github"></i>
-              GitHub
+            <%= link_to about_path, class: 'nav-link d-lg-block' do %>
+              <i class="fas fa-fw fa-info-circle"></i>
+              关于
             <% end %>
           </li>
         </ul>
@@ -84,6 +84,8 @@
         </p>
       </div>
     </footer>
+    <div id="body-bg" style="display: none;">
+    </div>
 
     <%# Optional scripts %>
     <%# jQuery, Popper.js, Bootstrap, Rails UJS, Font Awesome, Vue.js %>
