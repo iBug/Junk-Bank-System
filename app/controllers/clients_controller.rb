@@ -63,7 +63,7 @@ class ClientsController < ApplicationController
     if @client.destroy
       redirect_to clients_url, success: '客户已删除'
     else
-      redirect_to clients_url, alert: '客户删除失败'
+      redirect_back fallback_location: clients_url, alert: '客户删除失败'
     end
   end
 

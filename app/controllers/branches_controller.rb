@@ -42,8 +42,11 @@ class BranchesController < ApplicationController
 
   # DELETE /branches/1
   def destroy
-    @branch.destroy
-    redirect_to branches_url, success: '支行已删除'
+    if @branch.destroy
+      redirect_to branches_url, success: '支行已删除'
+    else
+      redirect_back fallback_location: branches_url, alert: '支行删除失败'
+    end
   end
 
   private

@@ -41,8 +41,11 @@ class StaffsController < ApplicationController
 
   # DELETE /staffs/1
   def destroy
-    @staff.destroy
-    redirect_to staffs_url, success: '员工已删除'
+    if @staff.destroy
+      redirect_to staffs_url, success: '员工已删除'
+    else
+      redirect_back fallback_location: departments_url, alert: '员工删除失败'
+    end
   end
 
   private
