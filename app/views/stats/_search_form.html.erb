@@ -1,7 +1,7 @@
 <% @date_options ||= { date_separator: '</div><div class="col col-4">', start_year: @start_year, end_year: @end_year } %>
 
-<%= form_with url: url, local: true, id: 'search-form', method: :get, class: 'card shadow-sm mb-3' do |form| %>
-  <div class="card-header">
+<%= form_with url: url, local: true, id: 'search-form', method: :get, class: 'card shadow mb-3' do |form| %>
+  <div class="card-header text-center bg-info text-white">
     <h3 class="mb-0">搜索<h3>
   </div>
 
@@ -45,7 +45,7 @@
     </div>
   </div>
 
-  <div class="card-footer">
+  <div class="card-footer text-center bg-info text-white">
     <%= form.button class: 'btn btn-success', type: :submit, name: :action, value: :submit, onclick: 'onSubmit()' do %>
       <i class="fa fas fa-search"></i> 搜索
     <% end %>

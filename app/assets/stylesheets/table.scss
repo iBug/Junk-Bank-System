@@ -3,3 +3,19 @@ table.table {
 		vertical-align: middle;
 	}
 }
+
+table.table.with-action {
+	th, td {
+		&:last-child {
+			width: 1px;
+
+			@media (min-width: 576px) {
+				white-space: nowrap;
+			}
+
+			.btn {
+				white-space: nowrap;
+			}
+		}
+	}
+}

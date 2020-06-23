@@ -8,7 +8,7 @@
 <div class="row d-flex flex-column flex-md-row">
   <div class="col col-12 col-md-6 d-flex flex-column flex-grow-1">
     <div class="card <%= card_class %>">
-      <div class="card-header text-center">
+      <div class="card-header text-center bg-success text-light">
         <h3 class="mb-0 font-weight-normal">储蓄业务</h3>
       </div>
 
@@ -21,7 +21,7 @@
         </dl>
       </div>
 
-      <div class="card-footer text-center">
+      <div class="card-footer text-center bg-success text-light">
         <%= link_to raw(t'actions.info'), deposit_stats_path, class: 'btn btn-primary' %>
       </div>
     </div>
@@ -29,7 +29,7 @@
 
   <div class="col col-12 col-md-6 d-flex flex-column flex-grow-1">
     <div class="card <%= card_class %>">
-      <div class="card-header text-center">
+      <div class="card-header text-center bg-danger text-light">
         <h3 class="mb-0 font-weight-normal">贷款业务</h3>
       </div>
 
@@ -42,7 +42,7 @@
         </dl>
       </div>
 
-      <div class="card-footer text-center">
+      <div class="card-footer text-center bg-danger text-light">
         <%= link_to raw(t'actions.info'), loan_stats_path, class: 'btn btn-primary' %>
       </div>
     </div>
