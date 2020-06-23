@@ -3,7 +3,7 @@ class StaffsController < ApplicationController
 
   # GET /staffs
   def index
-    staffs
+    staffs.order(:id)
   end
 
   # GET /staffs/1

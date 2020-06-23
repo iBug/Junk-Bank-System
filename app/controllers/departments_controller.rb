@@ -4,7 +4,7 @@ class DepartmentsController < ApplicationController
 
   # GET /departments
   def index
-    @departments = Department.all
+    @departments = Department.order(:id)
   end
 
   # GET /departments/1

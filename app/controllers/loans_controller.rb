@@ -7,7 +7,7 @@ class LoansController < ApplicationController
   # GET /loans
   def index
     #client_count = Loan.joins(:clients).select('COUNT(*)')
-    @loans = Loan.left_outer_joins(:branch, :issues).group(:id).select('loans.*', 'branches.name AS branch_name', 'IFNULL(SUM(issues.amount), 0) AS amount_issued')
+    @loans = Loan.left_outer_joins(:branch, :issues).group(:id).order(:id).select('loans.*', 'branches.name AS branch_name', 'IFNULL(SUM(issues.amount), 0) AS amount_issued')
   end
 
   # GET /loans/1

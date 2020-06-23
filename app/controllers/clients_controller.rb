@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
 
   # GET /clients
   def index
-    @clients = Client.joins(:contact, :manager).select('clients.*', 'contacts.name AS contact_name', 'staffs.name AS manager_name')
+    @clients = Client.joins(:contact, :manager).order(:id).select('clients.*', 'contacts.name AS contact_name', 'staffs.name AS manager_name')
   end
 
   # GET /clients/1

@@ -24,7 +24,7 @@
   { name: 'ZJX', person_id: '6666-MONTH', phone: '1234-9999', address: '233 Cards Rd, S', start_date: '2000-01-01', manager: false, branch_id: 1, department_id: 2 },
   { name: 'CWK', person_id: '3594-FLXG', phone: '2333-2333', address: '1st Teaching Bldg, USTC', start_date: '1958-01-01', manager: false, branch_id: 3, department_id: 3 },
   { name: 'Volltin', person_id: 'AAAA-ZZZZ', phone: '0000-0000', address: 'Hello, world!', start_date: '2016-09-01', manager: true, branch_id: 2, department_id: 1 },
-  { name: 'Steve', person_id: 'player-1', phone: '87654321-0', address: 'Overworld', start_date: '2011-11-18', manager: true, branch_id: 4, department_id: 3 },
+  { name: 'Herobrine', person_id: 'player-1', phone: '87654321-0', address: 'Overworld', start_date: '2011-11-18', manager: true, branch_id: 4, department_id: 3 },
   { name: 'Thor', person_id: 'THUNDER', phone: '7777-7777', address: 'XXXX', start_date: '1999-12-31', manager: true, branch_id: 3, department_id: 1 },
 ].each { |h| Staff.create h }
 
@@ -36,4 +36,5 @@ CONTACT_COMMON = { name: 'Example', phone: '0000-0000', email: 'hello@example.co
   { name: 'Lamar Davis', person_id: 'GGGG-HHHH', phone: 'N/A', address: 'Forum Drive, Strawberry, Los Santos', manager_id: 1, manager_type: 1, contact_attributes: CONTACT_COMMON },
   { name: 'Lester Crest', person_id: 'IIII-JJJJ', phone: 'N/A', address: 'Amarillo Vista, El Burro Heights, Los Santos', manager_id: 6, manager_type: 2, contact_attributes: CONTACT_COMMON },
   { name: 'Devin Weston', person_id: 'KKKK-LLLL', phone: 'N/A', address: 'Buen Vino Road, Tongva Hills, Los Santos County', manager_id: 3, manager_type: 3, contact_attributes: CONTACT_COMMON },
+  { name: 'Steve Haines', person_id: 'MMMM-NNNN', phone: '328-555-0150', address: 'Los Santos', manager_id: 2, manager_type: 2, contact_attributes: CONTACT_COMMON },
 ].each { |h| Client.create h }
