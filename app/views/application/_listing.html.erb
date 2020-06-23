@@ -5,13 +5,11 @@
 <% end %>
 
 <% content_for :body do %>
-  <ul class="list-group list-group-flush my-0">
+  <div class="list-group list-group-flush my-0">
     <% items.each do |item| %>
-      <li class="list-group-item list-group-item-action">
-        <%= link_to item.send(name_field), item %>
-      </li>
+      <%= link_to item.send(name_field), item, class: 'list-group-item list-group-item-action' %>
     <% end %>
-  </ul>
+  </div>
 <% end %>
 
 <% content_for :footer do %>
