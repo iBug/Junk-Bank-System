@@ -1,5 +1,6 @@
 module ApplicationHelper
   include PathHelper
+  include ErrorsHelper
 
   def active_page(page)
     current_page?(page) ? 'active' : ''

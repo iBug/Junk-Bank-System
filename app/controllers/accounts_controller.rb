@@ -47,8 +47,21 @@ class AccountsController < ApplicationController
 
   # PATCH/PUT /accounts/1
   def update
-    Account.transaction do
-      Ownership.where(account: @account).update_all(branch_id: update_params[:branch_id])
+    if update_params[:branch_id].to_i != @account.branch_id
+      client_ids = Ownership.where(account: @account).select(:client_id)
+      target_client_ids = Ownership.where(branch_id: update_params[:branch_id], client_id: client_ids)
+      unless target_client_ids.empty?
+        target_client_ids.joins(:branch, :client).select('branches.name AS branch_name', 'clients.name AS client_name').each do |target|
+          errors << "客户 #{target.client_name} 在支行 #{target.branch_name} 已有账户"
+        end
+        render :edit and return
+      end
+
+      Account.transaction do
+        Ownership.where(account: @account).update_all(branch_id: update_params[:branch_id])
+        @account.update! update_params
+      end
+    else
       @account.update! update_params
     end
     redirect_to @account, success: '成功更新账户'
