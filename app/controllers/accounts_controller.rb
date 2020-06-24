@@ -3,7 +3,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts
   def index
-    @accounts = Account.joins(:branch).select('accounts.*', 'branches.name AS branch_name')
+    @accounts = Account.joins(:branch).order(:id).select('accounts.*', 'branches.name AS branch_name')
   end
 
   # GET /accounts/1
@@ -47,11 +47,13 @@ class AccountsController < ApplicationController
 
   # PATCH/PUT /accounts/1
   def update
-    if @account.update(update_params)
-      redirect_to @account, success: '成功更新账户'
-    else
-      render :edit
+    Account.transaction do
+      Ownership.where(account: @account).update_all(branch_id: update_params[:branch_id])
+      @account.update! update_params
     end
+    redirect_to @account, success: '成功更新账户'
+  rescue ActiveRecord::ActiveRecordError
+    render :edit, alert: '账户更新失败'
   end
 
   # DELETE /accounts/1
@@ -72,7 +74,7 @@ class AccountsController < ApplicationController
     end
 
     def update_params
-      account_params.except(*%i[branch_id accountable_type ownerships_attributes])
+      account_params.except(*%i[accountable_type ownerships_attributes])
     end
 
     def ownership_params
