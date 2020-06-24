@@ -6,7 +6,7 @@
   <table class="table table-hover mb-0 with-action">
     <thead>
       <tr>
-        <% fields_with_name.zip(["", "d-none d-xl-table-cell", "d-none d-lg-table-cell", "d-none"]).each do |(field, name), classes| %>
+        <% fields_with_name.zip(["", "d-none d-xl-table-cell", "d-none", "d-none"]).each do |(field, name), classes| %>
           <th class="<%= classes %>"><%= name %></th>
         <% end %>
         <th>负责人</th>
