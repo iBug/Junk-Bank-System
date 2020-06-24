@@ -11,7 +11,7 @@
 <% if items.empty? %>
   无
 <% elsif items.size > 3 %>
-  <% separator %>
+  <%= separator %>
   &hellip;
   <br />
   共 <%= items.size %> 个，<%= link_to '查看全部', view_all %>

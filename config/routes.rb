@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   scope :branches do
     get ':id/staffs', to: 'branches#staffs', as: :branch_staffs
+    get ':id/accounts', to: 'branches#accounts', as: :branch_accounts
   end
 
   scope :departments do
