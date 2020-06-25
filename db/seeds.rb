@@ -57,4 +57,5 @@ generate_staffs(8).each { |h| Staff.create h }
   ['Lester Crest', 'N/A', 'Amarillo Vista, El Burro Heights, Los Santos', 6, 2],
   ['Devin Weston', 'N/A', 'Buen Vino Road, Tongva Hills, Los Santos County', 3, 3],
   ['Steve Haines', '328-555-0150', 'Los Santos', 2, 2],
+  ['Stretch', 'N/A', 'Strawberry, Los Santos', 2, 1],
 ].each { |a| Client.create({ name: a[0], person_id: Faker::IDNumber.invalid, phone: a[1], address: a[2], manager_id: a[3], manager_type: a[4], contact_attributes: generate_contact }) }
