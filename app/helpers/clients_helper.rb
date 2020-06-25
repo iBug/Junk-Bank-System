@@ -1,4 +1,6 @@
 module ClientsHelper
+  include AccountsHelper
+
   MANAGER_TYPE_NAMES = %w[未指定 贷款负责人 银行账户负责人 同时为贷款负责人和银行账户负责人]
   MANAGER_TYPE_NAMES_SHORT = %w[未指定 贷款 银行账户 贷款+银行账户]
 

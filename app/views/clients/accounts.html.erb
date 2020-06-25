@@ -3,37 +3,37 @@
 <% end %>
 
 <% content_for :body do %>
-  <% unless @accounts.empty? %>
-    <table class="table table-hover mb-0">
-      <thead>
-        <tr>
-          <th>账户号</th>
-          <th>账户类型</th>
-          <th>支行</th>
-          <th>操作</th>
-        </tr>
-      </thead>
+  <table class="table table-hover mb-0 with-action">
+    <thead>
+      <tr>
+        <th>账户号</th>
+        <th>类型</th>
+        <th>余额</th>
+        <th>支行</th>
+        <th>最近访问时间</th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <% @accounts.each do |account| %>
-          <tr>
-            <td><%= account.account_id %></td>
-            <td><%= account_type_name account.accountable_type %></td>
-            <td><%= link_to account.branch_name, branch_path(account.branch_id) %></td>
-            <td>
-              <%= link_to raw(t'actions.view'), account_path(account.account_id), class: 'btn btn-outline-primary' %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    客户 <%= @client.name %> 没有关联账户
-  <% end %>
+    <tbody id="search-content">
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= link_to "\##{account.id}", account_path(account.id) %></td>
+          <td><%= account_type_name account.accountable_type %></td>
+          <td><%= account.balance %></td>
+          <td><%= link_to account.branch_name, branch_path(account.branch_id) %></td>
+          <td><%= account.last_access %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
 
 <% content_for :footer do %>
-  <%= link_to raw(t'actions.back'), @client, class: 'btn btn-secondary' %>
+  <div>
+    <%= link_to raw(t'actions.back'), :back, class: 'btn btn-success' %>
+    <a class="btn btn-primary" href="#search-form" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="search-form"><%= raw(t'actions.search') %></a>
+  </div>
+  <%= render partial: 'quick_search' %>
 <% end %>
 
-<%= render template: (@accounts.empty? ? 'layouts/card' : 'layouts/listing') %>
+<%= render template: 'layouts/listing' %>

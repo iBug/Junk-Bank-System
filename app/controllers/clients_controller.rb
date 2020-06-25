@@ -20,7 +20,7 @@ class ClientsController < ApplicationController
 
   # GET /clients/1/accounts
   def accounts
-    @accounts = Ownership.joins(:branch).where(client: @client).select('ownerships.*', 'branches.name AS branch_name')
+    @accounts = Ownership.joins(:account, :branch).where(client: @client).select('ownerships.*', 'accounts.balance AS balance', 'branches.name AS branch_name')
   end
 
   # GET /clients/1/loans
