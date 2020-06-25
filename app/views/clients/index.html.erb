@@ -19,7 +19,7 @@
     <tbody id="search-content">
       <% @clients.each do |client| %>
         <tr>
-          <% fields_with_name.zip(["", "d-none d-xl-table-cell", "d-none d-lg-table-cell", "d-none"]).each do |(field, name), classes| %>
+          <% fields_with_name.zip(["", "d-none d-xl-table-cell", "d-none", "d-none"]).each do |(field, name), classes| %>
             <td class="<%= classes %>"><%= client[field] %></td>
           <% end %>
           <td><%= link_to client.manager_name, staff_path(client.manager_id) %></td>
