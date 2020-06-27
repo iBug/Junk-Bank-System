@@ -20,6 +20,10 @@
     <dd class="col col-12 col-md-10"><%= link_to @staff.branch_name, branch_path(@staff.branch_id) %></dd>
     <dt class="col col-12 col-md-2">部门</dt>
     <dd class="col col-12 col-md-10"><%= link_to @staff.department_name, department_path(@staff.department_id) %></dd>
+    <dt class="col col-12 col-md-2">负责的客户</dt>
+    <dd class="col col-12 col-md-10">
+      <%= list_items @clients, view_all: staff_clients_path(@staff) %>
+    </dd>
   </dl>
 <% end %>
 

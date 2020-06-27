@@ -1,5 +1,6 @@
 class StaffsController < ApplicationController
-  before_action :set_staff, only: [:show, :edit, :update, :destroy]
+  before_action :set_staff, only: %i[show clients edit update destroy]
+  before_action :set_clients, only: %i[show clients]
 
   # GET /staffs
   def index
@@ -56,6 +57,10 @@ class StaffsController < ApplicationController
 
     def set_staff
       @staff = staffs.find(params[:id])
+    end
+
+    def set_clients
+      @clients = Client.joins(:manager).where(manager: @staff)
     end
 
     # Only allow a list of trusted parameters through.

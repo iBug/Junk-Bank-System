@@ -19,6 +19,10 @@ Rails.application.routes.draw do
     get ':id/staffs', to: 'departments#staffs', as: :department_staffs
   end
 
+  scope :staffs do
+    get ':id/clients', to: 'staffs#clients', as: :staff_clients
+  end
+
   scope :clients do
     get ':id/contact', to: 'clients#contact', as: :contact
     get ':id/accounts', to: 'clients#accounts', as: :client_accounts
