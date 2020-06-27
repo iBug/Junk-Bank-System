@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[show edit owners owner_create update destroy]
+  before_action :set_account, only: %i[show edit owners update destroy]
 
   # GET /accounts
   def index
