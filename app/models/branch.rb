@@ -5,6 +5,6 @@ class Branch < ApplicationRecord
   has_many :loans, dependent: :restrict_with_error
 
   validates_uniqueness_of :name
-  validates :city, presence: true
+  validates_presence_of :city
   validates_numericality_of :assets, greater_than_or_equal_to: 0.0
 end

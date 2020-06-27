@@ -1,8 +1,8 @@
 class Contact < ApplicationRecord
   belongs_to :client
 
-  validates :name, presence: true
-  validates :phone, presence: true
-  validates :email, presence: true
-  validates :relationship, presence: true
+  validates_presence_of :name
+  validates_presence_of :phone
+  validates_presence_of :email
+  validates_presence_of :relationship
 end
