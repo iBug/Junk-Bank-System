@@ -1,11 +1,19 @@
 <% limit ||= 3 %>
 <% name_field ||= :name %>
-<% separator ||= raw('<br />') %>
+<% separator ||= false %>
 <% view_all ||= root_path %>
 
-<% items.limit(limit).each_with_index do |item, index| %>
-  <%= separator unless index.zero? %>
-  <%= link_to item.send(name_field), item %>
+<% if separator %>
+  <% items.limit(limit).each_with_index do |item, index| %>
+    <%= separator unless index.zero? %>
+    <%= link_to item.send(name_field), item %>
+  <% end %>
+<% else %>
+  <ul class="list-unstyled mb-0">
+    <% items.limit(limit).each do |item| %>
+      <li><%= link_to item.send(name_field), item %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <% if items.empty? %>

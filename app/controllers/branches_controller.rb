@@ -1,7 +1,8 @@
 class BranchesController < ApplicationController
-  before_action :set_branch, only: %i[show accounts staffs edit update destroy]
+  before_action :set_branch, only: %i[show accounts loans staffs edit update destroy]
   before_action :set_staffs, only: %i[show staffs]
   before_action :set_accounts, only: %i[show accounts]
+  before_action :set_loans, only: %i[show loans]
 
   # GET /branches
   def index
@@ -67,5 +68,9 @@ class BranchesController < ApplicationController
 
     def set_accounts
       @accounts = Account.where(branch: @branch)
+    end
+
+    def set_loans
+      @loans = Loan.where(branch: @branch)
     end
 end

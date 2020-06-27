@@ -18,6 +18,10 @@
     <dd class="col col-12 col-md-10">
       <%= list_items @accounts, name_field: :id, separator: ',', view_all: branch_accounts_path(@branch) %>
     </dd>
+    <dt class="col col-12 col-md-2">贷款</dt>
+    <dd class="col col-12 col-md-10">
+      <%= list_items @loans, name_field: :id, separator: ',', view_all: branch_loans_path(@branch) %>
+    </dd>
   </dl>
 <% end %>
 
