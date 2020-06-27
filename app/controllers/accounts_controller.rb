@@ -23,7 +23,7 @@ class AccountsController < ApplicationController
   # GET /accounts/1/owners
   def owners
     @ownership = Ownership.new
-    @owners = @account.ownerships.joins(:client).select(:client_id, 'clients.name AS client_name')
+    @owners = @account.ownerships.joins(:client).select('ownerships.*', 'clients.name AS client_name')
     @available_clients = Client.where.not(id: Ownership.where(branch_id: @account.branch_id, accountable_type: @account.accountable_type).select(:client_id)).select(:id, :name)
   end
 
